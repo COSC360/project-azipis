@@ -2,11 +2,7 @@ Cosc 360 Project Proposal
 
 Description
 
-	This project proposal is for topic number 2 “My Discussion Forum Website” which includes similar look and functionality to the existing websites ‘Reddit’ 
-  and ‘HackerNews’. This website will allow registered users to post threads and comment within those threads. Unregistered users will be allowed to view 
-  all content but will be unable to create new threads, comment on existing threads, or interact with other users. The theme of this site will be career 
-  development, there will be thread groupings based on job industries. Our intention is to create a platform for professionals to share job opportunities
-  and discuss career related topics. Tentatively, the name of our website is “Career Café”.
+This project proposal is for topic number 2 “My Discussion Forum Website” which includes similar look and functionality to the existing websites ‘Reddit’ and ‘HackerNews’. This website will allow registered users to post threads and comment within those threads. Unregistered users will be allowed to view all content but will be unable to create new threads, comment on existing threads, or interact with other users. The theme of this site will be career development, there will be thread groupings based on job industries. Our intention is to create a platform for professionals to share job opportunities and discuss career related topics. Tentatively, the name of our website is “Career Café”.
 
 Requirements List
 Minimum features of the site include:
