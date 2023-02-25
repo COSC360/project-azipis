@@ -4,15 +4,60 @@
 <head lang="en">
    <meta charset="utf-8">
    <title>COSC 360 Lab 4</title>
-   <link rel="stylesheet" href="css/lab4.css" />
+   <link rel="stylesheet" href="css/style.css" />
+   <script type="text/javascript" src="scripts/script.js" defer></script>
 </head>
 
 <body>
+
    <header id="masthead">
-      <h1>Travel Posts from Web Dev</h1>
+
+      <img id="logo" src="images/logo.png" alt="Career Cafe Logo" />
+      <div class="btn-group">
+         <a href="#" class="button">Login</button>
+            <a href="createAccount.html" class="button">Create Account</a>
+      </div>
+      <div id="searchContainer">
+         <input id="search" type="text" placeholder="Search..">
+      </div>
+
+
    </header>
+
    <div id="main">
-      <article id="right-sidebar">
+
+      <article id="left-sidebar">
+         <h2>Popular Communities</h2>
+         <div class="collapsibles">
+            <button type="button" class="button collapsible">Healthcare</button>
+            <div class="content background">
+               <button type="button" class="nobutton">Interior Health</button>
+               <button type="button" class="nobutton">CVS</button>
+               <button type="button" class="nobutton">McKesson</button>
+               <button type="button" class="nobutton">Vancouver Coastal Health</button>
+            </div>
+            <button type="button" class="button collapsible">Government</button>
+            <div class="content background">
+               <button type="button" class="nobutton">Criminal Justice</button>
+               <button type="button" class="nobutton">Law Enforcement</button>
+               <button type="button" class="nobutton">Public Safety</button>
+               <button type="button" class="nobutton">Transportation</button>
+            </div>
+            <button type="button" class="button collapsible">Tech</button>
+            <div class="content background">
+               <button type="button" class="nobutton">Microsoft</button>
+               <button type="button" class="nobutton">Google</button>
+               <button type="button" class="nobutton">Facebook</button>
+               <button type="button" class="nobutton">Uber</button>
+            </div>
+            <button type="button" class="button collapsible">Engineering</button>
+            <div class="content background">
+               <button type="button" class="nobutton">Civil Engineering</button>
+               <button type="button" class="nobutton">Electrical Engineering</button>
+               <button type="button" class="nobutton">Mechanical Engineering</button>
+               <button type="button" class="nobutton">Mechatronics Engineering</button>
+            </div>
+         </div>
          <p>Bacon ipsum dolor sit amet kielbasa officia ribeye tri-tip sausage, swine salami occaecat biltong. Strip
             steak shoulder rump swine sunt commodo turducken sint eu ut kielbasa meatball duis. Do chicken laboris
             officia ut. </p>
@@ -20,82 +65,87 @@
             sport etc, litot Europa usa li sam vocabular.
          </p>
       </article>
+
       <article id="center">
-         <h1>Robert Paulson's Travel Posts</h1>
-         <div class="entry">
-            <figure>
-               <img src="images/travel/9498358806.jpg" alt="" />
-               <figcaption>Florence</figcaption>
-               <img src="images/travel/new-banner.png" alt="" class="overlayed" />
-            </figure>
-            <div>
-               <h2>Florence Tour</h2>
-               <p>Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del
-                  coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan
-                  lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental.</p>
-               <div class="right">
-                  <a href="#" class="linkbutton">Read More</a>
-               </div>
-            </div>
+
+         <div id="breadcrumb">
+
+            <h2> Popular Threads </h2>
+
+
          </div>
 
-         <div class="entry">
-            <figure>
-               <img src="images/travel/9504449928.jpg" alt="" />
-               <figcaption>Florence</figcaption>
-            </figure>
-            <div>
-               <h2>Lovin' Tuscany</h2>
-               <p>Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi
-                  traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles.
-               </p>
-               <div class="right">
-                  <a href="#" class="linkbutton">Read More</a>
+         <div id="threads">
+
+            <div class="thread">
+
+               <figure>
+                  <img src="#" alt="coffee cup">
+               </figure>
+
+               <div class="thread-info">
+
+                  <h1>This is why Microsoft should make more games </h1>
+
+                  <p class="username">Jim (Job Searching)</p>
+                  <p class="date">10:32 am</p>
+                  <p class="community">/Microsoft</p>
+
                </div>
+
+
             </div>
+            <div class="thread">
+
+               <figure>
+                  <img src="#" alt="coffee cup">
+               </figure>
+
+               <div class="thread-info">
+
+                  <h1>This is why Microsoft should make more games </h1>
+
+                  <p class="username">Jim (Job Searching)</p>
+                  <p class="date">10:32 am</p>
+                  <p class="community">/Microsoft</p>
+
+               </div>
+
+
+            </div>
+
+            <div class="thread">
+
+               <figure>
+                  <img src="#" alt="coffee cup">
+               </figure>
+
+               <div class="thread-info">
+
+                  <h1>This is why Microsoft should make more games </h1>
+
+                  <p class="username">Jim (Job Searching)</p>
+                  <p class="date">10:32 am</p>
+                  <p class="community">/Microsoft</p>
+
+               </div>
+
+
+            </div>
+
          </div>
 
-         <div class="entry">
-            <figure>
-               <img src="images/travel/9494472443.jpg" alt="" />
-               <figcaption>Venice</figcaption>
-               <img src="images/travel/new-banner.png" alt="" class="overlayed" />
-            </figure>
-            <div>
-               <h2>Love in Venezia</h2>
-               <p>
-               <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie,
-                  musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li
-                  pronunciation e li plu commun vocabules.</p>
-               <div class="right">
-                  <a href="#" class="linkbutton">Read More</a>
-               </div>
-            </div>
-         </div>
+
       </article>
+
    </div>
+
    <footer>
-      <div class="footer-related">
-         <h2>Related Posts</h2>
-         <div>
-            <img src="images/travel/tiny/9495574327.jpg" /><img src="images/travel/tiny/9496787858.jpg" /><img
-               src="images/travel/tiny/9502740177.jpg" /><img src="images/travel/tiny/9504609042.jpg" /><img
-               src="images/travel/tiny/9505536014.jpg" /><br />
-            <img src="images/travel/tiny/9505893300.jpg" /><img src="images/travel/tiny/8710247776.jpg" /><img
-               src="images/travel/tiny/8710320515.jpg" /><img src="images/travel/tiny/9494282329.jpg" /><img
-               src="images/travel/tiny/9494464567.jpg" />
-         </div>
-      </div>
-      <div class="footer-section">
-         <h2>About Us</h2>
-         <p>Bacon ipsum dolor sit amet kielbasa officia ribeye tri-tip sausage, swine salami occaecat biltong. Strip
-            steak shoulder rump swine sunt commodo turducken sint eu ut kielbasa meatball duis. Do chicken laboris
-            officia ut. </p>
-         <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica,
-            sport etc, litot Europa usa li sam vocabular.</p>
-         <p>&copy; Copyright 2023 Company X
-      </div>
+
+
+
    </footer>
+
 </body>
 
 </html>
