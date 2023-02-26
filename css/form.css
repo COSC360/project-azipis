@@ -1,0 +1,69 @@
+.textinput {
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 0.75em;
+    float: left;
+    margin: 1em;
+    width: 15em;
+}
+
+.invalid{
+    box-shadow: 0 0 1px 1px blue;
+}
+
+input:nth-child(3),
+input:nth-child(4),
+input:nth-child(6) {
+    clear: left;
+}
+
+fieldset{
+    width: 90%;
+    margin: auto;
+}
+
+fieldset .imgInput {
+    margin: 1em;
+}
+
+fieldset #imgWrapper {
+    position: relative;
+    height: 100px;
+    width: 100px;
+}
+
+fieldset #imgWrapper img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+fieldset #imgWrapper input {
+    display: none;
+}
+
+fieldset #imgWrapper label {
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    border: 1px solid #ccc;
+    background-color: #48abe0;
+    color: white;
+    border-radius: 50%;
+    padding: 6px 6px;
+    cursor: pointer;
+}
+
+fieldset input[type="submit"] {
+    margin: 0 auto;
+    display: block;
+
+}
+
+fieldset input[type="submit"]:hover {
+    background-color: #467EB3;
+    color: white;
+}

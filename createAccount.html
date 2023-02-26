@@ -5,21 +5,25 @@
    <meta charset="utf-8">
    <title>COSC 360 Lab 4</title>
    <link rel="stylesheet" href="css/style.css" />
+   <link rel="stylesheet" href="css/form.css" />
+   <link rel="stylesheet" href="css/login.css" />
+   <script type="text/javascript" src="scripts/form.js" defer></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
+   <script type="text/javascript" src="scripts/login.js" defer></script>
 </head>
 
 <body>
 
    <header id="masthead">
 
-      <img id="logo" src="images/logo.png" alt="Career Cafe Logo" />
+      <a href="index.html"><img id="logo" src="images/logo.png" alt="Career Cafe Logo"></a>
       <div class="btn-group">
-         <a href="#" class="button">Login</button>
+         <a href="#" class="button" onclick="openLogin()">Login</a>
          <a href="createAccount.html" class="button">Create Account</a>
       </div>
       <div id="searchContainer">
          <input id="search" type="text" placeholder="Search..">
-      </div>   
+      </div>
 
 
    </header>
@@ -30,30 +34,114 @@
          <h2>Popular Communities</h2>
          <div class="collapsibles">
             <button type="button" class="button collapsible">Healthcare</button>
-            <div class="content">test</div>
+            <div class="content background">
+               <button type="button" class="nobutton">Interior Health</button>
+               <button type="button" class="nobutton">CVS</button>
+               <button type="button" class="nobutton">McKesson</button>
+               <button type="button" class="nobutton">Vancouver Coastal Health</button>
+            </div>
             <button type="button" class="button collapsible">Government</button>
+            <div class="content background">
+               <button type="button" class="nobutton">Criminal Justice</button>
+               <button type="button" class="nobutton">Law Enforcement</button>
+               <button type="button" class="nobutton">Public Safety</button>
+               <button type="button" class="nobutton">Transportation</button>
+            </div>
             <button type="button" class="button collapsible">Tech</button>
+            <div class="content background">
+               <button type="button" class="nobutton">Microsoft</button>
+               <button type="button" class="nobutton">Google</button>
+               <button type="button" class="nobutton">Facebook</button>
+               <button type="button" class="nobutton">Uber</button>
+            </div>
             <button type="button" class="button collapsible">Engineering</button>
+            <div class="content background">
+               <button type="button" class="nobutton">Civil Engineering</button>
+               <button type="button" class="nobutton">Electrical Engineering</button>
+               <button type="button" class="nobutton">Mechanical Engineering</button>
+               <button type="button" class="nobutton">Mechatronics Engineering</button>
+            </div>
          </div>
-         <p>Bacon ipsum dolor sit amet kielbasa officia ribeye tri-tip sausage, swine salami occaecat biltong. Strip
-            steak shoulder rump swine sunt commodo turducken sint eu ut kielbasa meatball duis. Do chicken laboris
-            officia ut. </p>
-         <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica,
-            sport etc, litot Europa usa li sam vocabular.
-         </p>
       </article>
 
       <article id="center">
 
          <div id="breadcrumb">
 
-            
+            <h2> Create Account </h2>
+
 
          </div>
+
+         <div id="threads">
+            <form action="http://www.randyconnolly.com/tests/process.php" method="post">
+               <fieldset>
+                  <input type="text" class="textinput" id="fname" name="fname" placeholder="First Name" required></button>
+                  <input type="text" class="textinput" id="lname" name="lname" placeholder="Last Name" required></button>
+                  <input type="email" class="textinput" id="email" name="email" placeholder="Email" required></button>
+                  <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="pw" name="pw" placeholder="Password" required></button>
+                  <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="cpw" placeholder="Confirm Password" required></button>
+                  <div class="clear"></div>
+                  <div class="imgInput">
+                     <h4>Upload image</h4>
+                     <div id="imgWrapper">
+                        <label class="custom-file-upload">
+                           <input accept="image/*" type="file" onChange="previewFile(event)" id="img" name="img" required></button>
+                           ✎
+                        </label>
+                        <img id="preview" src="images/profile.png" alt="your image"/>
+                     </div>
+                  </div>
+                  <input type="submit" onClick="submitAttempt()" class="button"/>
+               </fieldset>
+
+               <br>
+
+            </form>
+
+
+            </div>
+
+         </div>
+
+         
 
 
       </article>
 
+   </div>
+
+   <div class="form-popup" id="login-popup">
+
+      <form id="login" method="get" action="login.php">
+
+         <h2> Login </h2>
+
+         <label for="email"><b>Email</b></label>
+         <input type="email" placeholder="Enter Email" name="email" required>
+
+         <label for="psw"><b>Password</b></label>
+         <input type="password" placeholder="Enter Password" name="psw" minlength="6" required>
+
+         <button id="forgot-psw" class="button" onclick="openForgotPsw()">Forgot password?</button>
+
+         <button type="submit" class="btn">Login</button>
+         <button type="button" class="btn cancel" onclick="closeLogin()">Close</button>
+      </form>
+   </div>
+
+   <div class="form-popup" id="forgotpsw-popup">
+
+      <form id="login" method="get" action="login.php">
+
+         <h2> Forgot password </h2>
+
+         <label for="email"><b>Email</b></label>
+         <input type="email" placeholder="Enter Email" name="email" required>
+
+         <button type="submit" class="btn">Reset my password</button>
+         <button type="button" class="btn cancel" onclick="closeForgotPsw()">Close</button>
+      </form>
    </div>
 
    <footer>

@@ -3,19 +3,21 @@
 
 <head lang="en">
    <meta charset="utf-8">
-   <title>COSC 360 Lab 4</title>
+   <title>CareerCafe - Find your passion</title>
    <link rel="stylesheet" href="css/style.css" />
+   <link rel="stylesheet" href="css/login.css" />
    <script type="text/javascript" src="scripts/script.js" defer></script>
+   <script type="text/javascript" src="scripts/login.js" defer></script>
 </head>
 
 <body>
 
    <header id="masthead">
 
-      <img id="logo" src="images/logo.png" alt="Career Cafe Logo" />
+      <a href="index.html"><img id="logo" src="images/logo.png" alt="Career Cafe Logo"></a>
       <div class="btn-group">
-         <a href="#" class="button">Login</button>
-            <a href="createAccount.html" class="button">Create Account</a>
+         <a href="#" class="button" onclick="openLogin()">Login</a>
+         <a href="createAccount.html" class="button">Create Account</a>
       </div>
       <div id="searchContainer">
          <input id="search" type="text" placeholder="Search..">
@@ -58,12 +60,6 @@
                <button type="button" class="nobutton">Mechatronics Engineering</button>
             </div>
          </div>
-         <p>Bacon ipsum dolor sit amet kielbasa officia ribeye tri-tip sausage, swine salami occaecat biltong. Strip
-            steak shoulder rump swine sunt commodo turducken sint eu ut kielbasa meatball duis. Do chicken laboris
-            officia ut. </p>
-         <p>Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica,
-            sport etc, litot Europa usa li sam vocabular.
-         </p>
       </article>
 
       <article id="center">
@@ -77,67 +73,164 @@
 
          <div id="threads">
 
-            <div class="thread">
+            <a href="#threadname1.html">
+               <div class="thread">
 
-               <figure>
-                  <img src="#" alt="coffee cup">
-               </figure>
+                  <figure>
+                     <span class="circle"></span>
+                     <img src="images/coffeecup.png" alt="coffee cup" class="overlayed">
+                  </figure>
 
-               <div class="thread-info">
+                  <div class="thread-info">
 
-                  <h1>This is why Microsoft should make more games </h1>
+                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
 
-                  <p class="username">Jim (Job Searching)</p>
-                  <p class="date">10:32 am</p>
-                  <p class="community">/Microsoft</p>
+                        <p>
+                           <span class="username">Jim (Job Searching)</span>
+                           <span class="date">10:32 am</span>
+                           <span class="community">/Microsoft </span>
+                        </p>
+
+                  </div>
+
 
                </div>
+            </a>
 
+            <a href="#threadname2.html">
+               <div class="thread">
 
-            </div>
-            <div class="thread">
+                  <figure>
+                     <span class="circle"></span>
+                     <img src="images/bean.png" alt="coffee cup" class="overlayed">
+                  </figure>
 
-               <figure>
-                  <img src="#" alt="coffee cup">
-               </figure>
+                  <div class="thread-info">
 
-               <div class="thread-info">
+                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
 
-                  <h1>This is why Microsoft should make more games </h1>
+                        <p>
+                           <span class="username">Jim (Job Searching)</span>
+                           <span class="date">10:32 am</span>
+                           <span class="community">/Microsoft </span>
+                        </p>
 
-                  <p class="username">Jim (Job Searching)</p>
-                  <p class="date">10:32 am</p>
-                  <p class="community">/Microsoft</p>
+                  </div>
+
 
                </div>
+            </a>
 
+            <a href="#threadname3.html">
+               <div class="thread">
 
-            </div>
+                  <figure>
+                     <span class="circle"></span>
+                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
+                  </figure>
 
-            <div class="thread">
+                  <div class="thread-info">
 
-               <figure>
-                  <img src="#" alt="coffee cup">
-               </figure>
+                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
 
-               <div class="thread-info">
+                        <p>
+                           <span class="username">Jim (Job Searching)</span>
+                           <span class="date">10:32 am</span>
+                           <span class="community">/Microsoft </span>
+                        </p>
 
-                  <h1>This is why Microsoft should make more games </h1>
+                  </div>
 
-                  <p class="username">Jim (Job Searching)</p>
-                  <p class="date">10:32 am</p>
-                  <p class="community">/Microsoft</p>
 
                </div>
+            </a>
+
+            <a href="#threadname4.html">
+               <div class="thread">
+
+                  <figure>
+                     <span class="circle"></span>
+                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
+                  </figure>
+
+                  <div class="thread-info">
+
+                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
+
+                        <p>
+                           <span class="username">Jim (Job Searching)</span>
+                           <span class="date">10:32 am</span>
+                           <span class="community">/Microsoft </span>
+                        </p>
+
+                  </div>
 
 
-            </div>
+               </div>
+            </a>
+
+            <a href="#threadname5.html">
+               <div class="thread">
+
+                  <figure>
+                     <span class="circle"></span>
+                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
+                  </figure>
+
+                  <div class="thread-info">
+
+                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
+
+                        <p>
+                           <span class="username">Jim (Job Searching)</span>
+                           <span class="date">10:32 am</span>
+                           <span class="community">/Microsoft </span>
+                        </p>
+
+                  </div>
+
+
+               </div>
+            </a>
 
          </div>
 
 
       </article>
 
+   </div>
+
+   <div class="form-popup" id="login-popup">
+
+      <form id="login" method="get" action="login.php">
+
+         <h2> Login </h2>
+
+         <label for="email"><b>Email</b></label>
+         <input type="email" placeholder="Enter Email" name="email" required>
+
+         <label for="psw"><b>Password</b></label>
+         <input type="password" placeholder="Enter Password" name="psw" minlength="6" required>
+
+         <button id="forgot-psw" class="button" onclick="openForgotPsw()">Forgot password?</button>
+
+         <button type="submit" class="btn">Login</button>
+         <button type="button" class="btn cancel" onclick="closeLogin()">Close</button>
+      </form>
+   </div>
+
+   <div class="form-popup" id="forgotpsw-popup">
+
+      <form id="login" method="get" action="login.php">
+
+         <h2> Forgot password </h2>
+
+         <label for="email"><b>Email</b></label>
+         <input type="email" placeholder="Enter Email" name="email" required>
+
+         <button type="submit" class="btn">Reset my password</button>
+         <button type="button" class="btn cancel" onclick="closeForgotPsw()">Close</button>
+      </form>
    </div>
 
    <footer>
