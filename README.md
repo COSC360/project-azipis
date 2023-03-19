@@ -62,5 +62,14 @@ This project proposal is for topic number 2 “My Discussion Forum Website” wh
 - Follow topics
 - Notifications
 
-
+# Min Core Functionality
+- Client-side security
+- Server-side implementation complete
+- Posted on cosc360.ok.ubc.ca
+- Server-side security
+- Discussion thread storage in database
+- Asynchronous updates
+- Database functionality complete
+- Core functional components operational (see baseline objectives)
+- Preliminary summary document, indicating implemented functionality
 
