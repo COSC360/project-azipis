@@ -1,3 +1,4 @@
+<?php include 'connection.php';?>
 <!DOCTYPE html>
 <html>
 
@@ -33,31 +34,51 @@
          <div class="collapsibles">
             <button type="button" class="button collapsible">Healthcare</button>
             <div class="content background">
-               <button type="button" class="nobutton">Interior Health</button>
-               <button type="button" class="nobutton">CVS</button>
-               <button type="button" class="nobutton">McKesson</button>
-               <button type="button" class="nobutton">Vancouver Coastal Health</button>
+               <?php
+               $sql = "SELECT * FROM Community WHERE industry = 'Healthcare'";
+               $result = mysqli_query($conn, $sql);
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
             <button type="button" class="button collapsible">Government</button>
             <div class="content background">
-               <button type="button" class="nobutton">Criminal Justice</button>
-               <button type="button" class="nobutton">Law Enforcement</button>
-               <button type="button" class="nobutton">Public Safety</button>
-               <button type="button" class="nobutton">Transportation</button>
+            <?php
+               $sql = "SELECT * FROM Community WHERE industry = 'Government'";
+               $result = mysqli_query($conn, $sql);
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
             <button type="button" class="button collapsible">Tech</button>
             <div class="content background">
-               <button type="button" class="nobutton">Microsoft</button>
-               <button type="button" class="nobutton">Google</button>
-               <button type="button" class="nobutton">Facebook</button>
-               <button type="button" class="nobutton">Uber</button>
+            <?php
+               $sql = "SELECT * FROM Community WHERE industry = 'Tech'";
+               $result = mysqli_query($conn, $sql);
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
             <button type="button" class="button collapsible">Engineering</button>
             <div class="content background">
-               <button type="button" class="nobutton">Civil Engineering</button>
-               <button type="button" class="nobutton">Electrical Engineering</button>
-               <button type="button" class="nobutton">Mechanical Engineering</button>
-               <button type="button" class="nobutton">Mechatronics Engineering</button>
+            <?php
+               $sql = "SELECT * FROM Community WHERE industry = 'Engineering'";
+               $result = mysqli_query($conn, $sql);
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
          </div>
       </article>
