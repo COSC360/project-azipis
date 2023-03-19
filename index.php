@@ -1,4 +1,4 @@
-<?php include 'connection.php';?>
+<?php include 'sql.php';?>
 <!DOCTYPE html>
 <html>
 
@@ -35,10 +35,9 @@
             <button type="button" class="button collapsible">Healthcare</button>
             <div class="content background">
                <?php
-               $sql = "SELECT * FROM Community WHERE industry = 'Healthcare'";
-               $result = mysqli_query($conn, $sql);
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' class='nobutton'>";
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -47,10 +46,9 @@
             <button type="button" class="button collapsible">Government</button>
             <div class="content background">
             <?php
-               $sql = "SELECT * FROM Community WHERE industry = 'Government'";
-               $result = mysqli_query($conn, $sql);
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' class='nobutton'>";
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -59,10 +57,9 @@
             <button type="button" class="button collapsible">Tech</button>
             <div class="content background">
             <?php
-               $sql = "SELECT * FROM Community WHERE industry = 'Tech'";
-               $result = mysqli_query($conn, $sql);
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' class='nobutton'>";
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -71,10 +68,9 @@
             <button type="button" class="button collapsible">Engineering</button>
             <div class="content background">
             <?php
-               $sql = "SELECT * FROM Community WHERE industry = 'Engineering'";
-               $result = mysqli_query($conn, $sql);
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' class='nobutton'>";
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
