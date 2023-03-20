@@ -1,9 +1,10 @@
+<?php include 'sql.php';?>
 <!DOCTYPE html>
 <html>
 
 <head lang="en">
    <meta charset="utf-8">
-   <title>COSC 360 Lab 4</title>
+   <title>CareerCafe - Create Account</title>
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/form.css" />
    <link rel="stylesheet" href="css/login.css" />
@@ -16,10 +17,10 @@
 
    <header id="masthead">
 
-      <a href="index.html"><img id="logo" src="images/logo.png" alt="Career Cafe Logo"></a>
+      <a href="index.php"><img id="logo" src="images/logo.png" alt="Career Cafe Logo"></a>
       <div class="btn-group">
          <a href="#" class="button" onclick="openLogin()">Login</a>
-         <a href="createAccount.html" class="button">Create Account</a>
+         <a href="createAccount.php" class="button">Create Account</a>
       </div>
       <div id="searchContainer">
          <input id="search" type="text" placeholder="Search..">
@@ -30,36 +31,52 @@
 
    <div id="main">
 
-      <article id="left-sidebar">
+   <article id="left-sidebar">
          <h2>Popular Communities</h2>
          <div class="collapsibles">
             <button type="button" class="button collapsible">Healthcare</button>
             <div class="content background">
-               <button type="button" class="nobutton">Interior Health</button>
-               <button type="button" class="nobutton">CVS</button>
-               <button type="button" class="nobutton">McKesson</button>
-               <button type="button" class="nobutton">Vancouver Coastal Health</button>
+               <?php
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
             <button type="button" class="button collapsible">Government</button>
             <div class="content background">
-               <button type="button" class="nobutton">Criminal Justice</button>
-               <button type="button" class="nobutton">Law Enforcement</button>
-               <button type="button" class="nobutton">Public Safety</button>
-               <button type="button" class="nobutton">Transportation</button>
+            <?php
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
             <button type="button" class="button collapsible">Tech</button>
             <div class="content background">
-               <button type="button" class="nobutton">Microsoft</button>
-               <button type="button" class="nobutton">Google</button>
-               <button type="button" class="nobutton">Facebook</button>
-               <button type="button" class="nobutton">Uber</button>
+            <?php
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
             <button type="button" class="button collapsible">Engineering</button>
             <div class="content background">
-               <button type="button" class="nobutton">Civil Engineering</button>
-               <button type="button" class="nobutton">Electrical Engineering</button>
-               <button type="button" class="nobutton">Mechanical Engineering</button>
-               <button type="button" class="nobutton">Mechatronics Engineering</button>
+            <?php
+               $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
+                  echo $row["name"];
+                  echo "</button>";
+               }
+               ?>
             </div>
          </div>
       </article>
@@ -74,19 +91,20 @@
          </div>
 
          <div id="threads">
-            <form action="http://www.randyconnolly.com/tests/process.php" method="post">
+            <form action="insertUser.php" method="post">
                <fieldset>
-                  <input type="text" class="textinput" id="fname" name="fname" placeholder="First Name" required></button>
-                  <input type="text" class="textinput" id="lname" name="lname" placeholder="Last Name" required></button>
-                  <input type="email" class="textinput" id="email" name="email" placeholder="Email" required></button>
-                  <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="pw" name="pw" placeholder="Password" required></button>
-                  <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="cpw" placeholder="Confirm Password" required></button>
+                  <input type="text" class="textinput" id="fname" name="fname" placeholder="First Name" required>
+                  <input type="text" class="textinput" id="lname" name="lname" placeholder="Last Name" required>
+                  <input type="text" class="textinput" id="username" name="username" placeholder="User name" required>
+                  <input type="email" class="textinput" id="email" name="email" placeholder="Email" required> <br>
+                  <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="pw" name="pw" placeholder="Password" required>
+                  <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="cpw" placeholder="Confirm Password" required>
                   <div class="clear"></div>
                   <div class="imgInput">
                      <h4>Upload image</h4>
                      <div id="imgWrapper">
                         <label class="custom-file-upload">
-                           <input accept="image/*" type="file" onChange="previewFile(event)" id="img" name="img" required></button>
+                           <input accept="image/*" type="file" onChange="previewFile(event)" id="img" name="img" required>
                            ✎
                         </label>
                         <img id="preview" src="images/profile.png" alt="your image"/>
