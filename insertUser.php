@@ -2,7 +2,6 @@
 
 include 'connection.php';
 
-
 $conn = getConnection();
 
 $stmt = $conn->prepare("INSERT INTO users (username, email, password, description, avatarimgpath, firstname, lastname) 
@@ -13,7 +12,7 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['pw'];
 $description = 'test';
-$avatarimgpath = 'images/'.$username.'/'.$_FILES['img'];
+$avatarimgpath = 'images/'.$username.'/'.$_FILES['img']['name'];
 $firstname = $_POST['fname'];
 $lastname = $_POST['lname'];
 
@@ -26,7 +25,7 @@ echo "Account created";
 $stmt->close();
 $conn->close();
 
-header("Redirect: index.php");
+header("Location: index.php");
 exit();
 
 ?>

@@ -91,7 +91,7 @@
          </div>
 
          <div id="threads">
-            <form action="insertUser.php" method="post">
+            <form action="insertUser.php" method="post" enctype="multipart/form-data">
                <fieldset>
                   <input type="text" class="textinput" id="fname" name="fname" placeholder="First Name" required>
                   <input type="text" class="textinput" id="lname" name="lname" placeholder="Last Name" required>

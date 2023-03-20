@@ -25,6 +25,8 @@ CREATE TABLE Users (
     password VARCHAR(30) NOT NULL,
     description VARCHAR(255),
     avatarimgpath VARCHAR(255) UNIQUE,
+    firstname VARCHAR(30),
+    lastname VARCHAR(30),
     PRIMARY KEY (userid)
 );
 
