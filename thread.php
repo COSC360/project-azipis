@@ -82,134 +82,26 @@
       <article id="center">
 
          <div id="breadcrumb">
+            <?php
+                $result = php_select("SELECT * FROM Thread WHERE tid = " . $_GET['tid'] . "");
+                $row = mysqli_fetch_assoc($result);
+                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"] . "");
+                $row2 = mysqli_fetch_assoc($result2);
 
-            <h2> Popular Threads </h2>
+                $industry = $row2["industry"];
+                $name = $row2["name"];
+                $threadname = $row["title"];
+                $creationtime = $row["created"];
+
+                echo "<h2> Jobs > " . $row2["industry"] . " > " . $row2["name"] . "</h2>"
+            ?>
 
 
          </div>
 
          <div id="threads">
-
-            <a href="thread.php?id=1">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/coffeecup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/bean.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
+            <h1><?php echo $threadname; ?></h1>
+            <h2><?php echo $creationtime; ?></h2>
          </div>
 
 

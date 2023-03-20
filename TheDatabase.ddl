@@ -21,6 +21,8 @@ CREATE TABLE Thread (
 CREATE TABLE Users (
     userid INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL UNIQUE,
+    firstname VARCHAR(30),
+    lastname VARCHAR(30),
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(30) NOT NULL,
     description VARCHAR(255),
@@ -73,4 +75,7 @@ INSERT INTO COMMUNITY VALUES (17, "Electrial", "Engineering");
 INSERT INTO COMMUNITY VALUES (18, "Mechanical", "Engineering");
 INSERT INTO COMMUNITY VALUES (19, "Industrial", "Engineering");
 INSERT INTO COMMUNITY VALUES (20, "Other Engineering", "Engineering");
+
+INSERT INTO Thread (title, communityid, created, points, content)
+VALUES ('I love big pharma', 1, NOW(), 0, 'Healthcare and big pharma is so cool');
 

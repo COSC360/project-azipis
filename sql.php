@@ -28,4 +28,5 @@ function php_insert($query, $types, ...$binds) {
     return $success;
 }
 
+
 ?>
