@@ -93,7 +93,7 @@
                 $threadname = $row["title"];
                 $creationtime = $row["created"];
 
-                echo "<h2> Jobs > " . $row2["industry"] . " > " . $row2["name"] . "</h2>"
+                echo "<h2> Jobs > " . $row2["industry"] . " > <a href='community.php?cid=" . $row["communityid"] . "'>" . $row2["name"] . "</a></h2>"
             ?>
 
 
