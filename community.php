@@ -30,7 +30,7 @@
    <div id="main">
 
       <article id="left-sidebar">
-        <button type="button" class="button centerme">Compose Thread</button>
+        <button type="button" class="button centerme" onclick="window.location.href='/createthread.php?cid=<?php echo $_GET["cid"]; ?>'">Compose Thread</button>
         <button type="button" class="button centerme">Trending</button>
         <button type="button" class="button centerme">New</button>
         <button type="button" class="button centerme">Controversial</button>
@@ -107,102 +107,6 @@
                   <figure>
                      <span class="circle"></span>
                      <img src="images/coffeecup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/bean.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
                   </figure>
 
                   <div class="thread-info">

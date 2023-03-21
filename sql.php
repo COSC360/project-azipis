@@ -28,5 +28,11 @@ function php_insert($query, $types, ...$binds) {
     return $success;
 }
 
+function php_get_last_insert_id() {
+    $conn = getConnection();
+    $result = mysqli_insert_id($conn);
+    return $result;
+}
+
 
 ?>

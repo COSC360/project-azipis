@@ -83,7 +83,7 @@
 
          <div id="breadcrumb">
             <?php
-                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $_GET['id'] . "");
+                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $_GET['cid'] . "");
                 $row2 = mysqli_fetch_assoc($result2);
 
                 $industry = $row2["industry"];
@@ -102,7 +102,7 @@
                   <input type="text" class="textinput" id="title" name="title" placeholder="Thread Title" required>
                   <input type="number" class="textinput" id="threadtype" name="threadtype" placeholder="Type of Thread" required>
                   <input type="text" class="textinput" id="content" name="content" placeholder="Content of Thread" required>
-                  <input type="text" id="communityid" name="communityid" value="<?php echo $_GET['id'] ?>"  hidden>
+                  <input type="text" id="communityid" name="communityid" value="<?php echo $_GET['cid'] ?>"  hidden>
                   <div class="clear"></div>
                   <input type="submit" class="button"/>
                </fieldset>
