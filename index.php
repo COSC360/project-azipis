@@ -89,8 +89,7 @@
          </div>
 
          <div id="threads">
-
-            <a href="thread.php?id=1">
+            <a id="thread_template" href="" hidden>
                <div class="thread">
 
                   <figure>
@@ -100,108 +99,12 @@
 
                   <div class="thread-info">
 
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
+                     <h2 class="thread-name"></h1>
 
                         <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/bean.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
-                        </p>
-
-                  </div>
-
-
-               </div>
-            </a>
-
-            <a href="thread.php">
-               <div class="thread">
-
-                  <figure>
-                     <span class="circle"></span>
-                     <img src="images/spilledcup.png" alt="coffee cup" class="overlayed">
-                  </figure>
-
-                  <div class="thread-info">
-
-                     <h2 class="thread-name">This is why Microsoft should make more games </h1>
-
-                        <p>
-                           <span class="username">Jim (Job Searching)</span>
-                           <span class="date">10:32 am</span>
-                           <span class="community">/Microsoft </span>
+                           <span class="username"></span>
+                           <span class="date"></span>
+                           <span class="community"></span>
                         </p>
 
                   </div>
@@ -257,5 +160,29 @@
    </footer>
 
 </body>
+
+<script>
+                function createNewThread(tid,title,created,points){
+                    var newThread = document.querySelector("#thread_template").cloneNode(true);
+                    newThread.id = "";
+                    newThread.href = "thread.php?tid=" + tid;
+                    newThread.hidden = false;
+                    newThread.querySelector(".thread-name").innerText = title;
+                    newThread.querySelector(".date").innerText = created;
+                    //newThread.querySelector(".username").value = user;
+                    //newThread.querySelector("#points").value = points;
+                    document.querySelector("#threads").appendChild(newThread);
+                }
+            <?php
+            $result = php_select("SELECT * FROM Thread ORDER BY created DESC");
+            while ($row = mysqli_fetch_assoc($result)) {
+               $tid = $row["tid"];
+               $title = $row["title"];
+               $created = $row["created"];
+               $points = $row["points"];
+               echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $points . "\");";
+            }
+            ?>
+</script>
 
 </html>
