@@ -176,11 +176,13 @@
             <?php
             $result = php_select("SELECT * FROM Thread ORDER BY created DESC");
             while ($row = mysqli_fetch_assoc($result)) {
+               $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
+               $community = mysqli_fetch_assoc($communityResult)["name"];
                $tid = $row["tid"];
                $title = $row["title"];
                $created = $row["created"];
                $points = $row["points"];
-               echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $points . "\");";
+               echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . " /" . $community . "\",\"" . $points . "\");";
             }
             ?>
 </script>
