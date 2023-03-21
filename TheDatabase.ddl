@@ -5,19 +5,6 @@ CREATE TABLE Community (
   PRIMARY KEY (communityid)
 );
 
-CREATE TABLE Thread (
-   tid INT NOT NULL AUTO_INCREMENT,
-   title VARCHAR(100),
-   communityid INT,
-   created DATETIME,
-   points INT,
-   content VARCHAR(500),
-   PRIMARY KEY (tid),
-   FOREIGN KEY (communityid) REFERENCES Community(communityid)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE
-);
-
 CREATE TABLE Users (
     userid INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL UNIQUE,
@@ -27,9 +14,24 @@ CREATE TABLE Users (
     password VARCHAR(30) NOT NULL,
     description VARCHAR(255),
     avatarimgpath VARCHAR(255) UNIQUE,
-    firstname VARCHAR(30),
-    lastname VARCHAR(30),
     PRIMARY KEY (userid)
+);
+
+CREATE TABLE Thread (
+   tid INT NOT NULL AUTO_INCREMENT,
+   title VARCHAR(100),
+   communityid INT,
+   created DATETIME,
+   points INT,
+   content VARCHAR(500),
+   PRIMARY KEY (tid),
+   userid INT,
+   FOREIGN KEY (userid) REFERENCES Users(userid)
+    ON DELETE SET NULL 
+    ON UPDATE CASCADE,
+   FOREIGN KEY (communityid) REFERENCES Community(communityid)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE Comment (

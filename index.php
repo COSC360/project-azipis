@@ -162,14 +162,15 @@
 </body>
 
 <script>
-                function createNewThread(tid,title,created,points){
+                function createNewThread(tid,title,created,community,points,user){
                     var newThread = document.querySelector("#thread_template").cloneNode(true);
                     newThread.id = "";
                     newThread.href = "thread.php?tid=" + tid;
                     newThread.hidden = false;
                     newThread.querySelector(".thread-name").innerText = title;
                     newThread.querySelector(".date").innerText = created;
-                    //newThread.querySelector(".username").value = user;
+                    newThread.querySelector(".community").innerText = community;
+                    newThread.querySelector(".username").innerText = user;
                     //newThread.querySelector("#points").value = points;
                     document.querySelector("#threads").appendChild(newThread);
                 }
@@ -182,7 +183,13 @@
                $title = $row["title"];
                $created = $row["created"];
                $points = $row["points"];
-               echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . " /" . $community . "\",\"" . $points . "\");";
+               $user = $row["userid"];
+               if($user === null){
+                  $user = "Anonymous";
+               } else {
+                  
+               }
+               echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\");";
             }
             ?>
 </script>

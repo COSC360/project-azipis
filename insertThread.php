@@ -2,14 +2,15 @@
 
 include 'sql.php';
 
-$query = "INSERT INTO Thread (title, communityid, created, points, content) VALUES (?, ?, NOW(), 0, ?)";
-$types = "sis";
+$query = "INSERT INTO Thread (title, communityid, created, points, content, userid) VALUES (?, ?, NOW(), 0, ?, ?)";
+$types = "sisi";
 
 $title = $_POST['title'];
 $communityid = $_POST['communityid'];
 $content = $_POST['content'];
+$userid = null;
 
-$result = php_insert($query, $types, $title, $communityid, $content);
+$result = php_insert($query, $types, $title, $communityid, $content, $userid);
 
 if ($result) {
     echo "Insertion succeeded";
