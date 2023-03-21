@@ -147,6 +147,11 @@ header{
     padding: 0.25em;
 }
 
+.centerme{
+    margin: 0 auto;
+    display: block;
+}
+
 #breadcrumb{
     background-color: #D9D9D9;
     border-radius: 4px;
