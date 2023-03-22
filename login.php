@@ -54,10 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
                     if(mysqli_stmt_fetch($stmt)){
 
-                        echo $uid . "<br>";
-                        echo password_hash($psw, PASSWORD_DEFAULT). "<br>";
-                        echo $hashed_psw. "<br>";
-
                         if (password_verify($psw, $hashed_psw)){
 
                             // Password is correct, start a new session
