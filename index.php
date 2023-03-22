@@ -37,7 +37,7 @@
                <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"/community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -48,7 +48,7 @@
             <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"/community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -59,7 +59,7 @@
             <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"/community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -70,7 +70,7 @@
             <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"/community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }

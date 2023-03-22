@@ -1,4 +1,4 @@
-<?php include 'sql.php';?>
+<?php include 'sql.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -30,70 +30,44 @@
    <div id="main">
 
       <article id="left-sidebar">
-        <button type="button" class="button centerme" onclick="window.location.href='/createthread.php?cid=<?php echo $_GET["cid"]; ?>'">Compose Thread</button>
-        <button type="button" class="button centerme">Trending</button>
-        <button type="button" class="button centerme">New</button>
-        <button type="button" class="button centerme">Controversial</button>
+         <button type="button" class="button centerme" onclick="window.location.href='createthread.php?cid=<?php echo $_GET["cid"]; ?>'">Compose Thread</button>
+         <button type="button" class="button centerme">Trending</button>
+         <button type="button" class="button centerme">New</button>
+         <button type="button" class="button centerme">Controversial</button>
          <h2>Related Topics</h2>
          <div class="collapsibles">
-            <button type="button" class="button collapsible">Healthcare</button>
-            <div class="content background">
+            
+            
+
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
+               $result = php_select("SELECT * FROM community WHERE communityid = " . $_GET["cid"] . "");
+               $row = mysqli_fetch_assoc($result);
+               $industry = $row["industry"];
+               
+               $result1 = php_select("SELECT * FROM community WHERE industry =  '". $industry . "'");
+               while ($row1 = mysqli_fetch_assoc($result1)) {
+                  echo "<button type='button' class='button related' onclick='window.location.href=\"community.php?cid=" . $row1["communityid"] . "\"' >";
+                  echo $row1["name"];
+                  echo "</button> <br>";
                }
                ?>
-            </div>
-            <button type="button" class="button collapsible">Government</button>
-            <div class="content background">
-            <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
-               }
-               ?>
-            </div>
-            <button type="button" class="button collapsible">Tech</button>
-            <div class="content background">
-            <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
-               }
-               ?>
-            </div>
-            <button type="button" class="button collapsible">Engineering</button>
-            <div class="content background">
-            <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
-               }
-               ?>
-            </div>
+
+            
+            
          </div>
       </article>
 
       <article id="center">
 
-      <div id="breadcrumb">
+         <div id="breadcrumb">
             <?php
-                $result = php_select("SELECT * FROM Community WHERE communityid = " . $_GET["cid"] . "");
-                $row = mysqli_fetch_assoc($result);
+            $result = php_select("SELECT * FROM Community WHERE communityid = " . $_GET["cid"] . "");
+            $row = mysqli_fetch_assoc($result);
 
-                $industry = $row["industry"];
-                $name = $row["name"];
+            $industry = $row["industry"];
+            $name = $row["name"];
 
-                echo "<h2> Jobs > " . $industry . " > " . $name . "</h2>"
+            echo "<h2> Jobs > " . $industry . " > " . $name . "</h2>"
             ?>
 
 
@@ -110,7 +84,8 @@
 
                   <div class="thread-info">
 
-                     <h2 class="thread-name"></h1>
+                     <h2 class="thread-name">
+                        </h1>
 
                         <p>
                            <span class="username"></span>
@@ -173,27 +148,27 @@
 </body>
 
 <script>
-                function createNewThread(tid,title,created,points){
-                    var newThread = document.querySelector("#thread_template").cloneNode(true);
-                    newThread.id = "";
-                    newThread.href = "thread.php?tid=" + tid;
-                    newThread.hidden = false;
-                    newThread.querySelector(".thread-name").innerText = title;
-                    newThread.querySelector(".date").innerText = created;
-                    //newThread.querySelector(".username").value = user;
-                    //newThread.querySelector("#points").value = points;
-                    document.querySelector("#threads").appendChild(newThread);
-                }
-            <?php
-            $result = php_select("SELECT * FROM Thread WHERE communityid = " . $_GET["cid"] . " ORDER BY created DESC");
-            while ($row = mysqli_fetch_assoc($result)) {
-               $tid = $row["tid"];
-               $title = $row["title"];
-               $created = $row["created"];
-               $points = $row["points"];
-               echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $points . "\");";
-            }
-            ?>
+   function createNewThread(tid, title, created, points) {
+      var newThread = document.querySelector("#thread_template").cloneNode(true);
+      newThread.id = "";
+      newThread.href = "thread.php?tid=" + tid;
+      newThread.hidden = false;
+      newThread.querySelector(".thread-name").innerText = title;
+      newThread.querySelector(".date").innerText = created;
+      //newThread.querySelector(".username").value = user;
+      //newThread.querySelector("#points").value = points;
+      document.querySelector("#threads").appendChild(newThread);
+   }
+   <?php
+   $result = php_select("SELECT * FROM Thread WHERE communityid = " . $_GET["cid"] . " ORDER BY created DESC");
+   while ($row = mysqli_fetch_assoc($result)) {
+      $tid = $row["tid"];
+      $title = $row["title"];
+      $created = $row["created"];
+      $points = $row["points"];
+      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $points . "\");";
+   }
+   ?>
 </script>
 
 </html>

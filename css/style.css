@@ -210,3 +210,8 @@ figure{
 .clear {
     clear: both;
 }
+
+.related {
+    width: 100%;
+    display: block;
+}
