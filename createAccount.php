@@ -131,7 +131,7 @@
 
    <div class="form-popup" id="login-popup">
 
-      <form id="login" method="get" action="login.php">
+      <form id="login" method="post" action="login.php">
 
          <h2> Login </h2>
 
@@ -150,7 +150,7 @@
 
    <div class="form-popup" id="forgotpsw-popup">
 
-      <form id="login" method="get" action="login.php">
+      <form id="login" method="post" action="login.php">
 
          <h2> Forgot password </h2>
 

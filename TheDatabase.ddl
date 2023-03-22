@@ -11,7 +11,7 @@ CREATE TABLE Users (
     firstname VARCHAR(30),
     lastname VARCHAR(30),
     email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(30) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     description VARCHAR(255),
     avatarimgpath VARCHAR(255) UNIQUE,
     PRIMARY KEY (userid)
