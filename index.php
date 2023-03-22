@@ -1,4 +1,5 @@
-<?php include 'sql.php';?>
+<?php include 'sql.php';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -37,7 +38,7 @@
                <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -48,7 +49,7 @@
             <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -59,7 +60,7 @@
             <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -70,7 +71,7 @@
             <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
+                  echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
                   echo "</button>";
                }
@@ -122,7 +123,7 @@
 
    <div class="form-popup" id="login-popup">
 
-      <form id="login" method="get" action="login.php">
+      <form id="login" method="post" action="login.php">
 
          <h2> Login </h2>
 
@@ -141,7 +142,7 @@
 
    <div class="form-popup" id="forgotpsw-popup">
 
-      <form id="login" method="get" action="login.php">
+      <form id="login" method="post" action="forgotpw.php">
 
          <h2> Forgot password </h2>
 

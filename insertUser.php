@@ -13,7 +13,9 @@ $avatarimgpath = 'images/'.$username.'/'.$_FILES['img']['name'];
 $firstname = $_POST['fname'];
 $lastname = $_POST['lname'];
 
-$result = php_insert($query, $types, $username, $email, $password, $description, $avatarimgpath, $firstname, $lastname);
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+$result = php_insert($query, $types, $username, $email, $hashed_password, $description, $avatarimgpath, $firstname, $lastname);
 
 if ($result) {
     if (!file_exists('images/'.$username)) {
