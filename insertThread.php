@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+
 include 'sql.php';
 
 $query = "INSERT INTO Thread (title, communityid, created, points, content, userid) VALUES (?, ?, NOW(), 0, ?, ?)";
@@ -8,7 +10,9 @@ $types = "sisi";
 $title = $_POST['title'];
 $communityid = $_POST['communityid'];
 $content = $_POST['content'];
-$userid = null;
+$userid = $_SESSION['uid'];
+
+echo $userid;
 
 $result = php_insert($query, $types, $title, $communityid, $content, $userid);
 
