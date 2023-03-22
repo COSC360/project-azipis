@@ -44,4 +44,28 @@ function php_get_last_insert_id() {
 }
 
 
+
+
+
+
+
+
+// Not sure if we want to keep these 2 functions here or move them
+// Print out logged in header
+function php_get_logged_in_header(){
+    echo '<div class="btn-group">';
+    echo '<a href="user.php?username='.$_SESSION['username']. '">'.$_SESSION['username'] . '(points)</a>' ;
+    echo '<a href="logout.php" class="button">Logout</a>';
+    echo '</div>';
+}
+
+// Print out logged in header
+function php_get_header(){
+    echo '<div class="btn-group">';
+    echo '<a href="#" class="button" onclick="openLogin()">Login</a>';
+    echo '<a href="createAccount.php" class="button">Create Account</a>';
+    echo '</div>';
+}
+
+
 ?>

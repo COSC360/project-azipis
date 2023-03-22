@@ -1,4 +1,5 @@
-<?php include 'sql.php'; ?>
+<?php include 'sql.php';
+session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -16,10 +17,16 @@
    <header id="masthead">
 
       <a href="index.php"><img id="logo" src="images/logo.png" alt="Career Cafe Logo"></a>
-      <div class="btn-group">
-         <a href="#" class="button" onclick="openLogin()">Login</a>
-         <a href="createAccount.php" class="button">Create Account</a>
-      </div>
+      <?php 
+      // Load header based on if logged in or not
+         if (isset($_SESSION['loggedin'])){
+            if ($_SESSION['loggedin'] == true){
+               php_get_logged_in_header();
+            }
+         }
+          else {
+            php_get_header();
+       }?>
       <div id="searchContainer">
          <input id="search" type="text" placeholder="Search..">
       </div>
@@ -127,7 +134,7 @@
 
    <div class="form-popup" id="forgotpsw-popup">
 
-      <form id="login" method="get" action="login.php">
+      <form id="login" method="get" action="resetpsw.php">
 
          <h2> Forgot password </h2>
 

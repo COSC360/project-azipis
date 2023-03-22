@@ -1,14 +1,17 @@
-<?php include 'sql.php';
-session_start();
+<?php
+    include "sql.php";
+    session_start();
 ?>
 <!DOCTYPE html>
 <html>
 
 <head lang="en">
    <meta charset="utf-8">
-   <title>CareerCafe - Find your passion</title>
+   <title>CareerCafe - Create Account</title>
    <link rel="stylesheet" href="css/style.css" />
+   <link rel="stylesheet" href="css/form.css" />
    <link rel="stylesheet" href="css/login.css" />
+   <script type="text/javascript" src="scripts/form.js" defer></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
 </head>
@@ -37,7 +40,7 @@ session_start();
 
    <div id="main">
 
-      <article id="left-sidebar">
+   <article id="left-sidebar">
          <h2>Popular Communities</h2>
          <div class="collapsibles">
             <button type="button" class="button collapsible">Healthcare</button>
@@ -90,35 +93,27 @@ session_start();
       <article id="center">
 
          <div id="breadcrumb">
-            <?php
-                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $_GET['cid'] . "");
-                $row2 = mysqli_fetch_assoc($result2);
 
-                $industry = $row2["industry"];
-                $name = $row2["name"];
-
-                echo "<h2> Jobs > " . $row2["industry"] . " > " . $row2["name"] . "</h2>"
-            ?>
+            <h2> Posts | Comments | Saved | Upvoted | Downvoted </h2>
 
 
          </div>
 
          <div id="threads">
-            <h1><?php echo "<b> New Post </b> in <b>" . $name . "</b>"; ?></h1>
-            <form action="insertThread.php" method="post">
-               <fieldset>
-                  <input type="text" class="textinput" id="title" name="title" placeholder="Thread Title" required>
-                  <input type="number" class="textinput" id="threadtype" name="threadtype" placeholder="Type of Thread" required>
-                  <input type="text" class="textinput" id="content" name="content" placeholder="Content of Thread" required>
-                  <input type="text" id="communityid" name="communityid" value="<?php echo $_GET['cid'] ?>"  hidden>
-                  <div class="clear"></div>
-                  <input type="submit" class="button"/>
-               </fieldset>
+
+               Breadcrumb options need hrefs
 
                <br>
 
-            </form>
+               Needs to be implemented
+
+
+
+            </div>
+
          </div>
+
+         
 
 
       </article>
@@ -127,7 +122,7 @@ session_start();
 
    <div class="form-popup" id="login-popup">
 
-      <form id="login" method="get" action="login.php">
+      <form id="login" method="post" action="login.php">
 
          <h2> Login </h2>
 
@@ -146,7 +141,7 @@ session_start();
 
    <div class="form-popup" id="forgotpsw-popup">
 
-      <form id="login" method="get" action="login.php">
+      <form id="login" method="post" action="login.php">
 
          <h2> Forgot password </h2>
 
