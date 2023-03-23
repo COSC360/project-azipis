@@ -8,12 +8,12 @@ CREATE TABLE Community (
 CREATE TABLE Users (
     userid INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL UNIQUE,
-    firstname VARCHAR(30),
-    lastname VARCHAR(30),
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     avatarimgpath VARCHAR(255) UNIQUE,
+    firstname VARCHAR(30),
+    lastname VARCHAR(30),
     PRIMARY KEY (userid)
 );
 
