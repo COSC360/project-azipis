@@ -14,6 +14,7 @@ CREATE TABLE Users (
     avatarimgpath VARCHAR(255) UNIQUE,
     firstname VARCHAR(30),
     lastname VARCHAR(30),
+    isAdmin BOOLEAN,
     PRIMARY KEY (userid)
 );
 
@@ -80,5 +81,5 @@ INSERT INTO COMMUNITY VALUES (19, "Industrial", "Engineering");
 INSERT INTO COMMUNITY VALUES (20, "Other Engineering", "Engineering");
 
 INSERT INTO Thread (title, communityid, created, points, content, threadtype)
-VALUES ('I love big pharma', 1, NOW(), 0, 'Healthcare and big pharma is so cool, 1');
+VALUES ('I love big pharma', 1, NOW(), 0, 'Healthcare and big pharma is so cool', 1);
 
