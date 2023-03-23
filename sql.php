@@ -54,8 +54,8 @@ function php_get_last_insert_id() {
 // Print out logged in header
 function php_get_logged_in_header(){
     echo '<div class="btn-group">';
-    echo '<a href="user.php?username='.$_SESSION['username']. '">'.$_SESSION['username'] . '(points)</a>' ;
-    echo '<a href="logout.php" class="button">Logout</a>';
+    echo '<a href="user.php?username='.$_SESSION['username']. '" class="header-links">'.$_SESSION['username'] . '(points)</a> | ' ;
+    echo '<a href="logout.php" class="header-links">Logout</a>';
     echo '</div>';
 }
 

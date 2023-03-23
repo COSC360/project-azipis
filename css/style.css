@@ -121,6 +121,27 @@ header{
 
 }
 
+.header-links{
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 1em;
+    padding: 2px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.header-links:hover{
+    background-color:#FF9C96;
+    color: white;
+}
+
+.header-links:visited{
+    color: black;
+}
+.header-links:link{
+    color: black;
+}
+
 .btn-group{
     float: right;
     margin: 1em 1em 0 0;
