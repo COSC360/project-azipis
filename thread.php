@@ -91,6 +91,7 @@
                 $industry = $row2["industry"];
                 $name = $row2["name"];
                 $threadname = $row["title"];
+                $threadbody = $row["content"];
                 $creationtime = $row["created"];
 
                 echo "<h2> Jobs > " . $row2["industry"] . " > <a href='community.php?cid=" . $row["communityid"] . "'>" . $row2["name"] . "</a></h2>"
@@ -101,6 +102,7 @@
 
          <div id="threads">
             <h1><?php echo $threadname; ?></h1>
+            <p><?php echo $threadbody; ?></p>
             <h2><?php echo $creationtime; ?></h2>
          </div>
 
