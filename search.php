@@ -104,13 +104,22 @@ session_start();
          <div id="breadcrumb">
             <?php 
                 $result = php_select("SELECT * FROM Thread WHERE title LIKE '%" . $_GET["search"] . "%' ORDER BY created DESC");
-            echo '<h2> Search Results - ' . mysqli_num_rows($result) . ' thread(s) found</h2>'
+            echo '<h2> Thread Results - ' . mysqli_num_rows($result) . ' thread(s) found</h2>'
             ?>
 
 
          </div>
          <div id="threads">
             <?php include 'thread_template.php' ?>
+         </div>
+         <div id="breadcrumb">
+            <?php 
+                $result2 = php_select("SELECT * FROM Users WHERE username LIKE '%" . $_GET["search"] . "%'");
+                echo '<h2> User Results - ' . mysqli_num_rows($result2) . ' user(s) found</h2>'
+            ?>
+         </div>
+         <div id="users">
+            <?php include 'user_template.php' ?>
          </div>
 
 
@@ -171,6 +180,16 @@ session_start();
          $type = $row["threadtype"];
          echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
       }
+
+      while ($row2 = mysqli_fetch_assoc($result2)) {
+        if(isset($row2["userid"])){
+            $uid = $row2["userid"];
+            $username = get_username_from_id($row2["userid"]);
+            $imgpath = $row2["avatarimgpath"];
+            $description = $row2["description"];
+            echo "createNewUserEntry(" . $uid . ",\"" . $username . "\",\"" . $imgpath . "\",\"" . $description . "\");";
+        }
+     }
       ?>
    </script>
 

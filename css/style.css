@@ -183,6 +183,16 @@ header{
     padding: 0.5em;
 }
 
+.user{
+    position: relative;
+    display: block;
+    border-top: 2px solid black;
+    width: 95%;
+    margin: auto;
+    clear: both;
+    height: 7em;
+}
+
 .thread{
     position: relative;
     display: block;
@@ -239,8 +249,18 @@ figure{
     border-radius: 50%;
     position: absolute;
     top: 0.5em;
-    left: 0.75em;
+    left: 0.5em;
     height: 4em;
+    width: 4em;
+}
+
+.profilepic{
+    border-radius: 50%;
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    height: 5em;
+    width: 5em;
 }
 
 #threads{
@@ -249,6 +269,16 @@ figure{
 }
 
 #threads a:link{
+    color: black;
+    text-decoration: none;
+}
+
+#users{
+    margin: 1em 0 1em 0;
+    height: 100%;
+}
+
+#users a:link{
     color: black;
     text-decoration: none;
 }
