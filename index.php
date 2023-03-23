@@ -11,6 +11,7 @@ session_start();
    <link rel="stylesheet" href="css/login.css" />
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
+   <script type="text/javascript" src="scripts/createnewthread.js"></script>
 </head>
 
 <body>
@@ -175,38 +176,21 @@ session_start();
    </footer>
 
 </body>
-
-<script>
-                function createNewThread(tid,title,created,community,points,user){
-                    var newThread = document.querySelector("#thread_template").cloneNode(true);
-                    newThread.id = "";
-                    newThread.href = "thread.php?tid=" + tid;
-                    newThread.hidden = false;
-                    newThread.querySelector(".thread-name").innerText = title;
-                    newThread.querySelector(".date").innerText = created;
-                    newThread.querySelector(".community").innerText = community;
-                    newThread.querySelector(".username").innerText = user;
-                    //newThread.querySelector("#points").value = points;
-                    document.querySelector("#threads").appendChild(newThread);
-                }
-            <?php
-            $result = php_select("SELECT * FROM Thread ORDER BY created DESC");
-            while ($row = mysqli_fetch_assoc($result)) {
-               $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
-               $community = mysqli_fetch_assoc($communityResult)["name"];
-               $tid = $row["tid"];
-               $title = $row["title"];
-               $created = $row["created"];
-               $points = $row["points"];
-               $user = $row["userid"];
-               if($user === null){
-                  $user = "Anonymous";
-               } else {
-                  
-               }
-               echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\");";
-            }
-            ?>
-</script>
+   <script>
+      <?php
+      $result = php_select("SELECT * FROM Thread ORDER BY created DESC");
+      while ($row = mysqli_fetch_assoc($result)) {
+         $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
+         $community = mysqli_fetch_assoc($communityResult)["name"];
+         $tid = $row["tid"];
+         $title = $row["title"];
+         $created = $row["created"];
+         $points = $row["points"];
+         $user = $row["userid"];
+         $type = $row["threadtype"];
+         echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
+      }
+      ?>
+   </script>
 
 </html>

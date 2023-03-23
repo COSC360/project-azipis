@@ -23,6 +23,7 @@ CREATE TABLE Thread (
    communityid INT,
    created DATETIME,
    points INT,
+   threadtype INT,
    content VARCHAR(500),
    PRIMARY KEY (tid),
    userid INT,
@@ -78,6 +79,6 @@ INSERT INTO COMMUNITY VALUES (18, "Mechanical", "Engineering");
 INSERT INTO COMMUNITY VALUES (19, "Industrial", "Engineering");
 INSERT INTO COMMUNITY VALUES (20, "Other Engineering", "Engineering");
 
-INSERT INTO Thread (title, communityid, created, points, content)
-VALUES ('I love big pharma', 1, NOW(), 0, 'Healthcare and big pharma is so cool');
+INSERT INTO Thread (title, communityid, created, points, content, threadtype)
+VALUES ('I love big pharma', 1, NOW(), 0, 'Healthcare and big pharma is so cool, 1');
 

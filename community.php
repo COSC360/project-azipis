@@ -10,6 +10,7 @@ session_start(); ?>
    <link rel="stylesheet" href="css/login.css" />
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
+   <script type="text/javascript" src="scripts/createnewthread.js"></script>
 </head>
 
 <body>
@@ -72,9 +73,9 @@ session_start(); ?>
             $row = mysqli_fetch_assoc($result);
 
             $industry = $row["industry"];
-            $name = $row["name"];
+            $community = $row["name"];
 
-            echo "<h2> Jobs > " . $industry . " > " . $name . "</h2>"
+            echo "<h2> Jobs > " . $industry . " > " . $community . "</h2>"
             ?>
 
 
@@ -155,25 +156,16 @@ session_start(); ?>
 </body>
 
 <script>
-   function createNewThread(tid, title, created, points) {
-      var newThread = document.querySelector("#thread_template").cloneNode(true);
-      newThread.id = "";
-      newThread.href = "thread.php?tid=" + tid;
-      newThread.hidden = false;
-      newThread.querySelector(".thread-name").innerText = title;
-      newThread.querySelector(".date").innerText = created;
-      //newThread.querySelector(".username").value = user;
-      //newThread.querySelector("#points").value = points;
-      document.querySelector("#threads").appendChild(newThread);
-   }
    <?php
    $result = php_select("SELECT * FROM Thread WHERE communityid = " . $_GET["cid"] . " ORDER BY created DESC");
    while ($row = mysqli_fetch_assoc($result)) {
       $tid = $row["tid"];
-      $title = $row["title"];
-      $created = $row["created"];
-      $points = $row["points"];
-      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $points . "\");";
+         $title = $row["title"];
+         $created = $row["created"];
+         $points = $row["points"];
+         $user = $row["userid"];
+         $type = $row["threadtype"];
+      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
    }
    ?>
 </script>

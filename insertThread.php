@@ -4,17 +4,16 @@ session_start();
 
 include 'sql.php';
 
-$query = "INSERT INTO Thread (title, communityid, created, points, content, userid) VALUES (?, ?, NOW(), 0, ?, ?)";
-$types = "sisi";
+$query = "INSERT INTO Thread (title, communityid, created, points, content, userid, threadtype) VALUES (?, ?, NOW(), 0, ?, ?, ?)";
+$types = "sisii";
 
 $title = $_POST['title'];
 $communityid = $_POST['communityid'];
 $content = $_POST['content'];
 $userid = $_SESSION['uid'];
+$threadtype = $_POST['threadtype'];
 
-echo $userid;
-
-$result = php_insert($query, $types, $title, $communityid, $content, $userid);
+$result = php_insert($query, $types, $title, $communityid, $content, $userid, $threadtype);
 
 if ($result) {
     echo "Insertion succeeded";
