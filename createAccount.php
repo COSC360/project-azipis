@@ -17,25 +17,7 @@ session_start();
 
 <body>
 
-   <header id="masthead">
-
-      <a href="index.php"><img id="logo" src="images/logo.png" alt="Career Cafe Logo"></a>
-      <?php 
-      // Load header based on if logged in or not
-         if (isset($_SESSION['loggedin'])){
-            if ($_SESSION['loggedin'] == true){
-               php_get_logged_in_header();
-            }
-         }
-          else {
-            php_get_header();
-       }?>
-      <div id="searchContainer">
-         <input id="search" type="text" placeholder="Search..">
-      </div>
-
-
-   </header>
+   <?php include 'header.php'?>
 
    <div id="main">
 
