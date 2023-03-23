@@ -4,7 +4,7 @@ function getUserThreads(username){
 
     //$("#threads").empty();
 
-    $("#threads").find('a').not("#thread_template").remove();
+    $("#threads").children().not("#thread_template").remove();
     
     $.get('getUserThreads.php', {username: username}, function(data) {
 

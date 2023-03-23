@@ -114,8 +114,7 @@ session_start();
         <article id="center">
 
             <div id="breadcrumb">
-
-                <h2> <a href="#" onclick="getUserThreads('<?php $_GET['username'] ?>')">Posts </a>
+                <h2> <a href="#" onclick="getUserThreads('<?php echo $_GET['username'] ?>')">Posts </a>
                     | Comments
                     | Saved
                     | Upvoted
@@ -125,34 +124,7 @@ session_start();
             </div>
 
             <div id="threads">
-
-                <a id="thread_template" href="" hidden>
-                    <div class="thread">
-
-                        <figure>
-                            <span class="circle"></span>
-                            <img src="images/coffeecup.png" alt="coffee cup" class="overlayed">
-                        </figure>
-
-                        <div class="thread-info">
-
-                            <h2 class="thread-name">
-                                </h1>
-
-                                <p>
-                                    <span class="username"></span>
-                                    <span class="date"></span>
-                                    <span class="community"></span>
-                                </p>
-
-                        </div>
-
-
-                    </div>
-                </a>
-
-
-
+                <?php include 'thread_template.php' ?>
             </div>
 
     </div>

@@ -82,7 +82,8 @@ session_start(); ?>
          </div>
 
          <div id="threads">
-         <div id="thread_template" class="relative" hidden>
+            <?php include 'thread_template.php' ?>
+         </div>
                <a class="thread" href="">
 
                   <figure>
