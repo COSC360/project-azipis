@@ -82,8 +82,8 @@ session_start(); ?>
          </div>
 
          <div id="threads">
-            <a id="thread_template" href="" hidden>
-               <div class="thread">
+         <div id="thread_template" class="relative" hidden>
+               <a class="thread" href="">
 
                   <figure>
                      <span class="circle"></span>
@@ -92,8 +92,7 @@ session_start(); ?>
 
                   <div class="thread-info">
 
-                     <h2 class="thread-name">
-                        </h1>
+                     <h2 class="thread-name"></h2>
 
                         <p>
                            <span class="username"></span>
@@ -104,10 +103,15 @@ session_start(); ?>
                   </div>
 
 
-               </div>
             </a>
-
-         </div>
+               <div class="points">
+                  <form action="vote.php" method="post"></form>
+                     <button>^</button>
+                     <p class="pointnum">0</p>
+                     <button>v</button>
+                  </div>
+            </div>
+            </div>
 
 
       </article>

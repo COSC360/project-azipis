@@ -7,7 +7,7 @@ function createNewThread(tid,title,created,community,points,user,threadtype){
     }
     var newThread = document.querySelector("#thread_template").cloneNode(true);
     newThread.id = "";
-    newThread.href = "thread.php?tid=" + tid;
+    newThread.querySelector(".thread").href = "thread.php?tid=" + tid;
     newThread.hidden = false;
     newThread.querySelector(".thread-name").innerText = title;
     newThread.querySelector(".date").innerText = created;

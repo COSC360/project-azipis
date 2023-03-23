@@ -93,12 +93,15 @@
                 $row = mysqli_fetch_assoc($result);
                 $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"] . "");
                 $row2 = mysqli_fetch_assoc($result2);
+                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"] . "");
+                $row2 = mysqli_fetch_assoc($result2);
 
                 $industry = $row2["industry"];
                 $name = $row2["name"];
                 $threadname = $row["title"];
                 $threadbody = $row["content"];
                 $creationtime = $row["created"];
+                $username = get_username_from_id($row["userid"]);
 
                 echo "<h2> Jobs > " . $row2["industry"] . " > <a href='community.php?cid=" . $row["communityid"] . "'>" . $row2["name"] . "</a></h2>"
             ?>
@@ -107,11 +110,29 @@
          </div>
 
          <div id="threads">
-            <h1><?php echo $threadname; ?></h1>
+            <h1 class="nomargin"><?php echo $threadname; ?></h1>
+            By <h4 class="inline nomargin"><?php echo $username; ?></h2>
+            at <h4 class="inline nomargin"><?php echo $creationtime; ?></h2>
             <p><?php echo $threadbody; ?></p>
-            <h2><?php echo $creationtime; ?></h2>
          </div>
+      
+      <form action="insertComment.php" method="post">
+            <fieldset>
+               <input type="text" class="textinput" id="title" name="title" placeholder="Comment" required>
+               <input type="text" id="communityid" name="communityid" value=""  hidden>
+               <div class="clear"></div>
+               <input type="submit" class="button" value="Submit Comment"/>
+            </fieldset>
 
+            <br>
+
+         </form>
+
+         <div class="comment">
+            <h4 class="author inline">Bob</h2>
+            <h5 class="date inline">1 Hour Ago</h3>
+            <p class="content">hey!</p>
+         </div>
 
       </article>
 
