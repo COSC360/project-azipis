@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 if(mysqli_stmt_num_rows($stmt) == 1){
 
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $uid, $username, $email, $hashed_psw, $desc, $av_img_path, $fname, $lname);
+                    mysqli_stmt_bind_result($stmt, $uid, $username, $email, $hashed_psw, $desc, $av_img_path, $fname, $lname, $admin);
 
                     if(mysqli_stmt_fetch($stmt)){
 
@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["avatarimgpath"] = $av_img_path;
                             $_SESSION["firstname"] = $fname;
                             $_SESSION["lastname"] = $lname;
+                            $_SESSION['isAdmin'] = $admin;
 
                             header("Location: index.php");
 
