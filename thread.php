@@ -1,4 +1,6 @@
-<?php include 'sql.php';?>
+<?php include 'sql.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +15,7 @@
 
 <body>
 
-   <header id="masthead">
+<header id="masthead">
 
       <a href="index.php"><img id="logo" src="images/logo.png" alt="Career Cafe Logo"></a>
       <?php 
@@ -31,7 +33,7 @@
       </div>
 
 
-   </header>
+</header>
 
    <div id="main">
 
@@ -115,23 +117,43 @@
             at <h4 class="inline nomargin"><?php echo $creationtime; ?></h2>
             <p><?php echo $threadbody; ?></p>
          </div>
-      
-      <form action="insertComment.php" method="post">
+      <?php
+      $tid = $_GET['tid'];
+      $notloggedin= "value=\"Submit Comment\"";
+      if(!isset($_SESSION['uid'])){
+         $notloggedin = "value=\"Not Logged In\" disabled";
+      }   
+      echo <<<EOD
+         <form action="insertComment.php" method="post">
             <fieldset>
-               <input type="text" class="textinput" id="title" name="title" placeholder="Comment" required>
-               <input type="text" id="communityid" name="communityid" value=""  hidden>
+               <input type="text" class="textinput" id="comment" name="comment" placeholder="Comment" required>
+               <input type="text" id="tid" name="tid" value="$tid" hidden>
                <div class="clear"></div>
-               <input type="submit" class="button" value="Submit Comment"/>
+               <input type="submit" class="button" $notloggedin/>
             </fieldset>
 
             <br>
 
          </form>
-
-         <div class="comment">
-            <h4 class="author inline">Bob</h2>
-            <h5 class="date inline">1 Hour Ago</h3>
-            <p class="content">hey!</p>
+         EOD;
+         ?>
+         <div id="comments">
+            <?php
+               $result = php_select("SELECT * FROM Comment WHERE tid = " . $_GET['tid'] . "");
+               while ($row = mysqli_fetch_assoc($result)) {
+                  echo "<div class='comment'>";
+                  echo "<h4 class='author inline'>";
+                  echo get_username_from_id($row["userid"]);
+                  echo "</h4> at ";
+                  echo "<h4 class='date inline'>";
+                  echo $row["created"];
+                  echo "</h4>";
+                  echo "<p class='content'>";
+                  echo $row["comment"];
+                  echo "</p>";
+                  echo "</div>";
+               }
+            ?>
          </div>
 
       </article>
