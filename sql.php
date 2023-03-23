@@ -43,6 +43,21 @@ function php_get_last_insert_id() {
     return $result;
 }
 
+//RETURN: Username string from userid, "Anonymous" if id not found
+function get_username_from_id($id) {
+    if($id == NULL) {
+        return "Anonymous";
+    }
+
+    $result = php_select("SELECT username FROM Users WHERE userid =" . $id);
+    $row = mysqli_fetch_assoc($result);
+    $username = $row["username"];
+
+    if($username == NULL) {
+        return "Anonymous";
+    }
+    return $username;
+}
 
 
 
