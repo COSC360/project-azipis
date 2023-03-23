@@ -14,6 +14,9 @@ session_start();
     <script type="text/javascript" src="scripts/form.js" defer></script>
     <script type="text/javascript" src="scripts/script.js" defer></script>
     <script type="text/javascript" src="scripts/login.js" defer></script>
+    <script type="text/javascript" src="scripts/createnewthread.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script type="text/javascript" src="scripts/jqueryfunctions.js" defer></script>
 </head>
 
 <body>
@@ -64,17 +67,42 @@ session_start();
             </div>
 
             <div id="description">
+                <p style="padding: 5px;">
+                    <?php
+
+                    if (isset($_SESSION['description'])) {
+                        echo $_SESSION['description'];
+                    } else {
+                        $result = php_select("SELECT description FROM users WHERE username = '" . $_GET['username'] . "'");
+                        $row = mysqli_fetch_assoc($result);
+                        echo $row['description'];
+                    }
+
+                    ?>
+                </p>
+            </div>
+
+            <div id="options">
+
                 <?php
 
-                if (isset($_SESSION['description'])) {
-                    echo $_SESSION['description'];
-                } else {
-                    $result = php_select("SELECT description FROM users WHERE username = '" . $_GET['username'] . "'");
-                    $row = mysqli_fetch_assoc($result);
-                    echo $row['description'];
+                if (isset($_SESSION['username'])) {
+
+                    if ($_SESSION['username'] === $_GET['username']) {
+
+                        echo '<a href="user.php?username=' . $_SESSION['username'] . '" class="button">Profile</a>';
+                        echo '<a href="settings.php?"username=' . $_SESSION['username'] . '" class="button">User Settings</a>';
+                        echo '<a href="logout.php" class="button">Logout</a>';
+                    }
+
+                    if ($_SESSION['isAdmin'] === 1) {
+                        echo '<a href="admin.php?username=' . $_SESSION['username'] . '" class="button">Admin</a>';
+                    }
                 }
 
+
                 ?>
+
 
             </div>
 
@@ -87,18 +115,41 @@ session_start();
 
             <div id="breadcrumb">
 
-                <h2> Posts | Comments | Saved | Upvoted | Downvoted </h2>
+                <h2> <a href="#" onclick="getUserThreads('<?php $_GET['username'] ?>')">Posts </a>
+                    | Comments
+                    | Saved
+                    | Upvoted
+                    | Downvoted </h2>
 
 
             </div>
 
             <div id="threads">
 
-                Breadcrumb options need hrefs
+                <a id="thread_template" href="" hidden>
+                    <div class="thread">
 
-                <br>
+                        <figure>
+                            <span class="circle"></span>
+                            <img src="images/coffeecup.png" alt="coffee cup" class="overlayed">
+                        </figure>
 
-                Needs to be implemented
+                        <div class="thread-info">
+
+                            <h2 class="thread-name">
+                                </h1>
+
+                                <p>
+                                    <span class="username"></span>
+                                    <span class="date"></span>
+                                    <span class="community"></span>
+                                </p>
+
+                        </div>
+
+
+                    </div>
+                </a>
 
 
 
