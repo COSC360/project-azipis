@@ -102,8 +102,10 @@ session_start();
       <article id="center">
 
          <div id="breadcrumb">
-
-            <h2> Popular Threads </h2>
+            <?php 
+                $result = php_select("SELECT * FROM Thread WHERE title LIKE '%" . $_GET["search"] . "%' ORDER BY created DESC");
+            echo '<h2> Search Results - ' . mysqli_num_rows($result) . ' thread(s) found</h2>'
+            ?>
 
 
          </div>
@@ -158,7 +160,6 @@ session_start();
 </body>
    <script>
       <?php
-      $result = php_select("SELECT * FROM Thread ORDER BY created DESC");
       while ($row = mysqli_fetch_assoc($result)) {
          $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
          $community = mysqli_fetch_assoc($communityResult)["name"];
