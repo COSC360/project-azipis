@@ -1,5 +1,7 @@
 <?php include 'sql.php';
+include 'security.php';
 session_start();
+$search_param = get_sanitized_param($_GET,'search');
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,7 @@ session_start();
 
 <body>
 
-    <?php include 'header.php'?>
+   <?php include 'header.php' ?>
    <div id="main">
 
       <article id="left-sidebar">
@@ -36,7 +38,7 @@ session_start();
             </div>
             <button type="button" class="button collapsible">Government</button>
             <div class="content background">
-            <?php
+               <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
@@ -47,7 +49,7 @@ session_start();
             </div>
             <button type="button" class="button collapsible">Tech</button>
             <div class="content background">
-            <?php
+               <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
@@ -58,7 +60,7 @@ session_start();
             </div>
             <button type="button" class="button collapsible">Engineering</button>
             <div class="content background">
-            <?php
+               <?php
                $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
@@ -73,21 +75,24 @@ session_start();
       <article id="center">
 
          <div id="breadcrumb">
-            <?php 
-                $result = php_select("SELECT * FROM Thread WHERE title LIKE '%" . $_GET["search"] . "%' ORDER BY created DESC");
-            echo '<h2> Thread Results - ' . mysqli_num_rows($result) . ' thread(s) found</h2>'
-            ?>
-
+         <?php 
+            $param1 = "%{$search_param}%";
+            $types = "s";
+            $result = php_select_prepared("SELECT * FROM Thread WHERE title LIKE ?",$types,$param1);
+            echo '<h2> Thread Results - ' . mysqli_num_rows($result) . ' users(s) found</h2>'
+         ?>
 
          </div>
          <div id="threads">
             <?php include 'thread_template.php' ?>
          </div>
          <div id="breadcrumb">
-            <?php 
-                $result2 = php_select("SELECT * FROM Users WHERE username LIKE '%" . $_GET["search"] . "%'");
-                echo '<h2> User Results - ' . mysqli_num_rows($result2) . ' user(s) found</h2>'
-            ?>
+         <?php 
+            $param1 = "%{$search_param}%";
+            $types = "s";
+            $result2 = php_select_prepared("SELECT * FROM Users WHERE username LIKE ?",$types,$param1);
+            echo '<h2> Thread Results - ' . mysqli_num_rows($result2) . ' users(s) found</h2>'
+               ?>
          </div>
          <div id="users">
             <?php include 'user_template.php' ?>
@@ -138,30 +143,30 @@ session_start();
    </footer>
 
 </body>
-   <script>
-      <?php
-      while ($row = mysqli_fetch_assoc($result)) {
-         $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
-         $community = mysqli_fetch_assoc($communityResult)["name"];
-         $tid = $row["tid"];
-         $title = $row["title"];
-         $created = $row["created"];
-         $points = $row["points"];
-         $user = get_username_from_id($row["userid"]);
-         $type = $row["threadtype"];
-         echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
-      }
+<script>
+   <?php
+   while ($row = mysqli_fetch_assoc($result)) {
+      $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
+      $community = mysqli_fetch_assoc($communityResult)["name"];
+      $tid = $row["tid"];
+      $title = $row["title"];
+      $created = $row["created"];
+      $points = $row["points"];
+      $user = get_username_from_id($row["userid"]);
+      $type = $row["threadtype"];
+      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
+   }
 
-      while ($row2 = mysqli_fetch_assoc($result2)) {
-        if(isset($row2["userid"])){
-            $uid = $row2["userid"];
-            $username = get_username_from_id($row2["userid"]);
-            $imgpath = $row2["avatarimgpath"];
-            $description = $row2["description"];
-            echo "createNewUserEntry(" . $uid . ",\"" . $username . "\",\"" . $imgpath . "\",\"" . $description . "\");";
-        }
-     }
-      ?>
-   </script>
+   while ($row2 = mysqli_fetch_assoc($result2)) {
+      if (isset($row2["userid"])) {
+         $uid = $row2["userid"];
+         $username = get_username_from_id($row2["userid"]);
+         $imgpath = $row2["avatarimgpath"];
+         $description = $row2["description"];
+         echo "createNewUserEntry(" . $uid . ",\"" . $username . "\",\"" . $imgpath . "\",\"" . $description . "\");";
+      }
+   }
+   ?>
+</script>
 
 </html>

@@ -10,6 +10,26 @@ function php_select($query) {
     return $result;
 }
 
+//For prepared sql selection queries
+//RETURN: FALSE for failure, RESULT OBJECT for success
+function php_select_prepared($query, $types, ...$binds) {
+    $conn = getConnection();
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($query);
+    if (!$stmt) {
+        return false;
+    }
+    
+    // Bind the parameters
+    $stmt->bind_param($types, ...$binds);
+    
+    // Execute the statement
+    $stmt->execute();
+    
+    // Return success or failure
+    return $stmt->get_result();
+}
+
 //For sql insertion queries
 //RETURN: FALSE for failure, TRUE for success
 function php_insert($query, $types, ...$binds) {
