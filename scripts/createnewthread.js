@@ -28,3 +28,16 @@ function createNewUserEntry(uid,username,imgpath,desc,location="#users"){
     newUser.querySelector(".desc").innerText = desc;
     document.querySelector(location).appendChild(newUser);
 }
+
+function createNewComment(cid, comment, created, points, username, location="#comments"){
+
+    var newComment = document.querySelector("#comment_template").cloneNode(true);
+    newComment.id = "";
+    newComment.hidden = false;
+    newComment.querySelector(".author").innerText = username;
+    newComment.querySelector(".date").innerText = created;
+    newComment.querySelector(".content").innerText = comment;
+    //newComment.querySelector("#points").value = points;
+    document.querySelector(location).appendChild(newComment);
+
+}

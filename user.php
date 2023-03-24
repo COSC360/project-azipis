@@ -1,7 +1,7 @@
 <?php
 include "sql.php";
 include 'security.php';
-$username = get_sanitized_string_param($_GET,'username');
+$username = get_sanitized_string_param($_GET, 'username');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ session_start();
 
 <body>
 
-    <?php include 'header.php'?>
+    <?php include 'header.php' ?>
 
     <div id="main">
 
@@ -38,8 +38,8 @@ session_start();
                         echo '<img src="' . $_SESSION['avatarimgpath'] . '" alt="Avatar Image">';
                         echo '<figcaption>' . $_SESSION['username'] . '</figcaption>';
                     } else {
-                        $result = php_select_prepared("SELECT avatarimgpath FROM users WHERE username = ?","s",$username);
-                        if(mysqli_num_rows($result) > 0){
+                        $result = php_select_prepared("SELECT avatarimgpath FROM users WHERE username = ?", "s", $username);
+                        if (mysqli_num_rows($result) > 0) {
                             $row = mysqli_fetch_assoc($result);
                             $imgpath = $row['avatarimgpath'];
                             echo '<img src="' . $imgpath . '" alt="Avatar Image">';
@@ -62,11 +62,10 @@ session_start();
                     if (isset($_SESSION['description'])) {
                         echo $_SESSION['description'];
                     } else {
-                        $result = php_select_prepared("SELECT description FROM users WHERE username = ?","s",$username);
+                        $result = php_select_prepared("SELECT description FROM users WHERE username = ?", "s", $username);
                         $row = mysqli_fetch_assoc($result);
                         echo $row['description'];
                     }
-
                     ?>
                 </p>
             </div>
@@ -74,7 +73,6 @@ session_start();
             <div id="options">
 
                 <?php
-
                 if (isset($_SESSION['username'])) {
 
                     if ($_SESSION['username'] === $username) {
@@ -88,11 +86,7 @@ session_start();
                         echo '<a href="admin.php?username=' . $_SESSION['username'] . '" class="button">Admin</a>';
                     }
                 }
-
-
                 ?>
-
-
             </div>
 
 
@@ -104,10 +98,10 @@ session_start();
 
             <div id="breadcrumb">
                 <h2> <a href="#" onclick="getUserThreads('<?php echo $username ?>')">Posts </a>
-                    | Comments
-                    | Saved
+                    <a href="#" onclick="getUserComments('<?php echo $username ?>')">| Comments </a>
                     | Upvoted
-                    | Downvoted </h2>
+                    | Downvoted
+                </h2>
 
 
             </div>
@@ -115,6 +109,12 @@ session_start();
             <div id="threads">
                 <?php include 'thread_template.php' ?>
             </div>
+
+            <div id="comments">
+                <?php include 'comment_template.php' ?>
+            </div>
+
+        </article>
 
     </div>
 

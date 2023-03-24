@@ -1,10 +1,11 @@
 function getUserThreads(username){
 
-    console.log(username);
+    //console.log(username);
 
     //$("#threads").empty();
 
-    $("#threads").children().not("#thread_template").remove();
+    $("#threads").children().not("#thread_template",).remove();
+    $("#comments").children().not("#comment_template",).remove();
     
     $.get('getUserThreads.php', {username: username}, function(data) {
 
@@ -19,6 +20,31 @@ function getUserThreads(username){
             var user = threads[i].username;
 
             createNewThread(tid, title, created, community, points, user, threadtype);
+        }
+
+    });
+
+}
+
+function getUserComments(username){
+
+    //console.log(username);
+
+    //$("#threads").empty();
+
+    $("#threads").children().not("#thread_template").remove();
+    $("#comments").children().not("#comment_template",).remove();
+    
+    $.get('getUserComments.php', {username: username}, function(data) {
+
+        var threads = JSON.parse(data);
+        for (var i = 0; i < threads.length; i++) {
+            var cid = threads[i].cid;
+            var comment = threads[i].comment;
+            var created = threads[i].created;
+            var points = threads[i].points;
+
+            createNewComment(cid, comment, created, points, username);
         }
 
     });
