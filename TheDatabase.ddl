@@ -52,6 +52,22 @@ CREATE TABLE Comment (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE ban (
+  banid INT,
+  userid INT,
+  adminid INT,
+  bandate DATETIME,
+  expiredate DATETIME,
+  banreason VARCHAR(1000),
+  PRIMARY KEY (banid),
+  FOREIGN KEY (userid) REFERENCES users(userid)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  FOREIGN KEY (adminid) REFERENCES users(userid)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+);
+
 -- Healthcare Communities
 INSERT INTO COMMUNITY VALUES (1, "Pharma", "Healthcare");
 INSERT INTO COMMUNITY VALUES (2, "Health Insurance", "Healthcare");
