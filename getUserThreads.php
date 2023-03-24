@@ -15,6 +15,6 @@ while ($row = $result->fetch_assoc()) {
     $rows[] = $row;
 }
 
-echo json_encode($rows);
+json_encode($rows);
 
 ?>
