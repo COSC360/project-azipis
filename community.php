@@ -1,4 +1,7 @@
-<?php include 'sql.php';
+<?php 
+include 'sql.php';
+include 'security.php';
+$cid = get_sanitized_string_param($_GET,'cid');
 session_start(); ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +23,7 @@ session_start(); ?>
    <div id="main">
 
       <article id="left-sidebar">
-         <button type="button" class="button centerme" onclick="window.location.href='createthread.php?cid=<?php echo $_GET["cid"]; ?>'">Compose Thread</button>
+         <button type="button" class="button centerme" onclick="window.location.href='createthread.php?cid=<?php echo $cid; ?>'">Compose Thread</button>
          <button type="button" class="button centerme">Trending</button>
          <button type="button" class="button centerme">New</button>
          <button type="button" class="button centerme">Controversial</button>
@@ -30,15 +33,17 @@ session_start(); ?>
             
 
                <?php
-               $result = php_select("SELECT * FROM community WHERE communityid = " . $_GET["cid"] . "");
-               $row = mysqli_fetch_assoc($result);
-               $industry = $row["industry"];
-               
-               $result1 = php_select("SELECT * FROM community WHERE industry =  '". $industry . "'");
-               while ($row1 = mysqli_fetch_assoc($result1)) {
-                  echo "<button type='button' class='button related' onclick='window.location.href=\"community.php?cid=" . $row1["communityid"] . "\"' >";
-                  echo $row1["name"];
-                  echo "</button> <br>";
+               $result = php_select_prepared("SELECT * FROM community WHERE communityid = ?","i",$cid);
+               if(mysqli_num_rows($result) > 0){
+                  $row = mysqli_fetch_assoc($result);
+                  $industry = $row["industry"];
+                  
+                  $result1 = php_select_prepared("SELECT * FROM community WHERE industry =  ?","s",$industry);
+                  while ($row1 = mysqli_fetch_assoc($result1)) {
+                     echo "<button type='button' class='button related' onclick='window.location.href=\"community.php?cid=" . $row1["communityid"] . "\"' >";
+                     echo $row1["name"];
+                     echo "</button> <br>";
+                  }
                }
                ?>
 
@@ -51,13 +56,15 @@ session_start(); ?>
 
          <div id="breadcrumb">
             <?php
-            $result = php_select("SELECT * FROM Community WHERE communityid = " . $_GET["cid"] . "");
-            $row = mysqli_fetch_assoc($result);
+            $result = php_select_prepared("SELECT * FROM Community WHERE communityid = ?","i",$cid);
+            if(mysqli_num_rows($result) > 0){
+               $row = mysqli_fetch_assoc($result);
 
-            $industry = $row["industry"];
-            $community = $row["name"];
+               $industry = $row["industry"];
+               $community = $row["name"];
 
-            echo "<h2> Jobs > " . $industry . " > " . $community . "</h2>"
+               echo "<h2> Jobs > " . $industry . " > " . $community . "</h2>";
+            }
             ?>
 
 
@@ -115,9 +122,9 @@ session_start(); ?>
 
 <script>
    <?php
-   $result = php_select("SELECT * FROM Thread WHERE communityid = " . $_GET["cid"] . " ORDER BY created DESC");
+   $result = php_select_prepared("SELECT * FROM Thread WHERE communityid = ?","i",$cid);
    while ($row = mysqli_fetch_assoc($result)) {
-      $tid = $row["tid"];
+         $tid = $row["tid"];
          $title = $row["title"];
          $created = $row["created"];
          $points = $row["points"];

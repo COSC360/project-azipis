@@ -1,4 +1,6 @@
 <?php include 'sql.php';
+include 'security.php';
+$cid = get_sanitized_int_param($_GET,'cid');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -73,13 +75,16 @@ session_start();
 
          <div id="breadcrumb">
             <?php
-                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $_GET['cid'] . "");
-                $row2 = mysqli_fetch_assoc($result2);
+                $result2 = php_select_prepared("SELECT * FROM Community WHERE communityid = ?","i",$cid);
+                $name = "";
+                if(mysqli_num_rows($result2) > 0){
+                  $row2 = mysqli_fetch_assoc($result2);
 
-                $industry = $row2["industry"];
-                $name = $row2["name"];
+                  $industry = $row2["industry"];
+                  $name = $row2["name"];
 
-                echo "<h2> Jobs > " . $row2["industry"] . " > " . $row2["name"] . "</h2>"
+                  echo "<h2> Jobs > " . $row2["industry"] . " > " . $row2["name"] . "</h2>";
+                }
             ?>
 
 

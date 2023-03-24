@@ -1,7 +1,7 @@
 <?php include 'sql.php';
 include 'security.php';
 session_start();
-$search_param = get_sanitized_param($_GET,'search');
+$search_param = get_sanitized_string_param($_GET,'search');
 ?>
 <!DOCTYPE html>
 <html>

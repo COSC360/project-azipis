@@ -1,5 +1,7 @@
 <?php
 include "sql.php";
+include 'security.php';
+$username = get_sanitized_string_param($_GET,'username');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -36,11 +38,15 @@ session_start();
                         echo '<img src="' . $_SESSION['avatarimgpath'] . '" alt="Avatar Image">';
                         echo '<figcaption>' . $_SESSION['username'] . '</figcaption>';
                     } else {
-                        $result = php_select("SELECT avatarimgpath FROM users WHERE username = '" . $_GET['username'] . "'");
-                        $row = mysqli_fetch_assoc($result);
-                        $imgpath = $row['avatarimgpath'];
-                        echo '<img src="' . $imgpath . '" alt="Avatar Image">';
-                        echo '<figcaption>' . $_GET['username'] . '</figcaption>';
+                        $result = php_select_prepared("SELECT avatarimgpath FROM users WHERE username = ?","s",$username);
+                        if(mysqli_num_rows($result) > 0){
+                            $row = mysqli_fetch_assoc($result);
+                            $imgpath = $row['avatarimgpath'];
+                            echo '<img src="' . $imgpath . '" alt="Avatar Image">';
+                            echo '<figcaption>' . $username . '</figcaption>';
+                        } else {
+                            die();
+                        }
                     }
 
 
@@ -56,7 +62,7 @@ session_start();
                     if (isset($_SESSION['description'])) {
                         echo $_SESSION['description'];
                     } else {
-                        $result = php_select("SELECT description FROM users WHERE username = '" . $_GET['username'] . "'");
+                        $result = php_select_prepared("SELECT description FROM users WHERE username = ?","s",$username);
                         $row = mysqli_fetch_assoc($result);
                         echo $row['description'];
                     }
@@ -71,7 +77,7 @@ session_start();
 
                 if (isset($_SESSION['username'])) {
 
-                    if ($_SESSION['username'] === $_GET['username']) {
+                    if ($_SESSION['username'] === $username) {
 
                         echo '<a href="user.php?username=' . $_SESSION['username'] . '" class="button">Profile</a>';
                         echo '<a href="settings.php?"username=' . $_SESSION['username'] . '" class="button">User Settings</a>';
@@ -97,7 +103,7 @@ session_start();
         <article id="center">
 
             <div id="breadcrumb">
-                <h2> <a href="#" onclick="getUserThreads('<?php echo $_GET['username'] ?>')">Posts </a>
+                <h2> <a href="#" onclick="getUserThreads('<?php echo $username ?>')">Posts </a>
                     | Comments
                     | Saved
                     | Upvoted

@@ -79,6 +79,14 @@ function get_username_from_id($id) {
     return $username;
 }
 
+function get_entry_exists($table,$colname,$val,$valtype){
+    $result = php_select_prepared("SELECT * FROM " . $table . " WHERE " . $colname . "= ?", $valtype, $val);
+    if(mysqli_num_rows($result) > 0){
+        return true;
+    }
+    return false;
+
+}
 
 
 

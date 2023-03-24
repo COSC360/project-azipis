@@ -1,4 +1,6 @@
 <?php include 'sql.php';
+include 'security.php';
+$tid = get_sanitized_int_param($_GET,'tid');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -73,21 +75,27 @@ session_start();
 
          <div id="breadcrumb">
             <?php
-                $result = php_select("SELECT * FROM Thread WHERE tid = " . $_GET['tid'] . "");
-                $row = mysqli_fetch_assoc($result);
-                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"] . "");
-                $row2 = mysqli_fetch_assoc($result2);
-                $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"] . "");
-                $row2 = mysqli_fetch_assoc($result2);
+                $result = php_select_prepared("SELECT * FROM Thread WHERE tid = ?", "i", $tid);
+                $threadname = "";
+                $username = "";
+                $creationtime = "";
+                $threadbody = "";
+                if(mysqli_num_rows($result) > 0){
+                  $row = mysqli_fetch_assoc($result);
+                  $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"] . "");
+                  $row2 = mysqli_fetch_assoc($result2);
 
-                $industry = $row2["industry"];
-                $name = $row2["name"];
-                $threadname = $row["title"];
-                $threadbody = $row["content"];
-                $creationtime = $row["created"];
-                $username = get_username_from_id($row["userid"]);
+                  $industry = $row2["industry"];
+                  $name = $row2["name"];
+                  $threadname = $row["title"];
+                  $threadbody = $row["content"];
+                  $creationtime = $row["created"];
+                  $username = get_username_from_id($row["userid"]);
 
-                echo "<h2> Jobs > " . $row2["industry"] . " > <a href='community.php?cid=" . $row["communityid"] . "'>" . $row2["name"] . "</a></h2>"
+                  echo "<h2> Jobs > " . $row2["industry"] . " > <a href='community.php?cid=" . $row["communityid"] . "'>" . $row2["name"] . "</a></h2>";
+                } else {
+                  die();
+                }
             ?>
 
 
