@@ -178,6 +178,15 @@ header{
     border-radius: 4px;
 }
 
+#breadcrumb a:link{
+    color: black;
+    text-decoration: none;
+}
+
+#breadcrumb a:visited{
+    color: black;
+}
+
 #breadcrumb h2{
     margin: 0;
     padding: 0.5em;

@@ -1,6 +1,5 @@
 <?php 
-include 'sql.php';
-include 'security.php';
+include 'functions.php';
 session_start();
 
 $query = "INSERT INTO Comment (comment, tid, created, points, userid) VALUES (?, ?, NOW(), 0, ?)";

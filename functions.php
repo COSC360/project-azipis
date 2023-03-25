@@ -2,6 +2,18 @@
 
 <?php
 
+/*
+
+*********************************************************************************************
+
+    SQL / DATABASE
+
+    SPECIFIC FUNCTIONS HERE
+
+*********************************************************************************************
+
+*/
+
 //For sql selection queries
 //RETURN: FALSE for failure, RESULT OBJECT for success
 function php_select($query) {
@@ -88,10 +100,17 @@ function get_entry_exists($table,$colname,$val,$valtype){
 
 }
 
+/*
 
+*********************************************************************************************
 
+    HTML
 
+    SPECIFIC FUNCTIONS HERE
 
+*********************************************************************************************
+
+*/
 
 // Not sure if we want to keep these 2 functions here or move them
 // Print out logged in header
@@ -108,6 +127,56 @@ function php_get_header(){
     echo '<a href="#" class="button" onclick="openLogin()">Login</a>';
     echo '<a href="createAccount.php" class="button">Create Account</a>';
     echo '</div>';
+}
+
+
+/*
+
+*********************************************************************************************
+
+    Sanitization and Security
+
+    SPECIFIC FUNCTIONS HERE
+
+*********************************************************************************************
+
+*/
+
+
+function get_sanitized_string_param($method,$constant){
+    $in = "";
+    if(isset($method[$constant]) && !empty($method[$constant])){
+        $in = $method[$constant];
+        if(gettype($in) != "string"){
+           $in = "";
+        }
+    } else {
+        $in = "";
+    }
+
+    return $in;
+}
+
+function get_sanitized_int_param($method,$constant){
+    $in = 0;
+    if(isset($method[$constant]) && !empty($method[$constant])){
+        $in = intval($method[$constant]);
+        if(gettype($in) != "integer"){
+           $in = 0;
+        }
+    } else {
+        $in = 0;
+    }
+
+    return $in;
+}
+
+function is_valid_int_param($int,$min,$max){
+    if( $int < $min ||  $int > $max ){
+        return false;
+    } else {
+        return true;
+    }
 }
 
 

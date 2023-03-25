@@ -1,6 +1,5 @@
 <?php 
-include 'sql.php';
-include 'security.php';
+include 'functions.php';
 $cid = get_sanitized_string_param($_GET,'cid');
 session_start(); ?>
 <!DOCTYPE html>

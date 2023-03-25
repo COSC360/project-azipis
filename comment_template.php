@@ -1,6 +1,3 @@
-
-
-
 <div id="comment_template" class="relative" hidden>
 
     <div class='comment'>

@@ -1,5 +1,4 @@
-<?php include 'sql.php';
-include 'security.php';
+<?php include 'functions.php';
 session_start();
 $search_param = get_sanitized_string_param($_GET,'search');
 ?>

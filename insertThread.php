@@ -2,8 +2,7 @@
 
 session_start();
 
-include 'sql.php';
-include 'security.php';
+include 'functions.php';
 if(!isset($_SESSION['uid'])){
     header("Location: index.php");
     die();

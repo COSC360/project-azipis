@@ -3,7 +3,7 @@
 // Initialize session
 session_start();
 
-require_once "sql.php";
+require_once "functions.php";
 
 $email = $psw = "";
 $email_err = $psw_err = $login_err = "";

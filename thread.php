@@ -1,5 +1,4 @@
-<?php include 'sql.php';
-include 'security.php';
+<?php include 'functions.php';
 $tid = get_sanitized_int_param($_GET,'tid');
 session_start();
 ?>

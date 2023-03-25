@@ -1,6 +1,5 @@
 <?php
-include "sql.php";
-include 'security.php';
+include "functions.php";
 $username = get_sanitized_string_param($_GET, 'username');
 session_start();
 ?>
@@ -99,8 +98,8 @@ session_start();
             <div id="breadcrumb">
                 <h2> <a href="#" onclick="getUserThreads('<?php echo $username ?>')">Posts </a>
                     <a href="#" onclick="getUserComments('<?php echo $username ?>')">| Comments </a>
-                    | Upvoted
-                    | Downvoted
+                    <a href="#" onclick="getUserUpvoted('<?php echo $username ?>')">| Upvoted </a>
+                    <a href="#" onclick="getUserDownvoted('<?php echo $username ?>')">| Downvoted </a>
                 </h2>
 
 
