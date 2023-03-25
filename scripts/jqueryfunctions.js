@@ -50,3 +50,22 @@ function getUserComments(username){
     });
 
 }
+
+function sendResetPassword(){
+
+    $email = $("#email-input").val();
+    
+    // if valid email, send reset link
+    if (ValidateEmail($email)){
+        $("#valid-email").html("If the email exists, a reset link will be emailed to you.");
+        $.post('sendForgotPwEmail.php', {email: $email}, function(result){
+            // do something with result
+            console.log(result);
+        });
+        
+    } else {
+        $("#valid-email").html("This email is not valid. Try again.");
+    }
+
+
+}

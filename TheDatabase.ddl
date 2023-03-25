@@ -68,6 +68,12 @@ CREATE TABLE ban (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE passwordreset ( 
+  email VARCHAR(250) NOT NULL, 
+  resettoken VARCHAR(250) NOT NULL, 
+  resettokenexp DATETIME NOT NULL 
+);
+
 -- Healthcare Communities
 INSERT INTO COMMUNITY VALUES (1, "Pharma", "Healthcare");
 INSERT INTO COMMUNITY VALUES (2, "Health Insurance", "Healthcare");

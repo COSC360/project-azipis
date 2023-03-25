@@ -15,17 +15,17 @@
 }
 
 /* Add styles to the form container */
-#login {
+#login, #forgotpw {
     width: 90%;
     margin: auto;
 }
 
-#login h2{
+#login h2, #forgotpw h2{
     text-align: center;
 }
 
 /* Full-width input fields */
-#login input[type=email], #login input[type=password] {
+#login input[type=email], #login input[type=password], #forgotpw input[type=email], #forgotpw input[type=password] {
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -34,13 +34,13 @@
 }
 
 /* When the inputs get focus, do something */
-#login input[type=email]:focus, #login input[type=password]:focus {
+#login input[type=email]:focus, #login input[type=password]:focus, #forgotpw input[type=email]:focus, #forgotpw input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
-#login .btn {
+#login .btn, #forgotpw .btn {
   background-color: #467EB3;
   color: white;
   padding: 16px 20px;
@@ -53,12 +53,12 @@
 }
 
 /* Add a red background color to the cancel button */
-#login .cancel {
+#login .cancel, #forgotpw .cancel {
   background-color: red;
 }
 
 /* Add some hover effects to buttons */
-#login .btn:hover, .open-button:hover {
+#login .btn:hover, #forgotpw .btn:hover, .open-button:hover {
   opacity: 1;
 }
 
@@ -72,4 +72,9 @@
     margin-bottom:10px;
     border-radius: 6px;
     border: 2px solid #467EB3;
+}
+
+#valid-email{
+  text-align: center;
+  font-weight: bold;
 }

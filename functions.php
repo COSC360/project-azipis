@@ -65,6 +65,16 @@ function php_insert($query, $types, ...$binds) {
     return $success;
 }
 
+// to be implemented
+function php_update($query, $types, ...$binds){
+
+}
+
+// to be implemented
+function php_delete($query, $types, ...$binds){
+
+}
+
 
 //For sql queries that have a auto-increment id
 //Should be called immediately after an insert statement
