@@ -133,11 +133,11 @@ $search_param = get_sanitized_string_param($_GET,'search');
 
    while ($row2 = mysqli_fetch_assoc($result2)) {
       if (isset($row2["userid"])) {
-         $uid = $row2["userid"];
+         $userid = $row2["userid"];
          $username = get_username_from_id($row2["userid"]);
          $imgpath = $row2["avatarimgpath"];
          $description = $row2["description"];
-         echo "createNewUserEntry(" . $uid . ",\"" . $username . "\",\"" . $imgpath . "\",\"" . $description . "\");";
+         echo "createNewUserEntry(" . $userid . ",\"" . $username . "\",\"" . $imgpath . "\",\"" . $description . "\");";
       }
    }
    ?>

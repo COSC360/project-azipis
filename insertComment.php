@@ -18,8 +18,8 @@ if(!get_entry_exists("thread", "tid", $threadid, "i")){
     die();
 }
 
-if(isset($_SESSION['uid'])){
-    $result = php_insert($query, $types, $comment, $threadid, $_SESSION['uid']);
+if(isset($_SESSION['userid'])){
+    $result = php_insert($query, $types, $comment, $threadid, $_SESSION['userid']);
 } else {
     $result = false;
 }

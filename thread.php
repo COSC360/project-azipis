@@ -112,7 +112,7 @@ session_start();
       <?php
       $tid = $_GET['tid'];
       $notloggedin= "value=\"Submit Comment\"";
-      if(!isset($_SESSION['uid'])){
+      if(!isset($_SESSION['userid'])){
          $notloggedin = "value=\"Not Logged In\" disabled";
       }   
       echo <<<EOD

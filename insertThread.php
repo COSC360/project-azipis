@@ -3,7 +3,7 @@
 session_start();
 
 include 'functions.php';
-if(!isset($_SESSION['uid'])){
+if(!isset($_SESSION['userid'])){
     header("Location: index.php");
     die();
 }
@@ -13,7 +13,7 @@ $types = "sisii";
 $title = get_sanitized_string_param($_POST, 'title');
 $communityid = get_sanitized_int_param($_POST, 'communityid');
 $content = get_sanitized_string_param($_POST, 'content');
-$userid = $_SESSION['uid'];
+$userid = $_SESSION['userid'];
 $threadtype = get_sanitized_int_param($_POST,'threadtype');
 if($threadtype < 1 || $threadtype > 3){
     header("Location: index.php");

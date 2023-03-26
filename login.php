@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 if(mysqli_stmt_num_rows($stmt) == 1){
 
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $uid, $username, $email, $hashed_psw, $desc, $av_img_path, $fname, $lname, $admin);
+                    mysqli_stmt_bind_result($stmt, $userid, $username, $email, $hashed_psw, $desc, $av_img_path, $fname, $lname, $admin);
 
                     if(mysqli_stmt_fetch($stmt)){
 
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Password is correct, start a new session
                             session_start();
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["userid"] = $uid;
+                            $_SESSION["userid"] = $userid;
                             $_SESSION["username"] = $username;
                             $_SESSION["email"] = $email;
                             $_SESSION["description"] = $desc;
