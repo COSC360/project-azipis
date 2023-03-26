@@ -142,6 +142,10 @@ header{
     color: black;
 }
 
+.header-links:hover{
+    background-color:#FF9C96;
+}
+
 .btn-group{
     float: right;
     margin: 1em 1em 0 0;
@@ -181,10 +185,16 @@ header{
 #breadcrumb a:link{
     color: black;
     text-decoration: none;
+    padding: 2px;
+    border-radius: 4px;
 }
 
 #breadcrumb a:visited{
     color: black;
+}
+
+#breadcrumb a:hover{
+    background-color: #FF9C96;
 }
 
 #breadcrumb h2{
