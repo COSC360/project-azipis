@@ -117,23 +117,28 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
                             <fieldset>
                                 <div class="field-div">
                                     <textarea class="textinput" id="desc-input" name="desc-input" placeholder="<?php echo $_SESSION['description'] ?>"></textarea> <br>
-                                    <button type="button" class="button" id="change-desc" onclick="">Change</button>
+                                    <button type="button" class="button" id="change-desc" onclick="changeDescription(<?php echo $_SESSION['uid'] ?>)">Change</button>
                                 </div>
                                 <br>
                                 <div class="field-div">
                                     <input type="text" class="textinput" id="fname" name="fname" placeholder="<?php echo $_SESSION['firstname'] ?>" required> <br>
-                                    <button type="button" class="button" id="change-fname" onclick="">Change</button>
+                                    <button type="button" class="button" id="change-fname" onclick="changeFirstname(<?php echo $_SESSION['uid'] ?>)">Change</button>
                                 </div>
                                 <div class="field-div">
                                     <input type="text" class="textinput" id="lname" name="lname" placeholder="<?php echo $_SESSION['lastname'] ?>" required> <br>
-                                    <button type="button" class="button" id="change-lname" onclick="">Change</button>
+                                    <button type="button" class="button" id="change-lname" onclick="changeLastname(<?php echo $_SESSION['uid'] ?>)">Change</button>
+                                </div>
+
+                                <div class="field-div">
+                                    <input type="email" class="textinput" id="email" name="email" placeholder="<?php echo $_SESSION['email'] ?>" required> <br>
+                                    <button type="button" class="button" id="change-email" onclick="changeEmail(<?php echo $_SESSION['uid'] ?>)">Change</button>
                                 </div>
 
                                 <div class="field-div">
 
                                     <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="pw" name="pw" placeholder="Password" required> <br>
                                     <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="cpw" placeholder="Confirm Password" required>
-                                    <button type="button" class="button" id="change-pw" onclick="">Change</button>
+                                    <button type="button" class="button" id="change-pw" onclick="changePassword(<?php echo $_SESSION['uid'] ?>)">Change</button>
 
                                 </div>
 
@@ -151,7 +156,7 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
                                             <img id="preview" src="images/profile.png" alt="your image" />
                                         </div>
                                     </div>
-                                    <button type="button" class="button" id="change-img" onclick="">Change</button>
+                                    <button type="button" class="button" id="change-img" onclick="changeImage(<?php echo $_SESSION['uid'] ?>)">Change</button>
 
                                 </div>
                             </fieldset>

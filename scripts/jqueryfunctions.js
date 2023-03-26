@@ -69,5 +69,69 @@ function sendResetPassword(){
         $("#valid-email").html("This email is not valid. Try again.");
     }
 
+}
+
+function changeDescription(userid){
+
+    $description = $('#desc-input').val();
+
+    $.post('editUser.php', {userid: userid, value: $description, column: 'description'}, function(result){
+
+        console.log(result);
+    });
+
+    location.reload();
+
+}
+
+function changeFirstname(userid){
+
+    $firstname = $('#fname').val();
+
+    $.post('editUser.php', {userid: userid, value: $firstname, column: 'firstname'}, function(result){
+
+        console.log(result);
+    });
+
+    location.reload();
+
+}
+
+function changeLastname(userid){
+
+    $lastname = $('#lname').val();
+
+    $.post('editUser.php', {userid: userid, value: $lastname, column: 'lastname'}, function(result){
+
+        console.log(result);
+    });
+
+    location.reload();
+
+}
+
+function changeEmail(userid){
+
+    $email = $('#email').val()
+
+    $.post('editUser.php', {userid: userid, value: $email, column: 'email'}, function(result){
+
+        console.log(result);
+    });
+
+    location.reload();
+
+}
+
+function changePassword(userid){
+
+    $password = $('#pw').val();
+
+    $.post('editUser.php', {userid: userid, value: $password, column: 'password'}, function(result){
+
+        console.log(result);
+    });
+
+    location.reload();
 
 }
