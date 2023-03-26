@@ -139,7 +139,7 @@ session_start();
                $result = php_select("SELECT * FROM Comment WHERE tid = " . $_GET['tid'] . "");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<div class='comment' cid='" . $row["commentid"] . "'>";
-                  echo '<button id="delete_comment" class="button" onclick=>Delete Comment</button>';
+                  echo '<button class="button delete_comment" onclick=>Delete Comment</button>';
                   echo "<h4 class='author inline'>";
                   echo get_username_from_id($row["userid"]);
                   echo "</h4> at ";

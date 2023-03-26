@@ -86,11 +86,13 @@ $("#delete_thread").click(function(){
         });
 })
 
-$("#delete_comment").click(function(){
+$(".delete_comment").click(function(){
+        let elem = $(this)
         let cid = $(this).parent().attr("cid")
         deleteComment(cid,false,function(success){
             if(success == 1){
-                changeButtonColor($("#delete_comment"), "green", "white")
+                console.log(elem)
+                changeButtonColor(elem, "green", "white")
             }
         });
 })
