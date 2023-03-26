@@ -21,52 +21,28 @@ session_start();
    <div id="main">
 
       <article id="left-sidebar">
-         <h2>Popular Communities</h2>
+      <h2>Related Topics</h2>
          <div class="collapsibles">
-            <button type="button" class="button collapsible">Healthcare</button>
-            <div class="content background">
-               <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
-               }
-               ?>
-            </div>
-            <button type="button" class="button collapsible">Government</button>
-            <div class="content background">
+
+
+
             <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
+            $result = php_select_prepared("SELECT * FROM community WHERE communityid = ?", "i", $cid);
+            if (mysqli_num_rows($result) > 0) {
+               $row = mysqli_fetch_assoc($result);
+               $industry = $row["industry"];
+
+               $result1 = php_select_prepared("SELECT * FROM community WHERE industry =  ?", "s", $industry);
+               while ($row1 = mysqli_fetch_assoc($result1)) {
+                  echo "<button type='button' class='button related' onclick='window.location.href=\"community.php?cid=" . $row1["communityid"] . "\"' >";
+                  echo $row1["name"];
+                  echo "</button> <br>";
                }
-               ?>
-            </div>
-            <button type="button" class="button collapsible">Tech</button>
-            <div class="content background">
-            <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
-               }
-               ?>
-            </div>
-            <button type="button" class="button collapsible">Engineering</button>
-            <div class="content background">
-            <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<button type='button' onclick='location.href=/industry.php'class='nobutton'>";
-                  echo $row["name"];
-                  echo "</button>";
-               }
-               ?>
-            </div>
+            }
+            ?>
+
+
+
          </div>
       </article>
 

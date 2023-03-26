@@ -75,7 +75,7 @@ p, body {
     background-color: #D9D9D9;
     height: fit-content;
     margin: 1em auto;
-    padding: 0.5em 0.5em 0.5em 0.5em
+    padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
 #left-sidebar .collapsible{
@@ -170,6 +170,18 @@ header{
     color: black;
     text-align: center;
     padding: 0.25em;
+}
+
+.content.background button{
+    cursor: pointer;
+
+}
+
+#organizethreadbuttons button{
+    width: 90%;
+    margin: 1em 0 1em 0;
+    margin-left: 0.75em;
+
 }
 
 .centerme{
