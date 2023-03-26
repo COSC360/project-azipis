@@ -12,6 +12,7 @@ session_start();
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/form.css" />
     <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/updateform.css" />
     <script type="text/javascript" src="scripts/form.js" defer></script>
     <script type="text/javascript" src="scripts/script.js" defer></script>
     <script type="text/javascript" src="scripts/login.js" defer></script>
@@ -113,6 +114,60 @@ session_start();
                     }
                     ?>
                 </datalist>
+                <div id="edit-fields">
+                        <form action="editUser.php" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="field-div">
+                                    <textarea class="textinput" id="desc-input" name="desc-input" placeholder=></textarea> <br>
+                                    <button type="button" class="button" id="change-desc" onclick="">Change</button>
+                                </div>
+                                <br>
+                                <div class="field-div">
+                                    <input type="text" class="textinput" id="fname" name="fname" placeholder= required> <br>
+                                    <button type="button" class="button" id="change-fname" onclick="">Change</button>
+                                </div>
+                                <div class="field-div">
+                                    <input type="text" class="textinput" id="lname" name="lname" placeholder= required> <br>
+                                    <button type="button" class="button" id="change-lname" onclick="">Change</button>
+                                </div>
+                                <div class="field-div">
+                                    <input type="email" class="textinput" id="email" name="email" placeholder= required> <br>
+                                    <button type="button" class="button" id="change-email" onclick="">Change</button>
+                                </div>
+                                <div class="field-div">
+
+                                    <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="pw" name="pw" placeholder="Password" required> <br>
+                                    <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="cpw" placeholder="Confirm Password" required>
+                                    <button type="button" class="button" id="change-pw" onclick="">Change</button>
+
+                                </div>
+
+
+                                <div class="clear"></div>
+
+                                <div class="field-div">
+                                    <div class="imgInput">
+                                        <h4>Upload image</h4>
+                                        <div id="imgWrapper">
+                                            <label class="custom-file-upload">
+                                                <input accept="image/*" type="file" onChange="previewFile(event)" id="img" name="img" required>
+                                                ✎
+                                            </label>
+                                            <img id="preview" src="images/profile.png" alt="your image" />
+                                        </div>
+                                    </div>
+                                    <button type="button" class="button" id="change-img" onclick="">Change</button>
+
+                                </div>
+                            </fieldset>
+
+                            <br>
+
+                        </form>
+
+
+                    </div>
+
             </div>
     </div>
 

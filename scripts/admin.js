@@ -9,10 +9,32 @@ function search(e) {
 
 function getUserInfo(username){
     $.get('getUserInfo.php', {username: username}, function(data) {
-        var user = JSON.parse(data);
-        $("#username").text(user.username);
-        $("#email").text(user.email);
-        $("#points").text(user.points);
-        $("#description").text(user.description);
+        if(data){
+            var user = {};
+            try{
+                user = JSON.parse(data);
+            } catch(e){
+                console.log(e);
+            }
+            autoFillFields(user);
+        }
     })
 }
+
+function autoFillFields(info){
+    if(info.username){
+        $("#desc-input").val(info.description);
+        $("#fname").val(info.firstname);
+        $("#lname").val(info.lastname);
+        $("#email").val(info.email);
+        $("#preview").attr('src',info.avatarimgpath)
+    } else {
+        $("#desc-input").val("");
+        $("#fname").val("");
+        $("#lname").val("");
+        $("#email").val("");
+        $("#preview").attr('src','images/profile.png')
+    }
+
+}
+
