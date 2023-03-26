@@ -53,7 +53,7 @@ CREATE TABLE Comment (
 );
 
 CREATE TABLE ban (
-  banid INT,
+  banid INT NOT NULL AUTO_INCREMENT,
   userid INT,
   adminid INT,
   bandate DATETIME,

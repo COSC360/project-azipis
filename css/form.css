@@ -67,3 +67,11 @@ fieldset input[type="submit"]:hover {
     background-color: #467EB3;
     color: white;
 }
+
+.field-div h3{
+    margin: 1em;
+}
+
+#ban-div div{
+    margin: 1em;
+}
