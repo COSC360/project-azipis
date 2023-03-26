@@ -1,6 +1,6 @@
 <?php 
 
-include 'functions';
+include 'functions.php';
 
 $query = "INSERT INTO users (username, email, password, description, avatarimgpath, firstname, lastname, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 $types = "sssssssi";

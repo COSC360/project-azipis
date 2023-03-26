@@ -33,7 +33,7 @@ session_start();
                 <figure id="avatar-fig">
                     <?php
 
-                    if (isset($_SESSION['username'])) {
+                    if (isset($_SESSION['username']) && ($_SESSION['username']) == $username) {
                         echo '<img src="' . $_SESSION['avatarimgpath'] . '" alt="Avatar Image">';
                         echo '<figcaption>' . $_SESSION['username'] . '</figcaption>';
                     } else {
@@ -77,7 +77,7 @@ session_start();
                     if ($_SESSION['username'] === $username) {
 
                         echo '<a href="user.php?username=' . $_SESSION['username'] . '" class="button">Profile</a>';
-                        echo '<a href="settings.php?"username=' . $_SESSION['username'] . '" class="button">User Settings</a>';
+                        echo '<a href="settings.php?username=' . $_SESSION['username'] . '" class="button">User Settings</a>';
                         echo '<a href="logout.php" class="button">Logout</a>';
                     }
 
