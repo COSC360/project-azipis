@@ -28,7 +28,9 @@ if ($column === 'avatarimgpath'){
         move_uploaded_file($_FILES['img']['tmp_name'], $avatarimgpath);
     }
 
-    $_SESSION[$column] = $avatarimgpath;
+    if ($_SESSION['userid'] == $userid){
+        $_SESSION[$column] = $avatarimgpath;
+    }
 
     echo $result;
 
@@ -44,12 +46,12 @@ if ($column === 'avatarimgpath'){
     $types = 'si';
     $updateSuccess = php_update($updateQuery, $types, $value, $userid);
     
+    if ($_SESSION['userid'] == $userid){
+        $_SESSION[$column] = $value;
+    }
     
-    $_SESSION[$column] = $value;
     
     
     echo $updateSuccess;
 
 }
-
-?>
