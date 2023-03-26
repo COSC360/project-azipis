@@ -71,11 +71,11 @@ function sendResetPassword(){
 
 }
 
-function changeDescription(userid,reload=true,callback){
+function changeDescription(userid,username,reload=true,callback){
 
     $description = $('#desc-input').val();
 
-    $.post('editUser.php', {userid: userid, value: $description, column: 'description'}, function(result){
+    $.post('editUser.php', {userid: userid, username: username, value: $description, column: 'description'}, function(result){
 
         console.log(result);
         if(callback) callback(result);
@@ -87,11 +87,11 @@ function changeDescription(userid,reload=true,callback){
 
 }
 
-function changeFirstname(userid,reload=true,callback){
+function changeFirstname(userid,username,reload=true,callback){
 
     $firstname = $('#fname').val();
 
-    $.post('editUser.php', {userid: userid, value: $firstname, column: 'firstname'}, function(result){
+    $.post('editUser.php', {userid: userid, username: username, value: $firstname, column: 'firstname'}, function(result){
 
         console.log(result);
         if(callback) callback(result);
@@ -103,11 +103,11 @@ function changeFirstname(userid,reload=true,callback){
 
 }
 
-function changeLastname(userid,reload=true,callback){
+function changeLastname(userid,username,reload=true,callback){
 
     $lastname = $('#lname').val();
 
-    $.post('editUser.php', {userid: userid, value: $lastname, column: 'lastname'}, function(result){
+    $.post('editUser.php', {userid: userid,username: username, value: $lastname, column: 'lastname'}, function(result){
 
         console.log(result);
         if(callback) callback(result);
@@ -119,11 +119,11 @@ function changeLastname(userid,reload=true,callback){
 
 }
 
-function changeEmail(userid,reload=true,callback){
+function changeEmail(userid,username,reload=true,callback){
 
     $email = $('#email').val()
 
-    $.post('editUser.php', {userid: userid, value: $email, column: 'email'}, function(result){
+    $.post('editUser.php', {userid: userid, username: username, value: $email, column: 'email'}, function(result){
 
         console.log(result);
         if(callback) callback(result);
@@ -135,11 +135,11 @@ function changeEmail(userid,reload=true,callback){
 
 }
 
-function changePassword(userid,reload=true,callback){
+function changePassword(userid,username,reload=true,callback){
 
     $password = $('#pw').val();
 
-    $.post('editUser.php', {userid: userid, value: $password, column: 'password'}, function(result){
+    $.post('editUser.php', {userid: userid, username: username, value: $password, column: 'password'}, function(result){
 
         console.log(result);
         if(callback) callback(result);

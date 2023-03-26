@@ -2,6 +2,17 @@
 include "functions.php";
 $username = get_sanitized_string_param($_GET, 'username');
 session_start();
+
+$error = 'Access Denied. ';
+
+if (isset($_GET['username']) && (!empty($_GET['username']))) {
+
+    $username = get_sanitized_string_param($_GET, 'username');
+
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['username'] == $username &&
+    $_SESSION['isAdmin'] == 1) {
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +94,7 @@ session_start();
                         echo '<a href="logout.php" class="button">Logout</a>';
                     }
 
-                    if ($_SESSION['isAdmin'] === 1) {
+                    if ($_SESSION['isAdmin'] === 1 && ($_SESSION['username']) == $username) {
                         echo '<a href="admin.php?username=' . $_SESSION['username'] . '" class="button">Admin</a>';
                     }
                 }
@@ -118,20 +129,20 @@ session_start();
                         <form action="editUser.php" method="post" enctype="multipart/form-data">
                             <fieldset>
                                 <div class="field-div">
-                                    <textarea class="textinput" id="desc-input" name="desc-input" placeholder=></textarea> <br>
+                                    <textarea class="textinput" id="desc-input" name="desc-input" placeholder="Description"></textarea> <br>
                                     <button type="button" class="button" id="change-desc" onclick="">Change</button>
                                 </div>
                                 <br>
                                 <div class="field-div">
-                                    <input type="text" class="textinput" id="fname" name="fname" placeholder= required> <br>
+                                    <input type="text" class="textinput" id="fname" name="fname" placeholder="First Name" required> <br>
                                     <button type="button" class="button" id="change-fname" onclick="">Change</button>
                                 </div>
                                 <div class="field-div">
-                                    <input type="text" class="textinput" id="lname" name="lname" placeholder= required> <br>
+                                    <input type="text" class="textinput" id="lname" name="lname" placeholder="Last Name" required> <br>
                                     <button type="button" class="button" id="change-lname" onclick="">Change</button>
                                 </div>
                                 <div class="field-div">
-                                    <input type="email" class="textinput" id="email" name="email" placeholder= required> <br>
+                                    <input type="email" class="textinput" id="email" name="email" placeholder="Email" required> <br>
                                     <button type="button" class="button" id="change-email" onclick="">Change</button>
                                 </div>
                                 <div class="field-div">
@@ -205,3 +216,18 @@ session_start();
 </body>
 
 </html>
+
+<?php
+    } else {
+        $error .= 'Please log in and try again.';
+
+        echo $error;
+    }
+} else {
+
+    header('Location: index.php');
+}
+
+
+
+?>

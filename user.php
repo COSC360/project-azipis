@@ -58,7 +58,7 @@ session_start();
                 <p style="padding: 5px;">
                     <?php
 
-                    if (isset($_SESSION['description'])) {
+                    if (isset($_SESSION['description']) && ($_SESSION['username']) == $username) {
                         echo $_SESSION['description'];
                     } else {
                         $result = php_select_prepared("SELECT description FROM users WHERE username = ?", "s", $username);
@@ -81,7 +81,7 @@ session_start();
                         echo '<a href="logout.php" class="button">Logout</a>';
                     }
 
-                    if ($_SESSION['isAdmin'] === 1) {
+                    if ($_SESSION['isAdmin'] === 1 && ($_SESSION['username']) == $username) {
                         echo '<a href="admin.php?username=' . $_SESSION['username'] . '" class="button">Admin</a>';
                     }
                 }
