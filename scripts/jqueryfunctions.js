@@ -37,6 +37,8 @@ function getUserComments(username){
     
     $.get('getUserComments.php', {username: username}, function(data) {
 
+        console.log(username);
+
         var threads = JSON.parse(data);
         for (var i = 0; i < threads.length; i++) {
             var cid = threads[i].cid;
