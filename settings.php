@@ -156,7 +156,7 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
                                             <img id="preview" src="images/profile.png" alt="your image" />
                                         </div>
                                     </div>
-                                    <button type="button" class="button" id="change-img" onclick="changeImage(<?php echo $_SESSION['userid'] ?>)">Change</button>
+                                    <button type="button" class="button" id="change-img" onclick="changeImage(<?php echo $_SESSION['userid']?> , '<?php echo $_SESSION['username'] ?>')">Change</button>
 
                                 </div>
                             </fieldset>

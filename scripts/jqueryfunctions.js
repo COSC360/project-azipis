@@ -135,3 +135,28 @@ function changePassword(userid){
     location.reload();
 
 }
+
+function changeImage(userid, username) {
+    var fileInput = $('#img')[0];
+    var formData = new FormData();
+    formData.append('img', fileInput.files[0]);
+    formData.append('userid', userid);
+    formData.append('column', 'avatarimgpath');
+    formData.append('username', username);
+    $.ajax({
+        url: 'editUser.php',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            console.log(response);
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+
+}
