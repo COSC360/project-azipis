@@ -1,6 +1,6 @@
-<?php 
+<?php
 include 'functions.php';
-$cid = get_sanitized_string_param($_GET,'cid');
+$cid = get_sanitized_string_param($_GET, 'cid');
 session_start(); ?>
 <!DOCTYPE html>
 <html>
@@ -19,46 +19,51 @@ session_start(); ?>
 
 <body>
 
-<?php include 'header.php'?>
+   <?php include 'header.php' ?>
 
    <div id="main">
 
       <article id="left-sidebar">
-         <button type="button" class="button centerme" onclick="window.location.href='createthread.php?cid=<?php echo $cid; ?>'">Compose Thread</button>
-         <button type="button" class="button centerme">Trending</button>
-         <button type="button" class="button centerme">New</button>
-         <button type="button" class="button centerme">Controversial</button>
+         <div id="organizethreadbuttons">
+
+            <button type="button" class="button centerme" onclick="window.location.href='createthread.php?cid=<?php echo $cid; ?>'">Compose Thread</button>
+            <button type="button" class="button centerme">Trending</button>
+            <button type="button" class="button centerme">New</button>
+            <button type="button" class="button centerme">Controversial</button>
+         </div>
          <h2>Related Topics</h2>
          <div class="collapsibles">
-            
-            
 
-               <?php
-               $result = php_select_prepared("SELECT * FROM community WHERE communityid = ?","i",$cid);
-               if(mysqli_num_rows($result) > 0){
-                  $row = mysqli_fetch_assoc($result);
-                  $industry = $row["industry"];
-                  
-                  $result1 = php_select_prepared("SELECT * FROM community WHERE industry =  ?","s",$industry);
-                  while ($row1 = mysqli_fetch_assoc($result1)) {
-                     echo "<button type='button' class='button related' onclick='window.location.href=\"community.php?cid=" . $row1["communityid"] . "\"' >";
-                     echo $row1["name"];
-                     echo "</button> <br>";
-                  }
+
+
+            <?php
+            $result = php_select_prepared("SELECT * FROM community WHERE communityid = ?", "i", $cid);
+            if (mysqli_num_rows($result) > 0) {
+               $row = mysqli_fetch_assoc($result);
+               $industry = $row["industry"];
+
+               $result1 = php_select_prepared("SELECT * FROM community WHERE industry =  ?", "s", $industry);
+               while ($row1 = mysqli_fetch_assoc($result1)) {
+                  echo "<button type='button' class='button related' onclick='window.location.href=\"community.php?cid=" . $row1["communityid"] . "\"' >";
+                  echo $row1["name"];
+                  echo "</button> <br>";
                }
-               ?>
+            }
+            ?>
 
-            
-            
+
+
          </div>
+
+
       </article>
 
       <article id="center">
 
          <div id="breadcrumb">
             <?php
-            $result = php_select_prepared("SELECT * FROM Community WHERE communityid = ?","i",$cid);
-            if(mysqli_num_rows($result) > 0){
+            $result = php_select_prepared("SELECT * FROM Community WHERE communityid = ?", "i", $cid);
+            if (mysqli_num_rows($result) > 0) {
                $row = mysqli_fetch_assoc($result);
 
                $industry = $row["industry"];
@@ -97,14 +102,14 @@ session_start(); ?>
 
 <script>
    <?php
-   $result = php_select_prepared("SELECT * FROM Thread WHERE communityid = ?","i",$cid);
+   $result = php_select_prepared("SELECT * FROM Thread WHERE communityid = ?", "i", $cid);
    while ($row = mysqli_fetch_assoc($result)) {
-         $tid = $row["tid"];
-         $title = $row["title"];
-         $created = $row["created"];
-         $points = $row["points"];
-         $user = $row["userid"];
-         $type = $row["threadtype"];
+      $tid = $row["tid"];
+      $title = $row["title"];
+      $created = $row["created"];
+      $points = $row["points"];
+      $user = $row["userid"];
+      $type = $row["threadtype"];
       echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
    }
    ?>
