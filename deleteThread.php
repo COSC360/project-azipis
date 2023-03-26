@@ -3,8 +3,8 @@
 session_start();
 
 include 'functions.php';
-if($_SESSION['isAdmin'] != 1){
-    header("Location: index.php");
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION['isAdmin'] != 1){
+    echo "0";
     die();
 }
 
