@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Password is correct, start a new session
                             session_start();
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["uid"] = $uid;
+                            $_SESSION["userid"] = $uid;
                             $_SESSION["username"] = $username;
                             $_SESSION["email"] = $email;
                             $_SESSION["description"] = $desc;

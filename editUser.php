@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include 'functions.php';
 
 $column = get_sanitized_string_param($_POST, "column");
@@ -15,6 +17,10 @@ if ($column === 'password'){
 $updateQuery = 'UPDATE users SET ' .$column. '= ? WHERE userid = ?;';
 $types = 'si';
 $updateSuccess = php_update($updateQuery, $types, $value, $userid);
+
+
+$_SESSION[$column] = $value;
+
 
 return $updateSuccess;
 
