@@ -14,6 +14,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
    <script type="text/javascript" src="scripts/createnewthread.js"></script>
+   <script type="text/javascript" src="scripts/jqueryfunctions.js"></script>
 </head>
 
 <body>

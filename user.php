@@ -125,11 +125,11 @@ session_start();
     </div>
 
     <?php
-   // if not logged in, add login/forgot pw forms
-   if (!isset($_SESSION['loggedin'])) {
-      include 'loginforms.php';
-   }
-   ?>
+    // if not logged in, add login/forgot pw forms
+    if (!isset($_SESSION['loggedin'])) {
+        include 'loginforms.php';
+    }
+    ?>
 
     <footer>
 

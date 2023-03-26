@@ -69,13 +69,23 @@ if (isset($_POST["email"]) && isset($_POST["action"]) &&
     } else {
         $hashed_password = password_hash($pass1, PASSWORD_DEFAULT);
 
+        $updatePwQuery = 'UPDATE users SET password = ? WHERE email = ?';
+        $pwTypes = 'ss';
+        $updatePwSuccess = php_update($updatePwQuery, $pwTypes, $hashed_password, $email);
 
+        $delTokQuery = 'DELETE from passwordreset WHERE email = ?';
+        $tokTypes = 's';
+        $delTokenSuccess = php_delete($delTokQuery, $tokTypes, $email);
+
+        /*
         mysqli_query(
             getConnection(),
             "UPDATE `users` SET `password`='" . $hashed_password . "' WHERE `email`='" . $email . "';"
         );
 
         mysqli_query(getConnection(), "DELETE FROM `passwordreset` WHERE `email`='" . $email . "';");
+
+        */
 
         echo '<div class="error"><p>Congratulations! Your password has been updated successfully.</p>
 <p><a href="index.php">

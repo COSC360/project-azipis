@@ -68,10 +68,14 @@ function php_insert($query, $types, ...$binds) {
 // to be implemented
 function php_update($query, $types, ...$binds){
 
+    return php_insert($query, $types, ...$binds);
+
 }
 
 // to be implemented
 function php_delete($query, $types, ...$binds){
+
+    return php_insert($query, $types, ...$binds);
 
 }
 
