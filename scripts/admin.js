@@ -87,7 +87,7 @@ function changeButtonColor(button,color,oldcolor){
 
 function search(e) {
     e = e || window.event;
-    if(e.keyCode == 13) {
+    if(e) {
         var elem = e.srcElement || e.target;
         getUserInfo(elem.value,autoFillFields);
     }
@@ -99,7 +99,6 @@ function getUserInfo(username,callback){
             try{
                 userInfo = JSON.parse(data);
             } catch(e){
-                console.log(e);
                 userInfo = {};
             }
             callback(userInfo);

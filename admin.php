@@ -105,7 +105,7 @@ session_start();
 
             <div>
                 <label for="user" class="centertext"><h3>Choose user to edit:</h3></label>
-                <input list="users" name="user" id="user" class="centerme textinput" onkeydown="search()" required>
+                <input list="users" name="user" id="user" class="centerme textinput" onchange="search()" required>
                 <datalist id="users">
                     <?php
                     $result = php_select("SELECT username FROM users");
