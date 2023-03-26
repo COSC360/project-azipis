@@ -1,12 +1,10 @@
 
 <div id="thread_template" class="relative" hidden>
-    <a class="thread" href="">
-
+    <a class="thread" href="">  
         <figure>
             <span class="circle"></span>
             <img src="images/coffeecup.png" alt="coffee cup" class="overlayed">
         </figure>
-
         <div class="thread-info">
 
             <h2 class="thread-name"></h2>

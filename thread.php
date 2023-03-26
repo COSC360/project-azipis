@@ -11,6 +11,7 @@ session_start();
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/login.css" />
    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+   <script type="text/javascript" src="scripts/admin.js" defer></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
    <script type="text/javascript" src="scripts/createnewthread.js"></script>
@@ -72,10 +73,10 @@ session_start();
             </div>
          </div>
       </article>
-
-      <article id="center">
-
+      <article id="center">  
          <div id="breadcrumb">
+
+         
             <?php
                 $result = php_select_prepared("SELECT * FROM Thread WHERE tid = ?", "i", $tid);
                 $threadname = "";
@@ -102,7 +103,11 @@ session_start();
 
 
          </div>
-
+         <?php 
+         if(isset($_SESSION['userid']) && $_SESSION['isAdmin'] === 1){
+            echo '<button id="delete_thread" class="button" onclick=>Delete Thread</button>';
+         }
+         ?>         
          <div id="threads">
             <h1 class="nomargin"><?php echo $threadname; ?></h1>
             By <h4 class="inline nomargin"><?php echo $username; ?></h2>
@@ -133,7 +138,8 @@ session_start();
             <?php
                $result = php_select("SELECT * FROM Comment WHERE tid = " . $_GET['tid'] . "");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<div class='comment'>";
+                  echo "<div class='comment' cid='" . $row["commentid"] . "'>";
+                  echo '<button id="delete_comment" class="button" onclick=>Delete Comment</button>';
                   echo "<h4 class='author inline'>";
                   echo get_username_from_id($row["userid"]);
                   echo "</h4> at ";

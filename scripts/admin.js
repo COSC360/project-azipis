@@ -77,6 +77,23 @@ $("#change-img").click(function(){
     }
 })
 
+$("#delete_thread").click(function(){
+        var url = new URL(window.location.href);
+        deleteThread(url.searchParams.get("tid"),false,function(success){
+            if(success){
+                changeButtonColor($("#delete_thread"), "green", "white")
+            }
+        });
+})
+
+$("#delete_comment").click(function(){
+        let cid = $(this).parent().attr("cid")
+        deleteComment(cid,false,function(success){
+            if(success == 1){
+                changeButtonColor($("#delete_comment"), "green", "white")
+            }
+        });
+})
 
 function changeButtonColor(button,color,oldcolor){
     button.css('background-color', color);
@@ -136,4 +153,3 @@ function autoFillFields(info){
         $("#preview").attr('src','images/profile.png')
     }
 }
-

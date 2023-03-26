@@ -179,3 +179,28 @@ function changeImage(userid, username,reload=true,callback) {
     });
 
 }
+
+
+function deleteThread(tid,reload=true,callback){
+    $.post('deleteThread.php', {tid: tid}, function(result){
+        console.log(result);
+        if(callback) callback(result);
+    }).fail(function(xhr, status, error) {
+        console.log(error);
+    })
+    if(reload){
+        location.reload();
+    }
+}
+
+function deleteComment(cid,reload=true,callback){
+    $.post('deleteComment.php', {cid: cid}, function(result){
+        console.log(result)
+        if(callback) callback(result);
+    }).fail(function(xhr, status, error) {
+        console.log(error);
+    })
+    if(reload){
+        location.reload();
+    }
+}

@@ -73,10 +73,25 @@ function php_update($query, $types, ...$binds){
 }
 
 // to be implemented
-function php_delete($query, $types, ...$binds){
-
-    return php_insert($query, $types, ...$binds);
-
+function php_delete_prepared($query, $types, ...$binds){
+    $conn = getConnection();
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($query);
+    if (!$stmt) {
+        return false;
+    }
+    
+    // Bind the parameters
+    $stmt->bind_param($types, ...$binds);
+    
+    // Execute the statement
+    $success = $stmt->execute();
+    
+    // Close the statement
+    $stmt->close();
+    
+    // Return success or failure
+    return $success;
 }
 
 
