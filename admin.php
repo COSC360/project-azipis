@@ -13,12 +13,12 @@ session_start();
     <link rel="stylesheet" href="css/form.css" />
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/updateform.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <script type="text/javascript" src="scripts/form.js" defer></script>
     <script type="text/javascript" src="scripts/script.js" defer></script>
     <script type="text/javascript" src="scripts/login.js" defer></script>
     <script type="text/javascript" src="scripts/createnewthread.js" defer></script>
     <script type="text/javascript" src="scripts/admin.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <script type="text/javascript" src="scripts/jqueryfunctions.js" defer></script>
 </head>
 
@@ -104,8 +104,8 @@ session_start();
             </div>
 
             <div>
-                <label for="user">Choose user to edit:</label>
-                <input list="users" name="user" id="user" onkeydown="search()" required>
+                <label for="user" class="centertext"><h3>Choose user to edit:</h3></label>
+                <input list="users" name="user" id="user" class="centerme textinput" onkeydown="search()" required>
                 <datalist id="users">
                     <?php
                     $result = php_select("SELECT username FROM users");

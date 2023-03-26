@@ -173,8 +173,13 @@ header{
 }
 
 .centerme{
-    margin: 0 auto;
+    margin: 0 auto !important;
     display: block;
+    float: unset !important;
+}
+
+.centertext{
+    text-align: center;
 }
 
 #breadcrumb{

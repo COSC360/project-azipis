@@ -71,72 +71,87 @@ function sendResetPassword(){
 
 }
 
-function changeDescription(userid){
+function changeDescription(userid,reload=true,callback){
 
     $description = $('#desc-input').val();
 
     $.post('editUser.php', {userid: userid, value: $description, column: 'description'}, function(result){
 
         console.log(result);
+        if(callback) callback(result);
     });
 
-    location.reload();
+    if(reload){
+        location.reload();
+    }
 
 }
 
-function changeFirstname(userid){
+function changeFirstname(userid,reload=true,callback){
 
     $firstname = $('#fname').val();
 
     $.post('editUser.php', {userid: userid, value: $firstname, column: 'firstname'}, function(result){
 
         console.log(result);
+        if(callback) callback(result);
     });
 
-    location.reload();
+    if(reload){
+        location.reload();
+    }
 
 }
 
-function changeLastname(userid){
+function changeLastname(userid,reload=true,callback){
 
     $lastname = $('#lname').val();
 
     $.post('editUser.php', {userid: userid, value: $lastname, column: 'lastname'}, function(result){
 
         console.log(result);
+        if(callback) callback(result);
     });
 
-    location.reload();
+    if(reload){
+        location.reload();
+    }
 
 }
 
-function changeEmail(userid){
+function changeEmail(userid,reload=true,callback){
 
     $email = $('#email').val()
 
     $.post('editUser.php', {userid: userid, value: $email, column: 'email'}, function(result){
 
         console.log(result);
+        if(callback) callback(result);
     });
 
-    location.reload();
+    if(reload){
+        location.reload();
+    }
 
 }
 
-function changePassword(userid){
+function changePassword(userid,reload=true,callback){
 
     $password = $('#pw').val();
 
     $.post('editUser.php', {userid: userid, value: $password, column: 'password'}, function(result){
 
         console.log(result);
+        if(callback) callback(result);
     });
 
-    location.reload();
+    if(reload){
+        location.reload();
+    }
 
 }
 
-function changeImage(userid, username) {
+function changeImage(userid, username,reload=true,callback) {
     var fileInput = $('#img')[0];
     var formData = new FormData();
     formData.append('img', fileInput.files[0]);
@@ -152,9 +167,13 @@ function changeImage(userid, username) {
         processData: false,
         success: function(response) {
             console.log(response);
-            location.reload();
+            if(reload){
+                location.reload();
+            }
+            if(callback) callback(response);
         },
         error: function(xhr, status, error) {
+            if(callback) callback(error);
             console.log(error);
         }
     });
