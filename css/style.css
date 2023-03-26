@@ -172,6 +172,11 @@ header{
     padding: 0.25em;
 }
 
+.content.background button{
+    cursor: pointer;
+
+}
+
 .centerme{
     margin: 0 auto;
     display: block;
