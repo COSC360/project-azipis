@@ -1,0 +1,22 @@
+#desc-input{
+    width: 70%;
+    height: 10em;
+}
+
+#edit-fields{
+    margin: 1em 0 1em 0;
+    height: 100%;
+}
+
+.field-div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .textinput {
+    flex: 1;
+  }
+  
+  .button {
+    margin-left: 10px;
+  }
