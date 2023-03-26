@@ -96,10 +96,10 @@ session_start();
         <article id="center">
 
             <div id="breadcrumb">
-                <h2> <a href="#" onclick="getUserThreads('<?php echo $username ?>')">Posts </a>
-                    <a href="#" onclick="getUserComments('<?php echo $username ?>')">| Comments </a>
-                    <a href="#" onclick="getUserUpvoted('<?php echo $username ?>')">| Upvoted </a>
-                    <a href="#" onclick="getUserDownvoted('<?php echo $username ?>')">| Downvoted </a>
+                <h2> <a href="#" onclick="getUserThreads('<?php echo $username ?>')">Posts </a>|
+                    <a href="#" onclick="getUserComments('<?php echo $username ?>')"> Comments </a>|
+                    <a href="#" onclick="getUserUpvoted('<?php echo $username ?>')"> Upvoted </a>|
+                    <a href="#" onclick="getUserDownvoted('<?php echo $username ?>')"> Downvoted </a>
                 </h2>
 
 
