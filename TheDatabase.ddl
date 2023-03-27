@@ -30,10 +30,10 @@ CREATE TABLE thread (
    content VARCHAR(500),
    PRIMARY KEY (tid),
    userid INT,
-   FOREIGN KEY (userid) REFERENCES Users(userid)
+   FOREIGN KEY (userid) REFERENCES users(userid)
     ON DELETE SET NULL 
     ON UPDATE CASCADE,
-   FOREIGN KEY (communityid) REFERENCES Community(communityid)
+   FOREIGN KEY (communityid) REFERENCES community(communityid)
     ON DELETE SET NULL
     ON UPDATE CASCADE
 );
@@ -46,10 +46,10 @@ CREATE TABLE comment (
    userid INT,
    tid INT,
    PRIMARY KEY (commentid),
-   FOREIGN KEY (userid) REFERENCES Users(userid)
+   FOREIGN KEY (userid) REFERENCES users(userid)
     ON DELETE SET NULL 
     ON UPDATE CASCADE,
-   FOREIGN KEY (tid) REFERENCES Thread(tid)
+   FOREIGN KEY (tid) REFERENCES thread(tid)
     ON DELETE SET NULL 
     ON UPDATE CASCADE
 );
@@ -75,7 +75,6 @@ CREATE TABLE passwordreset (
   resettoken VARCHAR(250) NOT NULL, 
   resettokenexp DATETIME NOT NULL,
   PRIMARY KEY (email) 
-  PRIMARY KEY (email)
 );
 
 -- Healthcare Communities
