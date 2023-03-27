@@ -1,7 +1,7 @@
 <?php
 
 include 'functions.php';
-$query = "SELECT * FROM Users WHERE username = ?";
+$query = "SELECT * FROM users WHERE username = ?";
 
 $username = get_sanitized_string_param($_GET,"username");
 $types = "s";
