@@ -54,21 +54,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
                     if(mysqli_stmt_fetch($stmt)){
 
+                        // Password is correct, check if user is banned
                         if (password_verify($psw, $hashed_psw)){
+                            $isBanned_query = "SELECT * FROM ban WHERE userid = ? AND expiredate > CURRENT_DATE;";
+                            $isBanned_types = "i";
 
-                            // Password is correct, start a new session
-                            session_start();
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["userid"] = $userid;
-                            $_SESSION["username"] = $username;
-                            $_SESSION["email"] = $email;
-                            $_SESSION["description"] = $desc;
-                            $_SESSION["avatarimgpath"] = $av_img_path;
-                            $_SESSION["firstname"] = $fname;
-                            $_SESSION["lastname"] = $lname;
-                            $_SESSION['isAdmin'] = $admin;
+                            $isbanned = php_select_prepared($isBanned_query, $isBanned_types, $userid);
 
-                            header("Location: index.php");
+                            //User is not banned, start session
+                            if(mysqli_num_rows($isbanned ) == 0){
+                                session_start();
+                                $_SESSION["loggedin"] = true;
+                                $_SESSION["userid"] = $userid;
+                                $_SESSION["username"] = $username;
+                                $_SESSION["email"] = $email;
+                                $_SESSION["description"] = $desc;
+                                $_SESSION["avatarimgpath"] = $av_img_path;
+                                $_SESSION["firstname"] = $fname;
+                                $_SESSION["lastname"] = $lname;
+                                $_SESSION['isAdmin'] = $admin;
+
+                                header("Location: index.php");
+                            } else {
+                                $login_err = "User is banned";
+                                echo $login_err;
+                            }
 
                         } else {
                             
