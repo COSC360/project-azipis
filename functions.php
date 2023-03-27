@@ -110,7 +110,7 @@ function get_username_from_id($id) {
         return "Anonymous";
     }
 
-    $result = php_select("SELECT username FROM Users WHERE userid =" . $id);
+    $result = php_select("SELECT username FROM users WHERE userid =" . $id);
     $row = mysqli_fetch_assoc($result);
     $username = $row["username"];
 
