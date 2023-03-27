@@ -1,5 +1,9 @@
 <?php 
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+
 include 'functions.php';
 
 $query = "INSERT INTO users (username, email, password, description, avatarimgpath, firstname, lastname, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -57,7 +61,9 @@ if ($result) {
 
     echo "Insertion succeeded";
 } else {
+    $conn = getConnection();
     echo "Insertion failed";
+    mysqli_close($conn);
 }
 
 header("Location: index.php");

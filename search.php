@@ -28,7 +28,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
             <button type="button" class="button collapsible">Healthcare</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Healthcare'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -39,7 +39,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
             <button type="button" class="button collapsible">Government</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Government'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -50,7 +50,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
             <button type="button" class="button collapsible">Tech</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Tech'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -61,7 +61,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
             <button type="button" class="button collapsible">Engineering</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Engineering'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -78,7 +78,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
          <?php 
             $param1 = "%{$search_param}%";
             $types = "s";
-            $result = php_select_prepared("SELECT * FROM Thread WHERE title LIKE ?",$types,$param1);
+            $result = php_select_prepared("SELECT * FROM thread WHERE title LIKE ?",$types,$param1);
             echo '<h2> Thread Results - ' . mysqli_num_rows($result) . ' users(s) found</h2>'
          ?>
 
@@ -90,7 +90,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
          <?php 
             $param1 = "%{$search_param}%";
             $types = "s";
-            $result2 = php_select_prepared("SELECT * FROM Users WHERE username LIKE ?",$types,$param1);
+            $result2 = php_select_prepared("SELECT * FROM users WHERE username LIKE ?",$types,$param1);
             echo '<h2> Thread Results - ' . mysqli_num_rows($result2) . ' users(s) found</h2>'
                ?>
          </div>
@@ -120,7 +120,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
 <script>
    <?php
    while ($row = mysqli_fetch_assoc($result)) {
-      $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
+      $communityResult = php_select("SELECT * FROM community WHERE communityid = " . $row["communityid"]);
       $community = mysqli_fetch_assoc($communityResult)["name"];
       $tid = $row["tid"];
       $title = $row["title"];

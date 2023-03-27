@@ -62,7 +62,7 @@ session_start(); ?>
 
          <div id="breadcrumb">
             <?php
-            $result = php_select_prepared("SELECT * FROM Community WHERE communityid = ?", "i", $cid);
+            $result = php_select_prepared("SELECT * FROM community WHERE communityid = ?", "i", $cid);
             if (mysqli_num_rows($result) > 0) {
                $row = mysqli_fetch_assoc($result);
 
@@ -102,7 +102,7 @@ session_start(); ?>
 
 <script>
    <?php
-   $result = php_select_prepared("SELECT * FROM Thread WHERE communityid = ?", "i", $cid);
+   $result = php_select_prepared("SELECT * FROM thread WHERE communityid = ?", "i", $cid);
    while ($row = mysqli_fetch_assoc($result)) {
       $tid = $row["tid"];
       $title = $row["title"];
