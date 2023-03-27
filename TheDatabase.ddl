@@ -1,7 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 
 CREATE TABLE community (
-  Communityid INT NOT NULL, 
+  communityid INT NOT NULL, 
   name VARCHAR(30),
   industry VARCHAR(30),
   PRIMARY KEY (Communityid)
@@ -23,7 +23,7 @@ CREATE TABLE users (
 CREATE TABLE thread (
    tid INT NOT NULL AUTO_INCREMENT,
    title VARCHAR(100),
-   Communityid INT,
+   communityid INT,
    created DATETIME,
    points INT,
    threadtype INT,
@@ -33,7 +33,7 @@ CREATE TABLE thread (
    FOREIGN KEY (userid) REFERENCES Users(userid)
     ON DELETE SET NULL 
     ON UPDATE CASCADE,
-   FOREIGN KEY (Communityid) REFERENCES Community(Communityid)
+   FOREIGN KEY (communityid) REFERENCES Community(communityid)
     ON DELETE SET NULL
     ON UPDATE CASCADE
 );
