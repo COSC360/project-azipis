@@ -72,7 +72,7 @@ CREATE TABLE passwordreset (
   email VARCHAR(250) NOT NULL, 
   resettoken VARCHAR(250) NOT NULL, 
   resettokenexp DATETIME NOT NULL,
-  PRIMARY KEY (email); 
+  PRIMARY KEY (email)
 );
 
 -- Healthcare Communities

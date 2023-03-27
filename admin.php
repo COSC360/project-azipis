@@ -187,12 +187,12 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
                                             <input type="radio" id="ban" name="status" value="ban">
                                             <label for="ban">Ban</label><br>
                                         </div>
-                                        <div id="ban-options">
+                                        <div id="ban-options" hidden>
                                             <label for="ban-length"> Length of ban: </label><br>
                                             <input type="number" id="ban-length" name="ban-length" min="1"> 
                                         </div>
 
-                                        <div>
+                                        <div id="ban-days" hidden>
                                             <input type="radio" id="day" name="date-type" value="day">
                                             <label for="day">Day</label><br>
                                             <input type="radio" id="month" name="date-type" value="month">
@@ -202,7 +202,7 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
                                             
                                         </div>
 
-                                        <button type="button" class="button" id="change-pw" onclick="">Change</button>
+                                        <button type="button" class="button" id="change_ban" onclick="">Change</button>
                                     </div>
                         </div>
                         </fieldset>

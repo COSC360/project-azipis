@@ -97,6 +97,49 @@ $(".delete_comment").click(function(){
         });
 })
 
+
+var isRegular = 0;
+$("#ban-status input").on("change", function(){
+    if($(this).attr("id") === "regular"){
+        isRegular = 1;
+        $("#ban-options").hide();
+        $("#ban-days").hide();
+    } else {
+        isRegular = 0;
+        $("#ban-options").show();
+        $("#ban-days").show();
+    }
+})
+
+$("#change_ban").click(function(){
+    if(userInfo && userInfo.userid){
+        if(isRegular){
+            unBanUser(userInfo.userid,false,function(success){
+                if(success){
+                    changeButtonColor($("#change_ban"), "green", "white")
+                }
+            });
+        } else {
+            let time = $("#ban-length").val();
+            let picked = document.querySelector('input[name="date-type"]:checked').value;
+            console.log(picked)
+            if(picked === "day"){
+                time = time
+            } else if(picked === "month"){
+                time = time * 30;
+            } else if(picked === "year"){
+                time = time * 365;
+            }
+            console.log("days:" + time);
+            banUser(userInfo.userid, 1, new Date(), new Date(new Date().getTime()+(time*24*60*60*1000)),"he sucks",false,function(success){ //TODO: get adminid and banreason
+                if(success){
+                    changeButtonColor($("#change_ban"), "green", "white")
+                }
+            });
+        }
+    }
+})
+
 function changeButtonColor(button,color,oldcolor){
     button.css('background-color', color);
     setTimeout(function(){

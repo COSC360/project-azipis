@@ -204,3 +204,27 @@ function deleteComment(cid,reload=true,callback){
         location.reload();
     }
 }
+//userid, adminid, bandate, expiredate, banreason
+function banUser(userid, adminid, bandate, expiredate, banreason, reload=true,callback){
+    $.post('banUser.php', {userid: userid, adminid: adminid, bandate: bandate.toISOString().slice(0, 19).replace('T', ' '), expiredate: expiredate.toISOString().slice(0, 19).replace('T', ' '), banreason: banreason}, function(result){
+        console.log(result);
+        if(callback) callback(result);
+    }).fail(function(xhr, status, error) {
+        console.log(error);
+    })
+    if(reload){
+        location.reload();
+    }
+}
+
+function unBanUser(userid,reload=true,callback){
+    $.post('unBanUser.php', {userid: userid}, function(result){
+        console.log(result);
+        if(callback) callback(result);
+    }).fail(function(xhr, status, error) {
+        console.log(error);
+    })
+    if(reload){
+        location.reload();
+    }
+}
