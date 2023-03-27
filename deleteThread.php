@@ -9,13 +9,13 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION['
 }
 
 //delete thread query
-$query = "DELETE FROM Thread WHERE tid = ?";
+$query = "DELETE FROM thread WHERE tid = ?";
 $types = "i";
 
 
 $threadid = get_sanitized_string_param($_POST, 'tid');
 
-if(!get_entry_exists("Thread", "tid", $threadid, "i")){
+if(!get_entry_exists("thread", "tid", $threadid, "i")){
     echo "0";
     die();
 }

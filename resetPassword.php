@@ -75,7 +75,7 @@ if (isset($_POST["email"]) && isset($_POST["action"]) &&
 
         $delTokQuery = 'DELETE from passwordreset WHERE email = ?';
         $tokTypes = 's';
-        $delTokenSuccess = php_delete($delTokQuery, $tokTypes, $email);
+        $delTokenSuccess = php_delete_prepared($delTokQuery, $tokTypes, $email);
 
         /*
         mysqli_query(

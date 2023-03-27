@@ -30,7 +30,7 @@ session_start();
             <button type="button" class="button collapsible">Healthcare</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Healthcare'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Healthcare'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -41,7 +41,7 @@ session_start();
             <button type="button" class="button collapsible">Government</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Government'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Government'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -52,7 +52,7 @@ session_start();
             <button type="button" class="button collapsible">Tech</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Tech'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Tech'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -63,7 +63,7 @@ session_start();
             <button type="button" class="button collapsible">Engineering</button>
             <div class="content background">
                <?php
-               $result = php_select("SELECT * FROM Community WHERE industry = 'Engineering'");
+               $result = php_select("SELECT * FROM community WHERE industry = 'Engineering'");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<button type='button' style='width:100%; margin-bottom: 2px;' onclick='window.location.href=\"community.php?cid=" . $row["communityid"] . "\"' class='nobutton'>";
                   echo $row["name"];
@@ -78,14 +78,14 @@ session_start();
 
          
             <?php
-                $result = php_select_prepared("SELECT * FROM Thread WHERE tid = ?", "i", $tid);
+                $result = php_select_prepared("SELECT * FROM thread WHERE tid = ?", "i", $tid);
                 $threadname = "";
                 $username = "";
                 $creationtime = "";
                 $threadbody = "";
                 if(mysqli_num_rows($result) > 0){
                   $row = mysqli_fetch_assoc($result);
-                  $result2 = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"] . "");
+                  $result2 = php_select("SELECT * FROM community WHERE communityid = " . $row["communityid"] . "");
                   $row2 = mysqli_fetch_assoc($result2);
 
                   $industry = $row2["industry"];
@@ -136,7 +136,7 @@ session_start();
          ?>
          <div id="comments">
             <?php
-               $result = php_select("SELECT * FROM Comment WHERE tid = " . $_GET['tid'] . "");
+               $result = php_select("SELECT * FROM comment WHERE tid = " . $_GET['tid'] . "");
                while ($row = mysqli_fetch_assoc($result)) {
                   echo "<div class='comment' cid='" . $row["commentid"] . "'>";
                   echo '<button class="button delete_comment" onclick=>Delete Comment</button>';

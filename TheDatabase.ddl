@@ -1,11 +1,13 @@
-CREATE TABLE Community (
-  communityid INT NOT NULL, 
+SET FOREIGN_KEY_CHECKS=0;
+
+CREATE TABLE community (
+  Communityid INT NOT NULL, 
   name VARCHAR(30),
   industry VARCHAR(30),
-  PRIMARY KEY (communityid)
+  PRIMARY KEY (Communityid)
 );
 
-CREATE TABLE Users (
+CREATE TABLE users (
     userid INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -18,10 +20,10 @@ CREATE TABLE Users (
     PRIMARY KEY (userid)
 );
 
-CREATE TABLE Thread (
+CREATE TABLE thread (
    tid INT NOT NULL AUTO_INCREMENT,
    title VARCHAR(100),
-   communityid INT,
+   Communityid INT,
    created DATETIME,
    points INT,
    threadtype INT,
@@ -31,12 +33,12 @@ CREATE TABLE Thread (
    FOREIGN KEY (userid) REFERENCES Users(userid)
     ON DELETE SET NULL 
     ON UPDATE CASCADE,
-   FOREIGN KEY (communityid) REFERENCES Community(communityid)
+   FOREIGN KEY (Communityid) REFERENCES Community(Communityid)
     ON DELETE SET NULL
     ON UPDATE CASCADE
 );
 
-CREATE TABLE Comment (
+CREATE TABLE comment (
    commentid INT NOT NULL AUTO_INCREMENT,
    comment VARCHAR(1000),
    created DATETIME,
@@ -72,37 +74,39 @@ CREATE TABLE passwordreset (
   email VARCHAR(250) NOT NULL, 
   resettoken VARCHAR(250) NOT NULL, 
   resettokenexp DATETIME NOT NULL,
+  PRIMARY KEY (email) 
   PRIMARY KEY (email)
 );
 
 -- Healthcare Communities
-INSERT INTO COMMUNITY VALUES (1, "Pharma", "Healthcare");
-INSERT INTO COMMUNITY VALUES (2, "Health Insurance", "Healthcare");
-INSERT INTO COMMUNITY VALUES (3, "Home Care", "Healthcare");
-INSERT INTO COMMUNITY VALUES (4, "Hospitals", "Healthcare");
-INSERT INTO COMMUNITY VALUES (5, "Other Healthcare", "Healthcare");
+INSERT INTO community VALUES (1, "Pharma", "Healthcare");
+INSERT INTO community VALUES (2, "Health Insurance", "Healthcare");
+INSERT INTO community VALUES (3, "Home Care", "Healthcare");
+INSERT INTO community VALUES (4, "Hospitals", "Healthcare");
+INSERT INTO community VALUES (5, "Other Healthcare", "Healthcare");
 
 -- Government Communities
-INSERT INTO COMMUNITY VALUES (6, "Criminal Justice", "Government");
-INSERT INTO COMMUNITY VALUES (7, "Law Enforcement", "Government");
-INSERT INTO COMMUNITY VALUES (8, "Public Safety", "Government");
-INSERT INTO COMMUNITY VALUES (9, "Transporation", "Government");
-INSERT INTO COMMUNITY VALUES (10, "Other Government", "Government");
+INSERT INTO community VALUES (6, "Criminal Justice", "Government");
+INSERT INTO community VALUES (7, "Law Enforcement", "Government");
+INSERT INTO community VALUES (8, "Public Safety", "Government");
+INSERT INTO community VALUES (9, "Transporation", "Government");
+INSERT INTO community VALUES (10, "Other Government", "Government");
 
 -- Tech Communities
-INSERT INTO COMMUNITY VALUES (11, "FAANG", "Tech");
-INSERT INTO COMMUNITY VALUES (12, "Startups", "Tech");
-INSERT INTO COMMUNITY VALUES (13, "Fintech", "Tech");
-INSERT INTO COMMUNITY VALUES (14, "Data science", "Tech");
-INSERT INTO COMMUNITY VALUES (15, "Other Tech", "Tech");
+INSERT INTO community VALUES (11, "FAANG", "Tech");
+INSERT INTO community VALUES (12, "Startups", "Tech");
+INSERT INTO community VALUES (13, "Fintech", "Tech");
+INSERT INTO community VALUES (14, "Data science", "Tech");
+INSERT INTO community VALUES (15, "Other Tech", "Tech");
 
 -- Engineering Communities
-INSERT INTO COMMUNITY VALUES (16, "Civil", "Engineering");
-INSERT INTO COMMUNITY VALUES (17, "Electrial", "Engineering");
-INSERT INTO COMMUNITY VALUES (18, "Mechanical", "Engineering");
-INSERT INTO COMMUNITY VALUES (19, "Industrial", "Engineering");
-INSERT INTO COMMUNITY VALUES (20, "Other Engineering", "Engineering");
+INSERT INTO community VALUES (16, "Civil", "Engineering");
+INSERT INTO community VALUES (17, "Electrial", "Engineering");
+INSERT INTO community VALUES (18, "Mechanical", "Engineering");
+INSERT INTO community VALUES (19, "Industrial", "Engineering");
+INSERT INTO community VALUES (20, "Other Engineering", "Engineering");
 
-INSERT INTO Thread (title, communityid, created, points, content, threadtype)
+INSERT INTO thread (title, communityid, created, points, content, threadtype)
 VALUES ('I love big pharma', 1, NOW(), 0, 'Healthcare and big pharma is so cool', 1);
 
+SET FOREIGN_KEY_CHECKS = 1;

@@ -50,7 +50,7 @@ session_start();
 
          <div id="breadcrumb">
             <?php
-                $result2 = php_select_prepared("SELECT * FROM Community WHERE communityid = ?","i",$cid);
+                $result2 = php_select_prepared("SELECT * FROM community WHERE communityid = ?","i",$cid);
                 $name = "";
                 if(mysqli_num_rows($result2) > 0){
                   $row2 = mysqli_fetch_assoc($result2);
