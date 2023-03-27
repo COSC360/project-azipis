@@ -40,9 +40,11 @@ function sendmail($email, $resettoken) {
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Reset your password';
         $root = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $root = pathinfo($root)['dirname'];
+
         $mail->Body    = "We received a request from you to reset your password! If this was not you, please check your account security. <br> <br> Click the link bellow: <br>
-    <a href='" . $root . "project-azipis/resetPassword.php?email=$email&resettoken=$resettoken'>Reset Password</a> <br>
-    <br> Best regards, <br> CareerCafe Team";
+        <a href='" . $root . "/resetPassword.php?email=$email&resettoken=$resettoken'>Reset Password</a> <br>
+        <br> Best regards, <br> CareerCafe Team";
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
