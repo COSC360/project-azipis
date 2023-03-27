@@ -20,7 +20,7 @@ $bandate = get_sanitized_string_param($_POST, 'bandate');
 $expiredate = get_sanitized_string_param($_POST, 'expiredate');
 $banreason = get_sanitized_string_param($_POST, 'banreason');
 
-if(!get_entry_exists("Users", "userid", $userid, "i")){
+if(!get_entry_exists("users", "userid", $userid, "i")){
     echo "UserID does not exist:" . $userid;
     die();
 }

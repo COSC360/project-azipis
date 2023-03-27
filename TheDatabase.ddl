@@ -4,7 +4,7 @@ CREATE TABLE community (
   communityid INT NOT NULL, 
   name VARCHAR(30),
   industry VARCHAR(30),
-  PRIMARY KEY (Communityid)
+  PRIMARY KEY (communityid)
 );
 
 CREATE TABLE users (

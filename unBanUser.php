@@ -15,7 +15,7 @@ $types = "i";
 
 $userid = get_sanitized_int_param($_POST, 'userid');
 
-if(!get_entry_exists("Users", "userid", $userid, "i")){
+if(!get_entry_exists("users", "userid", $userid, "i")){
     echo "UserID does not exist:" . $userid;
     die();
 }

@@ -107,7 +107,7 @@ session_start();
    <?php
    $result = php_select("SELECT * FROM thread ORDER BY created DESC");
    while ($row = mysqli_fetch_assoc($result)) {
-      $communityResult = php_select("SELECT * FROM Community WHERE communityid = " . $row["communityid"]);
+      $communityResult = php_select("SELECT * FROM community WHERE communityid = " . $row["communityid"]);
       $community = mysqli_fetch_assoc($communityResult)["name"];
       $tid = $row["tid"];
       $title = $row["title"];
