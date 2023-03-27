@@ -228,3 +228,12 @@ function unBanUser(userid,reload=true,callback){
         location.reload();
     }
 }
+
+function getIsBanned(userid,callback){
+    $.post('getIsBanned.php', {userid: userid}, function(result){
+        console.log(result);
+        if(callback) callback(result);
+    }).fail(function(xhr, status, error) {
+        console.log(error);
+    })
+}
