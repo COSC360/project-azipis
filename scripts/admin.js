@@ -82,6 +82,7 @@ $("#delete_thread").click(function(){
         deleteThread(url.searchParams.get("tid"),false,function(success){
             if(success){
                 changeButtonColor($("#delete_thread"), "green", "white")
+                window.location.replace("index.php");
             }
         });
 })
@@ -93,6 +94,12 @@ $(".delete_comment").click(function(){
             if(success == 1){
                 console.log(elem)
                 changeButtonColor(elem, "green", "white")
+
+                // delete div from page
+                $(elem).parent().remove();
+
+
+
             }
         });
 })

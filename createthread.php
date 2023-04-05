@@ -1,5 +1,5 @@
 <?php include 'functions.php';
-$cid = get_sanitized_int_param($_GET,'cid');
+$cid = get_sanitized_int_param($_GET, 'cid');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -10,18 +10,19 @@ session_start();
    <title>CareerCafe - Find your passion</title>
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/login.css" />
+   <link rel="stylesheet" href="css/createthread.css" />
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
 </head>
 
 <body>
 
-   <?php include 'header.php'?>
+   <?php include 'header.php' ?>
 
    <div id="main">
 
       <article id="left-sidebar">
-      <h2>Related Topics</h2>
+         <h2>Related Topics</h2>
          <div class="collapsibles">
 
 
@@ -50,16 +51,16 @@ session_start();
 
          <div id="breadcrumb">
             <?php
-                $result2 = php_select_prepared("SELECT * FROM community WHERE communityid = ?","i",$cid);
-                $name = "";
-                if(mysqli_num_rows($result2) > 0){
-                  $row2 = mysqli_fetch_assoc($result2);
+            $result2 = php_select_prepared("SELECT * FROM community WHERE communityid = ?", "i", $cid);
+            $name = "";
+            if (mysqli_num_rows($result2) > 0) {
+               $row2 = mysqli_fetch_assoc($result2);
 
-                  $industry = $row2["industry"];
-                  $name = $row2["name"];
+               $industry = $row2["industry"];
+               $name = $row2["name"];
 
-                  echo "<h2> Jobs > " . $row2["industry"] . " > " . $row2["name"] . "</h2>";
-                }
+               echo "<h2> Jobs > " . $row2["industry"] . " > " . $row2["name"] . "</h2>";
+            }
             ?>
 
 
@@ -69,12 +70,32 @@ session_start();
             <h1><?php echo "<b> New Post </b> in <b>" . $name . "</b>"; ?></h1>
             <form action="insertThread.php" method="post">
                <fieldset>
-                  <input type="text" class="textinput" id="title" name="title" placeholder="Thread Title" required>
-                  <input type="number" class="textinput" id="threadtype" name="threadtype" placeholder="Type of Thread" required>
-                  <input type="text" class="textinput" id="content" name="content" placeholder="Content of Thread" required>
-                  <input type="text" id="communityid" name="communityid" value="<?php echo $_GET['cid'] ?>"  hidden>
+                  <label for="title"><b>Title</b></label>
+                  <textarea class="textinput" id="title" name="title" placeholder="Thread Title" required></textarea> <br>
+                  <div class="type-container">
+                     <label for="threadtype">Type of Thread: </label>
+                     <label>
+                        <input type="radio" id="discussion" name="threadtype" value="1">
+                        <img src="images/coffeecup.png" alt="discussion" class="type-img">
+                     </label>
+                     <label for="discussion">Discussion</label>
+                     <label>
+                        <input type="radio" id="acclaim" name="threadtype" value="2">
+                        <img src="images/bean.png" alt="acclaim" class="type-img">
+                     </label>
+                     <label for="acclaim">Acclaim</label>
+                     <label>
+                        <input type="radio" id="criticism" name="threadtype" value="3">
+                        <img src="images/spilledcup.png" alt="criticism" class="type-img">
+                     </label>
+
+                     <label for="criticism">Criticism</label>
+                     <!--<input type="number" class="textinput" id="threadtype" name="threadtype" placeholder="Type of Thread" required><br> -->
+                  </div>
+                  <textarea class="textinput" id="content" name="content" placeholder="Content of Thread" required></textarea><br>
+                  <input type="text" id="communityid" name="communityid" value="<?php echo $_GET['cid'] ?>" hidden>
                   <div class="clear"></div>
-                  <input type="submit" class="button"/>
+                  <input type="submit" class="button" value="Post" />
                </fieldset>
 
                <br>

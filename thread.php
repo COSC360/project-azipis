@@ -8,8 +8,10 @@ session_start();
 <head lang="en">
    <meta charset="utf-8">
    <title>CareerCafe - Find your passion</title>
+   <link rel="shortcut icon" type="image/jpg" href="images/favicon1.png">
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/login.css" />
+   <link rel="stylesheet" href="css/thread.css" />
    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
    <script type="text/javascript" src="scripts/admin.js" defer></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
@@ -103,16 +105,17 @@ session_start();
 
 
          </div>
-         <?php 
-         if(isset($_SESSION['userid']) && $_SESSION['isAdmin'] === 1){
-            echo '<button id="delete_thread" class="button" onclick=>Delete Thread</button>';
-         }
-         ?>         
+      
          <div id="threads">
             <h1 class="nomargin"><?php echo $threadname; ?></h1>
-            By <h4 class="inline nomargin"><?php echo $username; ?></h2>
+            By <h4 class="inline nomargin"><?php echo '<a href="user.php?username=' .$username. '">' . $username . '</a>' ; ?></h2>
             at <h4 class="inline nomargin"><?php echo $creationtime; ?></h2>
             <p><?php echo $threadbody; ?></p>
+            <?php 
+         if(isset($_SESSION['userid']) && ($_SESSION['isAdmin'] === 1 || $_SESSION['username' ] === $username)){
+            echo '<button id="delete_thread" class="button" onclick=>Delete Thread</button>';
+         }
+         ?>   
          </div>
       <?php
       $tid = $_GET['tid'];
@@ -122,8 +125,8 @@ session_start();
       }   
       echo <<<EOD
          <form action="insertComment.php" method="post">
-            <fieldset>
-               <input type="text" class="textinput" id="comment" name="comment" placeholder="Comment" required>
+            <fieldset id="comment-fieldset">
+               <textarea class="textinput" id="comment" name="comment" placeholder="Comment" required></textarea>
                <input type="text" id="tid" name="tid" value="$tid" hidden>
                <div class="clear"></div>
                <input type="submit" class="button" $notloggedin/>
@@ -138,10 +141,14 @@ session_start();
             <?php
                $result = php_select("SELECT * FROM comment WHERE tid = " . $_GET['tid'] . "");
                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<div class='comment' cid='" . $row["commentid"] . "'>";
-                  echo '<button class="button delete_comment" onclick=>Delete Comment</button>';
+                  $commentId = $row["commentid"];
+                  $userId = $row["userid"];
+                  $commentUsername = get_username_from_id($userId);
+
+                  echo "<div class='comment' cid='" . $commentId . "'>";
+
                   echo "<h4 class='author inline'>";
-                  echo get_username_from_id($row["userid"]);
+                  echo '<a href="user.php?username=' . $commentUsername . '">' . $commentUsername . '</a>';
                   echo "</h4> at ";
                   echo "<h4 class='date inline'>";
                   echo $row["created"];
@@ -149,8 +156,16 @@ session_start();
                   echo "<p class='content'>";
                   echo $row["comment"];
                   echo "</p>";
-                  echo "</div>";
+                  if (isset($_SESSION['loggedin']) && ($_SESSION['isAdmin'] === 1 || $_SESSION['userid' ] == $userId)){
+                     echo '<button class="button delete_comment" onclick=>Delete Comment</button>';
+                  }
+                  echo "<br></div>";
                }
+
+               echo '<div class="clear"></div>';
+               
+
+
             ?>
          </div>
 

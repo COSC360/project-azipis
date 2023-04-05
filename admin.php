@@ -22,6 +22,7 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
         <head lang="en">
             <meta charset="utf-8">
             <title>CareerCafe - Create Account</title>
+            <link rel="shortcut icon" type="image/jpg" href="images/favicon1.png">
             <link rel="stylesheet" href="css/style.css" />
             <link rel="stylesheet" href="css/form.css" />
             <link rel="stylesheet" href="css/login.css" />

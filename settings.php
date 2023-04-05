@@ -87,7 +87,7 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
                             if ($_SESSION['username'] === $username) {
 
                                 echo '<a href="user.php?username=' . $_SESSION['username'] . '" class="button">Profile</a>';
-                                echo '<a href="settings.php?"username=' . $_SESSION['username'] . '" class="button">User Settings</a>';
+                                echo '<a href="settings.php?username=' . $_SESSION['username'] . '" class="button">User Settings</a>';
                                 echo '<a href="logout.php" class="button">Logout</a>';
                             }
 

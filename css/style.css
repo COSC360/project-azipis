@@ -389,3 +389,21 @@ figure{
 #options .button:hover{
     background-color: #7DC1FF;
 }
+
+#comment-fieldset{
+    margin-top: 1em;
+    clear: both;
+}
+
+#comment-fieldset #comment{
+    width: 75%;
+    height: 10em;
+    resize: vertical;
+}
+
+#delete_thread{
+}
+
+.delete_comment{
+    float: right;
+}

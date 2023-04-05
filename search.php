@@ -8,6 +8,7 @@ $search_param = get_sanitized_string_param($_GET,'search');
 <head lang="en">
    <meta charset="utf-8">
    <title>CareerCafe - Find your passion</title>
+   <link rel="shortcut icon" type="image/jpg" href="images/favicon1.png">
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/login.css" />
    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
