@@ -254,10 +254,10 @@ header{
     display: block;
     border-top: 2px solid black;
     width: 95%;
-    margin: 1em 0 1em 1em;
+    margin: 1em 0 0 1em;
     clear: both;
     height: fit-content;
-    padding-bottom: 1em;
+    padding-bottom: 0em;
 }
 
 .content{
@@ -390,20 +390,3 @@ figure{
     background-color: #7DC1FF;
 }
 
-#comment-fieldset{
-    margin-top: 1em;
-    clear: both;
-}
-
-#comment-fieldset #comment{
-    width: 75%;
-    height: 10em;
-    resize: vertical;
-}
-
-#delete_thread{
-}
-
-.delete_comment{
-    float: right;
-}

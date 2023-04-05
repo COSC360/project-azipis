@@ -54,6 +54,24 @@ CREATE TABLE comment (
     ON UPDATE CASCADE
 );
 
+CREATE TABLE thread_votes (
+  userid INT,
+  tid INT,
+  vote INT,
+  PRIMARY KEY (userid, tid),
+  FOREIGN KEY (userid) REFERENCES users(userid),
+  FOREIGN KEY (tid) REFERENCES thread(tid)
+);
+
+CREATE TABLE comment_votes (
+  userid INT,
+  commentid INT,
+  vote INT,
+  PRIMARY KEY (userid, commentid),
+  FOREIGN KEY (userid) REFERENCES users(userid),
+  FOREIGN KEY (commentid) REFERENCES comment(commentid)
+);
+
 CREATE TABLE ban (
   banid INT NOT NULL AUTO_INCREMENT,
   userid INT,

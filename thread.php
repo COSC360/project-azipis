@@ -146,7 +146,6 @@ session_start();
                   $commentUsername = get_username_from_id($userId);
 
                   echo "<div class='comment' cid='" . $commentId . "'>";
-
                   echo "<h4 class='author inline'>";
                   echo '<a href="user.php?username=' . $commentUsername . '">' . $commentUsername . '</a>';
                   echo "</h4> at ";
@@ -159,6 +158,18 @@ session_start();
                   if (isset($_SESSION['loggedin']) && ($_SESSION['isAdmin'] === 1 || $_SESSION['userid' ] == $userId)){
                      echo '<button class="button delete_comment" onclick=>Delete Comment</button>';
                   }
+
+                  echo <<<EOD
+
+                  <div class="points">
+                  <form action="vote.php" method="post"></form>
+                      <button>^</button>
+                      <p class="pointnum">0</p>
+                      <button>v</button>
+                  </div>
+
+                  EOD;
+
                   echo "<br></div>";
                }
 
