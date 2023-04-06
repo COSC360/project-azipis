@@ -26,6 +26,11 @@ function createNewThread(tid,title,created,community,points,user,threadtype,loca
         newThread.querySelector(".delete_thread_div").appendChild(deleteThreadButton);
     }
 
+    // if points == undefined, set to 0
+    if(points == undefined){
+        points = 0;
+    }
+
     newThread.querySelector(".username").innerText = user || "Anonymous";
     newThread.querySelector(".points").setAttribute("tid", tid);
     newThread.querySelector(".pointnum").innerText = points;
@@ -66,6 +71,11 @@ function createNewComment(cid, comment, created, points, username, location="#co
             deleteComment(cid);
         }
         newComment.querySelector(".delete_comment_div").appendChild(deleteCommentButton);
+    }
+
+    // if points == undefined, set to 0
+    if(points == undefined){
+        points = 0;
     }
 
     newComment.querySelector(".date").innerText = created;

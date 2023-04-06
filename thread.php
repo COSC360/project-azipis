@@ -139,46 +139,11 @@ session_start();
          ?>
          <div id="comments">
             <?php
-               $result = php_select("SELECT * FROM comment WHERE tid = " . $_GET['tid'] . "");
-               while ($row = mysqli_fetch_assoc($result)) {
-                  $commentId = $row["commentid"];
-                  $userId = $row["userid"];
-                  $commentUsername = get_username_from_id($userId);
-
-                  echo "<div class='comment' cid='" . $commentId . "'>";
-                  echo "<h4 class='author inline'>";
-                  echo '<a href="user.php?username=' . $commentUsername . '">' . $commentUsername . '</a>';
-                  echo "</h4> at ";
-                  echo "<h4 class='date inline'>";
-                  echo $row["created"];
-                  echo "</h4>";
-                  echo "<p class='content'>";
-                  echo $row["comment"];
-                  echo "</p>";
-                  if (isset($_SESSION['loggedin']) && ($_SESSION['isAdmin'] === 1 || $_SESSION['userid' ] == $userId)){
-                     echo '<button class="button delete_comment" onclick=>Delete Comment</button>';
-                  }
-
-                  echo <<<EOD
-
-                  <div class="points">
-                  <form action="vote.php" method="post"></form>
-                      <button>^</button>
-                      <p class="pointnum">0</p>
-                      <button>v</button>
-                  </div>
-
-                  EOD;
-
-                  echo "<br></div>";
-               }
-
-               echo '<div class="clear"></div>';
-               
-
+               include 'comment_template.php';
 
             ?>
          </div>
+         <div class="clear"></div>
 
       </article>
 
@@ -193,10 +158,41 @@ session_start();
 
    <footer>
 
-
-
    </footer>
-
 </body>
+<script>
+   <?php
+   $curUsername = '';
+   if (isset($_SESSION['username'])){
+      $curUsername = $_SESSION['username'];
+   }
+   $admin = 0;
+   if (isset($_SESSION['isAdmin'])){
+      $admin = $_SESSION['isAdmin'];
+   }
+   $result = php_select("SELECT * FROM comment WHERE tid = " . $_GET['tid'] . "");
+   while ($row = mysqli_fetch_assoc($result)) {
+      $commentId = $row["commentid"];
+      $comment = $row["comment"];
+      $created = $row["created"];
+      $userId = $row["userid"];
+      $commentUsername = get_username_from_id($userId);
+      $points = get_comment_points($commentId);
+      $location = '#comments';
+
+      // if points is undefined, set to 0
+      if (!isset($points)) {
+         $points = 0;
+      }
+      
+
+   // createNewComment
+   echo "createNewComment(" . $commentId . ",\"" . $comment . "\",\"" . $created . "\",\"" . $points . "\",\"" . $commentUsername . "\",\"" . $location . "\",\"" . $curUsername . "\",\"" . $admin . "\");";
+   }
+
+   ?>
+
+
+</script>
 
 </html>

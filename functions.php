@@ -120,6 +120,14 @@ function get_username_from_id($id) {
     return $username;
 }
 
+// Return: uid from username, 0 if not found
+function get_uid_from_username($username) {
+    $result = php_select_prepared("SELECT userid FROM users WHERE username = ?", 's', $username);
+    $row = mysqli_fetch_assoc($result);
+    $uid = $row["userid"];
+    return $uid;
+}
+
 function get_entry_exists($table,$colname,$val,$valtype){
     $result = php_select_prepared("SELECT * FROM " . $table . " WHERE " . $colname . "= ?", $valtype, $val);
     if(mysqli_num_rows($result) > 0){
@@ -145,6 +153,30 @@ function get_comment_points($cid){
     return $row["points"];
 }
 
+// returns the points a user has from threads
+function get_user_thread_points($uid){
+    $query = 'SELECT SUM(vote) AS points from thread_votes WHERE userid = ?';
+    $result = php_select_prepared($query, 'i', $uid);
+    $row = mysqli_fetch_assoc($result);
+    return $row["points"];
+}
+
+// returns the points a user has from comments
+function get_user_comment_points($uid){
+    $query = 'SELECT SUM(vote) AS points from comment_votes WHERE userid = ?';
+    $result = php_select_prepared($query, 'i', $uid);
+    $row = mysqli_fetch_assoc($result);
+    return $row["points"];
+}
+
+// returns total user points
+function get_user_points($username){
+    $uid = get_uid_from_username($username);
+    $tp = get_user_thread_points($uid);
+    $cp = get_user_comment_points($uid);
+    return $tp + $cp;
+}
+
 /*
 
 *********************************************************************************************
@@ -160,8 +192,12 @@ function get_comment_points($cid){
 // Not sure if we want to keep these 2 functions here or move them
 // Print out logged in header
 function php_get_logged_in_header(){
+
+    $username = $_SESSION['username'];
+    $points = get_user_points($username);
+
     echo '<div class="btn-group">';
-    echo '<a href="user.php?username='.$_SESSION['username']. '" class="header-links">'.$_SESSION['username'] . '(points)</a> | ' ;
+    echo '<a href="user.php?username='.$username. '" class="header-links">'.$username . '(' . $points. ')</a> | ' ;
     echo '<a href="logout.php" class="header-links">Logout</a>';
     echo '</div>';
 }
