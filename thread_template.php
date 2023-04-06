@@ -1,6 +1,5 @@
-
 <div id="thread_template" class="relative" hidden>
-    <a class="thread" href="">  
+    <a class="thread" href="">
         <figure>
             <span class="circle"></span>
             <img src="images/coffeecup.png" alt="coffee cup" class="overlayed">
@@ -16,13 +15,15 @@
             </p>
 
         </div>
+    </a>
 
+    <div class="delete_thread_div">
+    </div>
 
-</a>
     <div class="points" tid="">
         <form action="vote.php" method="post"></form>
-            <button class="upvote" value="1" onclick="vote(this, 1, 'thread')">^</button>
-            <p class="pointnum">0</p>
-            <button class="downvote" value="-1" onclick="vote(this, -1, 'thread')">v</button>
-        </div>
+        <button class="upvote" value="1" onclick="vote(this, 1, 'thread')">^</button>
+        <p class="pointnum">0</p>
+        <button class="downvote" value="-1" onclick="vote(this, -1, 'thread')">v</button>
+    </div>
 </div>

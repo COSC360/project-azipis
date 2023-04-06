@@ -25,7 +25,6 @@ CREATE TABLE thread (
    title VARCHAR(100),
    communityid INT,
    created DATETIME,
-   points INT,
    threadtype INT,
    content VARCHAR(500),
    PRIMARY KEY (tid),
@@ -42,7 +41,6 @@ CREATE TABLE comment (
    commentid INT NOT NULL AUTO_INCREMENT,
    comment VARCHAR(1000),
    created DATETIME,
-   points INT,
    userid INT,
    tid INT,
    PRIMARY KEY (commentid),
@@ -59,8 +57,12 @@ CREATE TABLE thread_votes (
   tid INT,
   vote INT,
   PRIMARY KEY (userid, tid),
-  FOREIGN KEY (userid) REFERENCES users(userid),
+  FOREIGN KEY (userid) REFERENCES users(userid)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY (tid) REFERENCES thread(tid)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE comment_votes (
@@ -68,8 +70,12 @@ CREATE TABLE comment_votes (
   commentid INT,
   vote INT,
   PRIMARY KEY (userid, commentid),
-  FOREIGN KEY (userid) REFERENCES users(userid),
+  FOREIGN KEY (userid) REFERENCES users(userid)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   FOREIGN KEY (commentid) REFERENCES comment(commentid)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE ban (

@@ -129,9 +129,18 @@ function get_entry_exists($table,$colname,$val,$valtype){
 
 }
 
+// returns the points a thread has
 function get_thread_points($tid){
     $query = 'SELECT SUM(vote) AS points from thread_votes WHERE tid = ?';
     $result = php_select_prepared($query, 'i', $tid);
+    $row = mysqli_fetch_assoc($result);
+    return $row["points"];
+}
+
+// returns the points a comment has
+function get_comment_points($cid){
+    $query = 'SELECT SUM(vote) AS points from comment_votes WHERE commentid = ?';
+    $result = php_select_prepared($query, 'i', $cid);
     $row = mysqli_fetch_assoc($result);
     return $row["points"];
 }

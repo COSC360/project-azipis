@@ -20,7 +20,7 @@ $userid = $row['userid'];
 $thread_owner = get_username_from_id($userid);
 
 
-if ($_SESSION['isAdmin'] === 1 || $_SESSION['username'] === $thread_owner) {
+if ($_SESSION['isAdmin'] == 1 || $_SESSION['username'] == $thread_owner) {
 
 //delete thread query
 $query = "DELETE FROM thread WHERE tid = ?";

@@ -108,7 +108,7 @@ session_start(); ?>
       $tid = $row["tid"];
       $title = $row["title"];
       $created = $row["created"];
-      $points = $row["points"];
+      $points = get_thread_points($tid);
       $user = get_username_from_id($row["userid"]);
       $type = $row["threadtype"];
       echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";

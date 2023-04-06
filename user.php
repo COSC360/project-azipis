@@ -1,7 +1,17 @@
 <?php
 include "functions.php";
 $username = get_sanitized_string_param($_GET, 'username');
+
 session_start();
+
+$isAdmin;
+$curUser;
+
+if (isset($_SESSION['username'])){
+    $curUser = get_sanitized_string_param($_SESSION, 'username');
+    $isAdmin = get_sanitized_int_param($_SESSION, 'isAdmin');
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,10 +107,10 @@ session_start();
         <article id="center">
 
             <div id="breadcrumb">
-                <h2> <a href="#" onclick="getUserThreads('<?php echo $username ?>')">Posts </a>|
-                    <a href="#" onclick="getUserComments('<?php echo $username ?>')"> Comments </a>|
-                    <a href="#" onclick="getUserUpvoted('<?php echo $username ?>')"> Upvoted </a>|
-                    <a href="#" onclick="getUserDownvoted('<?php echo $username ?>')"> Downvoted </a>
+                <h2> <a href="#" onclick="getUserThreads('<?php echo $username ?>', '<?php echo $curUser ?>', <?php echo $isAdmin ?>)">Posts </a>|
+                    <a href="#" onclick="getUserComments('<?php echo $username ?>', '<?php echo $curUser ?>', <?php echo $isAdmin ?>)"> Comments </a>|
+                    <a href="#" onclick="getUserUpvoted('<?php echo $username ?>', '<?php echo $curUser ?>', <?php echo $isAdmin ?>)"> Upvoted </a>|
+                    <a href="#" onclick="getUserDownvoted('<?php echo $username ?>', '<?php echo $curUser ?>', <?php echo $isAdmin ?>)"> Downvoted </a>
                 </h2>
 
 

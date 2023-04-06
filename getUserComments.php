@@ -18,6 +18,22 @@ $result = php_select_prepared($query, $types, $username);
 
 $rows = array();
 while ($row = $result->fetch_assoc()) {
+
+    $cid = $row['commentid'];
+    $points = get_comment_points($cid);
+
+    // set points to $points
+    $row['points'] = $points;
+
+    // unset password from row
+    unset($row['firstname']);
+    unset($row['lastname']);
+    unset($row['email']);
+    unset($row['avatarimgpath']);
+    unset($row['password']);
+    unset($row['isAdmin']);
+    unset($row['description']);
+
     $rows[] = $row;
 }
 

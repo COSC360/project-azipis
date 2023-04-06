@@ -7,7 +7,7 @@ if(!isset($_SESSION['userid'])){
     header("Location: index.php");
     die();
 }
-$query = "INSERT INTO thread (title, communityid, created, points, content, userid, threadtype) VALUES (?, ?, NOW(), 0, ?, ?, ?)";
+$query = "INSERT INTO thread (title, communityid, created, content, userid, threadtype) VALUES (?, ?, NOW(), ?, ?, ?)";
 $types = "sisii";
 
 $title = get_sanitized_string_param($_POST, 'title');

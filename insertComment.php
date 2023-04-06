@@ -2,7 +2,7 @@
 include 'functions.php';
 session_start();
 
-$query = "INSERT INTO comment (comment, tid, created, points, userid) VALUES (?, ?, NOW(), 0, ?)";
+$query = "INSERT INTO comment (comment, tid, created, userid) VALUES (?, ?, NOW(), ?)";
 $types = "sii";
 
 $comment = get_sanitized_string_param($_POST,'comment');

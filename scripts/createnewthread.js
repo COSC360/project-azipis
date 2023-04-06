@@ -1,4 +1,4 @@
-function createNewThread(tid,title,created,community,points,user,threadtype,location="#threads"){
+function createNewThread(tid,title,created,community,points,user,threadtype,location="#threads", owner, admin){
     switch(parseInt(threadtype)){
         case 1: threadtype = "images/coffeecup.png"; break;
         case 2: threadtype = "images/bean.png"; break;
@@ -13,6 +13,19 @@ function createNewThread(tid,title,created,community,points,user,threadtype,loca
     newThread.querySelector(".date").innerText = created;
     newThread.querySelector(".community").innerText = community;
     newThread.querySelector(".overlayed").src = threadtype;
+
+    // create delete thread button if owner or admin
+    if(owner || admin){
+        var deleteThreadButton = document.createElement("button");
+        deleteThreadButton.className = "button";
+        deleteThreadButton.id = "delete_thread";
+        deleteThreadButton.innerText = "Delete Thread";
+        deleteThreadButton.onclick = function(){
+            deleteThread(tid);
+        }
+        newThread.querySelector(".delete_thread_div").appendChild(deleteThreadButton);
+    }
+
     newThread.querySelector(".username").innerText = user || "Anonymous";
     newThread.querySelector(".points").setAttribute("tid", tid);
     newThread.querySelector(".pointnum").innerText = points;
@@ -30,15 +43,34 @@ function createNewUserEntry(uid,username,imgpath,desc,location="#users"){
     document.querySelector(location).appendChild(newUser);
 }
 
-function createNewComment(cid, comment, created, points, username, location="#comments"){
+function createNewComment(cid, comment, created, points, username, location="#comments", owner, admin){
 
     var newComment = document.querySelector("#comment_template").cloneNode(true);
     newComment.id = "";
     newComment.hidden = false;
-    newComment.querySelector(".author").innerText = username;
+    newComment.querySelector(".comment").setAttribute("cid", cid);
+
+    // create link to user that wrote comment
+    var authorElement = newComment.querySelector(".author");
+    var authorLinkElement = document.createElement("a");
+    authorLinkElement.href = "user.php?username=" + username;
+    authorLinkElement.innerText = username;
+    authorElement.appendChild(authorLinkElement);
+
+    // create delete comment button if owner or admin
+    if(owner === username || admin){
+        var deleteCommentButton = document.createElement("button");
+        deleteCommentButton.className = "button delete_comment";
+        deleteCommentButton.innerText = "Delete Comment";
+        deleteCommentButton.onclick = function(){
+            deleteComment(cid);
+        }
+        newComment.querySelector(".delete_comment_div").appendChild(deleteCommentButton);
+    }
+
     newComment.querySelector(".date").innerText = created;
     newComment.querySelector(".content").innerText = comment;
-    //newComment.querySelector("#points").value = points;
+    newComment.querySelector(".pointnum").innerText = points;
     document.querySelector(location).appendChild(newComment);
 
 }

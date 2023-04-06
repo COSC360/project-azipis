@@ -1,8 +1,15 @@
-function getUserThreads(username){
+function getUserThreads(username, owner, admin){
 
-    //console.log(username);
+    console.log(username + " " + owner + " " + admin);
+
+    if (username === owner){
+        owner = true;
+    } else {
+        owner = false;
+    }
 
     //$("#threads").empty();
+    var location = '#threads';
 
     $("#threads").children().not("#thread_template",).remove();
     $("#comments").children().not("#comment_template",).remove();
@@ -19,16 +26,21 @@ function getUserThreads(username){
             var threadtype = threads[i].threadtype;
             var user = threads[i].username;
 
-            createNewThread(tid, title, created, community, points, user, threadtype);
+            if (points == undefined){
+                points = 0;
+            }
+
+            createNewThread(tid, title, created, community, points, user, threadtype, location, owner, admin);
         }
 
     });
 
 }
 
-function getUserComments(username){
+function getUserComments(username, owner, admin){
 
-    //console.log(username);
+    console.log(username + " " + owner + " " + admin);
+    var location = '#comments';
 
     //$("#threads").empty();
 
@@ -37,16 +49,18 @@ function getUserComments(username){
     
     $.get('getUserComments.php', {username: username}, function(data) {
 
-        console.log(username);
-
         var threads = JSON.parse(data);
         for (var i = 0; i < threads.length; i++) {
-            var cid = threads[i].cid;
+            var cid = threads[i].commentid;
             var comment = threads[i].comment;
             var created = threads[i].created;
             var points = threads[i].points;
 
-            createNewComment(cid, comment, created, points, username);
+            if (points == undefined){
+                points = 0;
+            }
+
+            createNewComment(cid, comment, created, points, username, location , owner, admin);
         }
 
     });
@@ -189,7 +203,7 @@ function deleteThread(tid,reload=true,callback){
         console.log(error);
     })
     if(reload){
-        location.reload();
+        //location.reload();
     }
 }
 
@@ -201,7 +215,7 @@ function deleteComment(cid,reload=true,callback){
         console.log(error);
     })
     if(reload){
-        location.reload();
+        //location.reload();
     }
 }
 //userid, adminid, bandate, expiredate, banreason
