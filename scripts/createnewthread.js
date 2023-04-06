@@ -14,6 +14,7 @@ function createNewThread(tid,title,created,community,points,user,threadtype,loca
     newThread.querySelector(".community").innerText = community;
     newThread.querySelector(".overlayed").src = threadtype;
     newThread.querySelector(".username").innerText = user || "Anonymous";
+    newThread.querySelector(".points").setAttribute("tid", tid);
     //newThread.querySelector("#points").value = points;
     document.querySelector(location).appendChild(newThread);
 }

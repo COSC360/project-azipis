@@ -19,10 +19,10 @@
 
 
 </a>
-    <div class="points">
+    <div class="points" tid="">
         <form action="vote.php" method="post"></form>
-            <button>^</button>
+            <button class="upvote" value="1">^</button>
             <p class="pointnum">0</p>
-            <button>v</button>
+            <button class="downvote" value="-1">v</button>
         </div>
 </div>
