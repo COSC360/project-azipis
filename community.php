@@ -61,21 +61,9 @@ session_start(); ?>
 
       <article id="center">
 
-         <div id="breadcrumb">
-            <?php
-            $result = php_select_prepared("SELECT * FROM community WHERE communityid = ?", "i", $cid);
-            if (mysqli_num_rows($result) > 0) {
-               $row = mysqli_fetch_assoc($result);
-
-               $industry = $row["industry"];
-               $community = $row["name"];
-
-               echo "<h2> Jobs > " . $industry . " > " . $community . "</h2>";
-            }
-            ?>
-
-
-         </div>
+         <?php
+            include 'bread_crumb_template.php';
+         ?>
 
          <div id="threads">
             <?php include 'thread_template.php' ?>
