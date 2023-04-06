@@ -13,6 +13,7 @@ session_start();
    <link rel="stylesheet" href="css/createthread.css" />
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
+   <script type="text/javascript" src="scripts/thread_select_type.js" defer></script>
 </head>
 
 <body>

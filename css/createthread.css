@@ -33,3 +33,8 @@
 .type-img:hover{
     opacity: 0.5;
 }
+
+/* image corresponding to checked radio */
+.type-container input[type="radio"]:checked + img{
+    filter: saturate(3);
+}
