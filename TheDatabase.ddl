@@ -129,7 +129,7 @@ INSERT INTO community VALUES (18, "Mechanical", "Engineering");
 INSERT INTO community VALUES (19, "Industrial", "Engineering");
 INSERT INTO community VALUES (20, "Other Engineering", "Engineering");
 
-INSERT INTO thread (title, communityid, created, points, content, threadtype)
-VALUES ('I love big pharma', 1, NOW(), 0, 'Healthcare and big pharma is so cool', 1);
+INSERT INTO thread (title, communityid, created, content, threadtype)
+VALUES ('I love big pharma', 1, NOW(), 'Healthcare and big pharma is so cool', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
