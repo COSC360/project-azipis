@@ -1,5 +1,5 @@
-function createNewThread(tid,title,created,community,points,user,threadtype,location="#threads", owner, admin){
-    switch(parseInt(threadtype)){
+function createNewThread(tid, title, created, community, points, user, threadtype, location = "#threads", owner, admin) {
+    switch (parseInt(threadtype)) {
         case 1: threadtype = "images/coffeecup.png"; break;
         case 2: threadtype = "images/bean.png"; break;
         case 3: threadtype = "images/spilledcup.png"; break;
@@ -15,29 +15,64 @@ function createNewThread(tid,title,created,community,points,user,threadtype,loca
     newThread.querySelector(".overlayed").src = threadtype;
 
     // create delete thread button if owner or admin
-    if(owner || admin){
+    if (owner || admin) {
         var deleteThreadButton = document.createElement("button");
         deleteThreadButton.className = "button";
         deleteThreadButton.id = "delete_thread";
         deleteThreadButton.innerText = "Delete Thread";
-        deleteThreadButton.onclick = function(){
+        deleteThreadButton.onclick = function () {
             deleteThread(tid);
         }
         newThread.querySelector(".delete_thread_div").appendChild(deleteThreadButton);
     }
 
     // if points == undefined, set to 0
-    if(points == undefined){
-        points = 0;
+    if (points == undefined) {
+        newThread.querySelector(".pointnum").innerText = "0"
+    } else {
+        get_votes(tid, "thread", function (points) {
+            newThread.querySelector(".pointnum").innerText = points
+        });
     }
 
     newThread.querySelector(".username").innerText = user || "Anonymous";
     newThread.querySelector(".points").setAttribute("tid", tid);
-    newThread.querySelector(".pointnum").innerText = points;
+
+    let upvoteButton = newThread.querySelector(".points .upvote");
+    let downvoteButton = newThread.querySelector(".points .downvote");
+
+    upvoteButton.onclick = function () {
+        $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+        if (!upvoteButton.classList.contains("highlight")) {
+            upvoteButton.classList.add("highlight");
+            downvoteButton.classList.remove("highlight");
+        }
+        //request to insert vote
+        vote(tid, 1, 'thread')
+
+        //get updated vote count
+        get_votes(tid, "thread", function (points) {
+            newThread.querySelector(".pointnum").innerText = points
+        });
+    }
+    downvoteButton.onclick = function () {
+        $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+        if (!downvoteButton.classList.contains("highlight")) {
+            downvoteButton.classList.add("highlight");
+            upvoteButton.classList.remove("highlight");
+        }
+        //request to insert vote
+        vote(tid, -1, 'thread')
+        //get updated vote count
+        get_votes(tid, "thread", function (points) {
+            newThread.querySelector(".pointnum").innerText = points
+        });
+    }
     document.querySelector(location).appendChild(newThread);
 }
 
-function createNewUserEntry(uid,username,imgpath,desc,location="#users"){
+
+function createNewUserEntry(uid, username, imgpath, desc, location = "#users") {
     var newUser = document.querySelector("#user_template").cloneNode(true);
     newUser.id = "";
     newUser.hidden = false;
@@ -48,7 +83,7 @@ function createNewUserEntry(uid,username,imgpath,desc,location="#users"){
     document.querySelector(location).appendChild(newUser);
 }
 
-function createNewComment(cid, comment, created, points, username, location="#comments", owner, admin){
+function createNewComment(cid, comment, created, points, username, location = "#comments", owner, admin) {
 
     var newComment = document.querySelector("#comment_template").cloneNode(true);
     newComment.id = "";
@@ -63,24 +98,90 @@ function createNewComment(cid, comment, created, points, username, location="#co
     authorElement.appendChild(authorLinkElement);
 
     // create delete comment button if owner or admin
-    if(owner === username || admin){
+    if (owner === username || admin) {
         var deleteCommentButton = document.createElement("button");
         deleteCommentButton.className = "button delete_comment";
         deleteCommentButton.innerText = "Delete Comment";
-        deleteCommentButton.onclick = function(){
+        deleteCommentButton.onclick = function () {
             deleteComment(cid);
         }
         newComment.querySelector(".delete_comment_div").appendChild(deleteCommentButton);
     }
 
     // if points == undefined, set to 0
-    if(points == undefined){
-        points = 0;
+    if (points == undefined) {
+        newComment.querySelector(".pointnum").innerText = 0;
+    } else {
+        get_votes(cid, "comment", function (points) {
+            newComment.querySelector(".pointnum").innerText = points
+        });
     }
 
+    let upvoteButton = newComment.querySelector(".points .upvote");
+    let downvoteButton = newComment.querySelector(".points .downvote");
+
+    upvoteButton.onclick = function () {
+        $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+        if (!upvoteButton.classList.contains("highlight")) {
+            upvoteButton.classList.add("highlight");
+            downvoteButton.classList.remove("highlight");
+        }
+        vote(cid, 1, 'comment')
+        get_votes(cid, "comment", function (points) {
+            newComment.querySelector(".pointnum").innerText = points
+        });
+    }
+    downvoteButton.onclick = function () {
+        $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+        if (!downvoteButton.classList.contains("highlight")) {
+            downvoteButton.classList.add("highlight");
+            upvoteButton.classList.remove("highlight");
+        }
+        vote(cid, -1, 'comment')
+        get_votes(cid, "comment", function (points) {
+            newComment.querySelector(".pointnum").innerText = points
+        });
+    }
     newComment.querySelector(".date").innerText = created;
     newComment.querySelector(".content").innerText = comment;
-    newComment.querySelector(".pointnum").innerText = points;
     document.querySelector(location).appendChild(newComment);
 
+}
+
+function get_votes(id, type, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "../get_votes.php?id=" + id + "&type=" + type, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    console.log("points:", response.points);
+                    if(!response.points) response.points = 0;
+                    callback(response.points);
+                } else {
+                    console.log("fail");
+                    console.log(xhr.responseText)
+                    callback(0);
+                }
+            } else {
+                console.log("error:", xhr.statusText);
+                callback(0);
+            }
+        }
+    };
+    xhr.send();
+}
+
+function vote(id,vote,type) {
+    $.post("../vote.php", { id: id,vote: vote, type: type }, function(response) {
+        if (response.success) {
+            console.log("success")
+        } else {
+            console.log("fail")
+        }
+    }, "json").fail(function(xhr, status, error) {
+        console.log("error:", error)
+    });
 }

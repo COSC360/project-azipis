@@ -2,10 +2,12 @@
 include_once 'functions.php';
 session_start();
 
+$returnjson = [];
 // if not logged in, echo not logged in and die
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-    echo "Vote failed, not logged in.";
-    die();
+    $returnjson['success'] = false;
+    $returnstr = json_encode($returnjson);
+    die($returnstr);
 }
 
 $id = get_sanitized_int_param($_POST, 'id');
@@ -20,11 +22,14 @@ if ($type == "thread"){
     $result = php_insert($query, "iii", $userid, $id, $vote);
 
     if ($result) {
-        echo "1";
+        $returnjson['success'] = true;
+        $returnstr = json_encode($returnjson);
+        die($returnstr);
     } else {
-        echo "0";
+        $returnjson['success'] = false;
+        $returnstr = json_encode($returnjson);
+        die($returnstr);
     }
-    die();
 
 
 } else if ($type == "comment"){
@@ -34,15 +39,19 @@ if ($type == "thread"){
     $result = php_insert($query, "iii", $userid, $id, $vote);
 
     if ($result) {
-        echo "1";
+        $returnjson['success'] = true;
+        $returnstr = json_encode($returnjson);
+        die($returnstr);
     } else {
-        echo "0";
+        $returnjson['success'] = false;
+        $returnstr = json_encode($returnjson);
+        die($returnstr);
     }
-    die();
 
 } else {
-    echo "Vote failed, unknown type.";
-    die();
+    $returnjson['success'] = false;
+    $returnstr = json_encode($returnjson);
+    exit($returnstr);
 }
 
 ?>

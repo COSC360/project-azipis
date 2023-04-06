@@ -22,8 +22,8 @@
 
     <div class="points" tid="">
         <form action="vote.php" method="post"></form>
-        <button class="upvote" value="1" onclick="vote(this, 1, 'thread')">^</button>
+        <button class="upvote" value="1" onclick="">^</button>
         <p class="pointnum">0</p>
-        <button class="downvote" value="-1" onclick="vote(this, -1, 'thread')">v</button>
+        <button class="downvote" value="-1" onclick="">v</button>
     </div>
 </div>

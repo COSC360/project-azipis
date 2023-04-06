@@ -1,13 +1,11 @@
-function vote(up){
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST","../vote.php",true);
-    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status == 200){
-            var response = JSON.parse(xhr.responseText);
-            if(response.success){
-            }
+function vote(id,vote,type) {
+    $.post("../vote.php", { id: id,vote: vote, type: type }, function(response) {
+        if (response.success) {
+            console.log("success")
+        } else {
+            console.log("fail")
         }
-    }
-    xhr.send("data=data");
+    }, "json").fail(function(xhr, status, error) {
+        console.log("error:", error)
+    });
 }
