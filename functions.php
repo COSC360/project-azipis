@@ -129,6 +129,13 @@ function get_entry_exists($table,$colname,$val,$valtype){
 
 }
 
+function get_thread_points($tid){
+    $query = 'SELECT SUM(vote) AS points from thread_votes WHERE tid = ?';
+    $result = php_select_prepared($query, 'i', $tid);
+    $row = mysqli_fetch_assoc($result);
+    return $row["points"];
+}
+
 /*
 
 *********************************************************************************************

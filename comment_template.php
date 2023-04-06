@@ -10,9 +10,9 @@
 
     <div class="points" cid="">
         <form action="vote.php" method="post"></form>
-            <button class="upvote" value="1">^</button>
+        <button class="upvote" value="1" onclick="vote(this, 1, 'comment')">^</button>
             <p class="pointnum">0</p>
-            <button class="downvote" value="-1">v</button>
+            <button class="downvote" value="-1" onclick="vote(this, -1, 'comment')">v</button>
     </div>
 
 </div>

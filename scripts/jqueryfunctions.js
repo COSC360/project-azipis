@@ -237,3 +237,29 @@ function getIsBanned(userid,callback){
         console.log(error);
     })
 }
+
+function vote(element, vote, type, callback){
+
+    console.log(element);
+
+    if (type == 'thread'){
+    // get tid value from parent element
+    var id = $(element).parent().attr('tid');
+    } else if (type == 'comment'){
+    // get cid value from parent element
+    var id = $(element).parent().parent().attr('cid');
+    } else {
+        console.log('error, not a valid type');
+    }
+    //console.log(tid, vote);
+
+    
+    $.post('vote.php', {id: id, vote: vote, type: type}, function(result){
+        console.log(result);
+        if(callback) callback(result);
+    }).fail(function(xhr, status, error) {
+        console.log(error);
+    })
+    
+
+}
