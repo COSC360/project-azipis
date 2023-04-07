@@ -45,9 +45,9 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
 
     upvoteButton.onclick = function () {
         $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!upvoteButton.classList.contains("highlight")) {
-            upvoteButton.classList.add("highlight");
-            downvoteButton.classList.remove("highlight");
+        if (!upvoteButton.classList.contains("highlightup")) {
+            upvoteButton.classList.add("highlightup");
+            downvoteButton.classList.remove("highlightdown");
         }
         //request to insert vote
         vote(tid, 1, 'thread')
@@ -59,9 +59,9 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
     }
     downvoteButton.onclick = function () {
         $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!downvoteButton.classList.contains("highlight")) {
-            downvoteButton.classList.add("highlight");
-            upvoteButton.classList.remove("highlight");
+        if (!downvoteButton.classList.contains("highlightdown")) {
+            downvoteButton.classList.add("highlightdown");
+            upvoteButton.classList.remove("highlightup");
         }
         //request to insert vote
         vote(tid, -1, 'thread')
@@ -124,9 +124,9 @@ function createNewComment(cid, comment, created, points, username, location = "#
 
     upvoteButton.onclick = function () {
         $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!upvoteButton.classList.contains("highlight")) {
-            upvoteButton.classList.add("highlight");
-            downvoteButton.classList.remove("highlight");
+        if (!upvoteButton.classList.contains("highlightup")) {
+            upvoteButton.classList.add("highlightup");
+            downvoteButton.classList.remove("highlightdown");
         }
         vote(cid, 1, 'comment');
         get_votes(cid, "comment", function (points) {
@@ -135,9 +135,9 @@ function createNewComment(cid, comment, created, points, username, location = "#
     }
     downvoteButton.onclick = function () {
         $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!downvoteButton.classList.contains("highlight")) {
-            downvoteButton.classList.add("highlight");
-            upvoteButton.classList.remove("highlight");
+        if (!downvoteButton.classList.contains("highlightdown")) {
+            downvoteButton.classList.add("highlightdown");
+            upvoteButton.classList.remove("highlightup");
         }
         vote(cid, -1, 'comment');
         get_votes(cid, "comment", function (points) {

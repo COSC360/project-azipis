@@ -400,3 +400,11 @@ figure{
 .highlight{
     background-color: yellow;
 }
+
+.highlightup{
+    background-color: #7DC1FF;
+}
+
+.highlightdown{
+    background-color: #FF9C96;
+}
