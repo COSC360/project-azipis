@@ -119,17 +119,18 @@ if (isset($_SESSION['username'])) {
    let my_username = "<?php echo $curUser ?>";
    let is_admin = <?php echo $isAdmin ?>;
    let threadNum = 0;
-   function getThreads(notify) {
+
+   function getThreads(notify, callback) {
       // make an AJAX call to get threads
       $.ajax({
          url: "get_threads.php?all=1",
          dataType: "json",
-         success: function (data) {
+         success: function(data) {
             if (data.success) {
                if (threadNum < data.threads.length) {
-                  let newThreads = (data.threads.length-threadNum)
+                  let newThreads = (data.threads.length - threadNum)
                   let startIndex = threadNum
-                  if(notify){
+                  if (notify) {
                      popup("There are " + newThreads + " new thread(s)!");
                      console.log("yay")
                   }
@@ -138,8 +139,10 @@ if (isset($_SESSION['username'])) {
                   for (let i = startIndex; i < data.threads.length; i++) {
                      let thread = data.threads[i];
                      let owner = my_username === thread.username
-                     createNewThread(thread.tid, thread.title, thread.created, thread.cname, thread.points, thread.username, thread.threadtype,"#threads",owner,is_admin);
+                     createNewThread(thread.tid, thread.title, thread.created, thread.cname, thread.points, thread.username, thread.threadtype, "#threads", owner, is_admin);
                   }
+
+                  callback();
 
                }
             } else {
@@ -147,38 +150,32 @@ if (isset($_SESSION['username'])) {
                console.log(data)
             }
          },
-         error: function (xhr, status, error) {
+         error: function(xhr, status, error) {
             console.error(error);
          }
       });
    }
 
    // call the getThreads function every 5 seconds
-   getThreads()
-   setInterval(function(){getThreads(true)}, 5000);
+   getThreads(false, applyUserVotes)
+   setInterval(function() {
+      getThreads(true)
+   }, 5000);
 
-   $(window).on('load', function() {
-      
+   function applyUserVotes() {
       <?php
-   $votedTids = get_user_voted_tid($curUser);
+      if (isset($_SESSION['loggedin'])) {
+         $votedTids = get_user_voted_tid($curUser);
+         foreach ($votedTids as $votedTid) {
+            $tid = $votedTid['tid'];
+            $vote = $votedTid['vote'];
+            
+            echo 'highlight_voted_threads("' . $tid . '", ' . $vote . ');';
 
-   foreach ($votedTids as $votedTid) {
-      $tid = $votedTid['tid'];
-      $vote = $votedTid['vote'];
-      
-      if ($vote == 1) {
-         echo "document.querySelector('div[tid=\"$tid\"] .upvote').classList.add('highlightup');";
-      } elseif ($vote == -1) {
-         echo "document.querySelector('div[tid=\"$tid\"] .downvote').classList.add('highlightdown');";
+         }
       }
+      ?>
    }
-   ?>
-
-   });
-
-   
-
-
 </script>
 
 </html>

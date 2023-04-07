@@ -148,7 +148,7 @@ if (isset($_SESSION['username'])) {
    let is_admin = <?php echo $isAdmin ?>;
 
    let commentNum = 0;
-   function getComments(notify) {
+   function getComments(notify, callback) {
       // make an AJAX call to get comments
       $.ajax({
          url: "get_comments.php?tid=<?php echo $tid; ?>",
@@ -170,6 +170,8 @@ if (isset($_SESSION['username'])) {
                      createNewComment(comment.commentid, comment.comment, comment.created, comment.points, comment.username, '#comments', my_username, is_admin);
                   }
 
+                  callback();
+
                }
             } else {
                console.error("Error: ");
@@ -183,8 +185,23 @@ if (isset($_SESSION['username'])) {
    }
 
    // call the getComments function every 5 seconds
-   getComments()
+   getComments(false, applyUserVotes);
    setInterval(function(){getComments(true)}, 5000);
+
+   function applyUserVotes() {
+      <?php
+      if (isset($_SESSION['loggedin'])) {
+         $votedCids = get_user_voted_cid($curUser);
+         foreach ($votedCids as $votedCid) {
+            $cid = $votedCid['commentid'];
+            $vote = $votedCid['vote'];
+            
+            echo 'highlight_voted_comments("' . $cid . '", ' . $vote . ');';
+
+         }
+      }
+      ?>
+   }
 
 </script>
 

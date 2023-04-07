@@ -197,7 +197,7 @@ function get_user_voted_tid($username){
 // return cid that user has voted on
 function get_user_voted_cid($username){
     $uid = get_uid_from_username($username);
-    $query = 'SELECT cid, vote FROM comment_votes WHERE userid = ?';
+    $query = 'SELECT commentid, vote FROM comment_votes WHERE userid = ?';
     $result = php_select_prepared($query, 'i', $uid);
     // return all rows from result
     $row = mysqli_fetch_all($result, MYSQLI_ASSOC);

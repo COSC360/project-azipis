@@ -206,3 +206,40 @@ function vote(id,vote,type,callback) {
         if(callback) callback()
     });
 }
+
+// function that highlights upvoted threads
+function highlight_voted_threads(tid, vote) {
+
+    console.log(document.querySelector('div[tid="'+tid+'"] .upvote'));
+
+
+    if (vote == 1){
+        if (document.querySelector('div[tid="'+tid+'"] .upvote') != null) {
+            document.querySelector('div[tid="'+tid+'"] .upvote').classList.add('highlightup');
+        }
+    } else if (vote == -1) {
+        if (document.querySelector('div[tid="'+tid+'"] .downvote') != null) {
+            document.querySelector('div[tid="'+tid+'"] .downvote').classList.add('highlightdown');
+        }
+    } else {
+        return;
+    }
+    
+}
+
+// function that highlights voted comments
+function highlight_voted_comments(cid, vote) {
+
+    if (vote == 1){
+        if (document.querySelector('div[cid="'+cid+'"] .upvote') != null) {
+            document.querySelector('div[cid="'+cid+'"] .upvote').classList.add('highlightup');
+        }
+    } else if (vote == -1) {
+        if (document.querySelector('div[cid="'+cid+'"] .downvote') != null) {
+            document.querySelector('div[cid="'+cid+'"] .downvote').classList.add('highlightdown');
+        }
+    } else {
+        return;
+    }
+
+}
