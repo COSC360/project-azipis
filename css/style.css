@@ -426,3 +426,24 @@ figure{
     border-radius: 0.35em;
     padding: 0.75em;
 }
+
+#popup-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    width: 80%;
+    max-width: 400px;
+    background-color: #f8d7da;
+    padding: 20px;
+    text-align: center;
+    color: black;
+    display: none;
+    font-size: 24px; 
+    font-weight: bold;
+  }
+  #show-popup-button {
+    margin-top: 20px;
+  }
