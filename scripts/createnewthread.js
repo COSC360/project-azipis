@@ -22,7 +22,7 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
     newThread.querySelector(".community").innerText = community;
     newThread.querySelector(".overlayed").src = threadtype;
 
-    console.log("owner: " + owner + " admin: " + admin);
+    //console.log("owner: " + owner + " admin: " + admin);
 
     // create delete thread button if owner or admin
     if (owner == true || admin == 1) {
@@ -59,7 +59,7 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
             if (votedThreads != null) {
 
                 votedThreads = JSON.parse(votedThreads);
-                console.log(votedThreads);
+                //console.log(votedThreads);
                 // for each thread in votedThreads, check if tid is in votedThreads
 
                 for (var i = 0; i < votedThreads.length; i++) {
@@ -68,7 +68,7 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
                     var returnedtid = votedThreads[i].tid;
                     var vote = parseInt(votedThreads[i].vote);
 
-                    console.log("Returned id: " + returnedtid + " voted: " + vote);
+                    //console.log("Returned id: " + returnedtid + " voted: " + vote);
 
                     if (returnedtid == tid) {
 
@@ -187,10 +187,10 @@ function createNewComment(cid, comment, created, points, username, location = "#
 
             if (votedThreads != null) {
 
-                console.log(votedThreads);
+                //console.log(votedThreads);
 
                 votedThreads = JSON.parse(votedThreads);
-                console.log(votedThreads);
+                //console.log(votedThreads);
                 // for each thread in votedThreads, check if tid is in votedThreads
 
                 for (var i = 0; i < votedThreads.length; i++) {
@@ -199,7 +199,7 @@ function createNewComment(cid, comment, created, points, username, location = "#
                     var returnedcid = votedThreads[i].commentid;
                     var vote = parseInt(votedThreads[i].vote);
 
-                    console.log("Returned id: " + returnedcid + " voted: " + vote);
+                    //console.log("Returned id: " + returnedcid + " voted: " + vote);
 
                     if (returnedcid == cid) {
 

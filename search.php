@@ -1,6 +1,14 @@
 <?php include 'functions.php';
 session_start();
 $search_param = get_sanitized_string_param($_GET,'search');
+
+$isAdmin = 0;
+$curUser = '';
+
+if (isset($_SESSION['username'])) {
+   $curUser = get_sanitized_string_param($_SESSION, 'username');
+   $isAdmin = get_sanitized_int_param($_SESSION, 'isAdmin');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,9 +19,9 @@ $search_param = get_sanitized_string_param($_GET,'search');
    <link rel="shortcut icon" type="image/jpg" href="images/favicon1.png">
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/login.css" />
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
-   <script type="text/javascript" src="scripts/login.js" defer></script>
+   <script type="text/javascript" src="scripts/login.js" ></script>
    <script type="text/javascript" src="scripts/createnewthread.js"></script>
    <script type="text/javascript" src="scripts/jqueryfunctions.js"></script>
 </head>
@@ -129,7 +137,16 @@ $search_param = get_sanitized_string_param($_GET,'search');
       $points = get_thread_points($tid);
       $user = get_username_from_id($row["userid"]);
       $type = $row["threadtype"];
-      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
+      $my_username = '';
+      $is_admin = 0;
+      if (isset($_SESSION['username'])) {
+         $my_username = $_SESSION['username'];
+      }
+      if (isset($_SESSION['is_admin'])) {
+         $is_admin = $_SESSION['is_admin'];
+      }
+      $owner = $user === $my_username;
+      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\",\"" . '#threads' . "\",\"" . $owner . "\",\"" . $is_admin . "\",\"" . $my_username . "\");";
    }
 
    while ($row2 = mysqli_fetch_assoc($result2)) {
