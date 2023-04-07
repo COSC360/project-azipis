@@ -5,12 +5,20 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
         case 3: threadtype = "images/spilledcup.png"; break;
         default: threadtype = "images/coffeecup.png"; break;
     }
+
+    // Parse date
+    const dateObj = new Date(created);
+
+    // Format the date using toLocaleString() with desired options
+    const options = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+    const formattedDate = dateObj.toLocaleString('en-US', options);
+
     var newThread = document.querySelector("#thread_template").cloneNode(true);
     newThread.id = "";
     newThread.querySelector(".thread").href = "thread.php?tid=" + tid;
     newThread.hidden = false;
     newThread.querySelector(".thread-name").innerText = title;
-    newThread.querySelector(".date").innerText = created;
+    newThread.querySelector(".date").innerText = formattedDate;
     newThread.querySelector(".community").innerText = community;
     newThread.querySelector(".overlayed").src = threadtype;
 
@@ -93,6 +101,13 @@ function createNewComment(cid, comment, created, points, username, location = "#
     newComment.hidden = false;
     newComment.querySelector(".comment").setAttribute("cid", cid);
 
+    // Parse date
+    const dateObj = new Date(created);
+
+    // Format the date using toLocaleString() with desired options
+    const options = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+    const formattedDate = dateObj.toLocaleString('en-US', options);
+
     // create link to user that wrote comment
     var authorElement = newComment.querySelector(".author");
     var authorLinkElement = document.createElement("a");
@@ -146,7 +161,7 @@ function createNewComment(cid, comment, created, points, username, location = "#
             });
         });
     }
-    newComment.querySelector(".date").innerText = created;
+    newComment.querySelector(".date").innerText = formattedDate;
     newComment.querySelector(".content").innerText = comment;
     document.querySelector(location).appendChild(newComment);
 

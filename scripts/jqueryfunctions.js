@@ -316,6 +316,7 @@ function deleteThread(tid,reload=true,callback){
     $.post('deleteThread.php', {tid: tid}, function(result){
         console.log(result);
         if(callback) callback(result);
+        
     }).fail(function(xhr, status, error) {
         console.log(error);
     })
