@@ -9,6 +9,7 @@ if (isset($_SESSION['username'])) {
    $isAdmin = get_sanitized_int_param($_SESSION, 'isAdmin');
 }
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -155,6 +156,28 @@ if (isset($_SESSION['username'])) {
    // call the getThreads function every 5 seconds
    getThreads()
    setInterval(function(){getThreads(true)}, 5000);
+
+   $(window).on('load', function() {
+      
+      <?php
+   $votedTids = get_user_voted_tid($curUser);
+
+   foreach ($votedTids as $votedTid) {
+      $tid = $votedTid['tid'];
+      $vote = $votedTid['vote'];
+      
+      if ($vote == 1) {
+         echo "document.querySelector('div[tid=\"$tid\"] .upvote').classList.add('highlightup');";
+      } elseif ($vote == -1) {
+         echo "document.querySelector('div[tid=\"$tid\"] .downvote').classList.add('highlightdown');";
+      }
+   }
+   ?>
+
+   });
+
+   
+
 
 </script>
 

@@ -316,12 +316,11 @@ function deleteThread(tid,reload=true,callback){
     $.post('deleteThread.php', {tid: tid}, function(result){
         console.log(result);
         if(callback) callback(result);
-        
     }).fail(function(xhr, status, error) {
         console.log(error);
     })
     if(reload){
-        //location.reload();
+        location.reload();
     }
 }
 
@@ -333,7 +332,7 @@ function deleteComment(cid,reload=true,callback){
         console.log(error);
     })
     if(reload){
-        //location.reload();
+        location.reload();
     }
 }
 //userid, adminid, bandate, expiredate, banreason
