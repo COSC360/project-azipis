@@ -52,8 +52,8 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
     let downvoteButton = newThread.querySelector(".points .downvote");
 
     // show how the user voted on threads
-    if (curUser != null) {
-        
+    if (typeof curUser !== 'undefined' && curUser !== null && curUser !== '') {
+
         get_voted_threads(curUser, function (votedThreads) {
 
             if (votedThreads != null) {
@@ -84,37 +84,42 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
             }
         });
 
+
+        upvoteButton.onclick = function () {
+            $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+            if (!upvoteButton.classList.contains("highlightup")) {
+                upvoteButton.classList.add("highlightup");
+                downvoteButton.classList.remove("highlightdown");
+            }
+            //request to insert vote
+            vote(tid, 1, 'thread', function () {
+                //get updated vote count
+                get_votes(tid, "thread", function (points) {
+                    newThread.querySelector(".pointnum").innerText = points
+                });
+            })
+        }
+        downvoteButton.onclick = function () {
+            $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+            if (!downvoteButton.classList.contains("highlightdown")) {
+                downvoteButton.classList.add("highlightdown");
+                upvoteButton.classList.remove("highlightup");
+            }
+            //request to insert vote
+            vote(tid, -1, 'thread', function () {
+                //get updated vote count
+                get_votes(tid, "thread", function (points) {
+                    newThread.querySelector(".pointnum").innerText = points
+                });
+            })
+        }
+
+    } else {
+        upvoteButton.onclick = openLogin;
+        downvoteButton.onclick = openLogin;
     }
 
 
-    upvoteButton.onclick = function () {
-        $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!upvoteButton.classList.contains("highlightup")) {
-            upvoteButton.classList.add("highlightup");
-            downvoteButton.classList.remove("highlightdown");
-        }
-        //request to insert vote
-        vote(tid, 1, 'thread', function () {
-            //get updated vote count
-            get_votes(tid, "thread", function (points) {
-                newThread.querySelector(".pointnum").innerText = points
-            });
-        })
-    }
-    downvoteButton.onclick = function () {
-        $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!downvoteButton.classList.contains("highlightdown")) {
-            downvoteButton.classList.add("highlightdown");
-            upvoteButton.classList.remove("highlightup");
-        }
-        //request to insert vote
-        vote(tid, -1, 'thread', function () {
-            //get updated vote count
-            get_votes(tid, "thread", function (points) {
-                newThread.querySelector(".pointnum").innerText = points
-            });
-        })
-    }
     document.querySelector(location).appendChild(newThread);
 }
 
@@ -176,8 +181,8 @@ function createNewComment(cid, comment, created, points, username, location = "#
 
     // show how the user voted on comments
 
-    if (owner != null) {
-        
+    if (typeof owner !== 'undefined' && owner !== null && owner !== '') {
+
         get_voted_comments(owner, function (votedThreads) {
 
             if (votedThreads != null) {
@@ -210,31 +215,36 @@ function createNewComment(cid, comment, created, points, username, location = "#
             }
         });
 
-    }
-
-    upvoteButton.onclick = function () {
-        $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!upvoteButton.classList.contains("highlightup")) {
-            upvoteButton.classList.add("highlightup");
-            downvoteButton.classList.remove("highlightdown");
-        }
-        vote(cid, 1, 'comment');
-        get_votes(cid, "comment", function (points) {
-            newComment.querySelector(".pointnum").innerText = points
-        });
-    }
-    downvoteButton.onclick = function () {
-        $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
-        if (!downvoteButton.classList.contains("highlightdown")) {
-            downvoteButton.classList.add("highlightdown");
-            upvoteButton.classList.remove("highlightup");
-        }
-        vote(cid, -1, 'comment', function () {
+        upvoteButton.onclick = function () {
+            $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+            if (!upvoteButton.classList.contains("highlightup")) {
+                upvoteButton.classList.add("highlightup");
+                downvoteButton.classList.remove("highlightdown");
+            }
+            vote(cid, 1, 'comment');
             get_votes(cid, "comment", function (points) {
                 newComment.querySelector(".pointnum").innerText = points
             });
-        });
+        }
+        downvoteButton.onclick = function () {
+            $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
+            if (!downvoteButton.classList.contains("highlightdown")) {
+                downvoteButton.classList.add("highlightdown");
+                upvoteButton.classList.remove("highlightup");
+            }
+            vote(cid, -1, 'comment', function () {
+                get_votes(cid, "comment", function (points) {
+                    newComment.querySelector(".pointnum").innerText = points
+                });
+            });
+        }
+
+    } else {
+        upvoteButton.onclick = openLogin;
+        downvoteButton.onclick = openLogin;
     }
+
+
     newComment.querySelector(".date").innerText = formattedDate;
     newComment.querySelector(".content").innerText = comment;
     document.querySelector(location).appendChild(newComment);
@@ -305,7 +315,7 @@ function get_voted_threads(username, callback) {
 
 // function that calls the get_user_voted_cid function from function.php
 function get_voted_comments(username, callback) {
-    
+
     $.ajax({
         url: 'functions.php',
         data: {
