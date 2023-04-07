@@ -1,6 +1,14 @@
 <?php include 'functions.php';
 $tid = get_sanitized_int_param($_GET,'tid');
 session_start();
+
+$isAdmin = 0;
+$curUser = '';
+
+if (isset($_SESSION['username'])) {
+   $curUser = get_sanitized_string_param($_SESSION, 'username');
+   $isAdmin = get_sanitized_int_param($_SESSION, 'isAdmin');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +20,8 @@ session_start();
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/login.css" />
    <link rel="stylesheet" href="css/thread.css" />
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script type="text/javascript" src="scripts/popup.js"></script>
    <script type="text/javascript" src="scripts/admin.js" defer></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
@@ -135,37 +144,47 @@ session_start();
    </footer>
 </body>
 <script>
-   <?php
-   $curUsername = '';
-   if (isset($_SESSION['username'])){
-      $curUsername = $_SESSION['username'];
+   let my_username = "<?php echo $curUser ?>";
+   let is_admin = <?php echo $isAdmin ?>;
+
+   let commentNum = 0;
+   function getComments(notify) {
+      // make an AJAX call to get comments
+      $.ajax({
+         url: "get_comments.php?tid=<?php echo $tid; ?>",
+         dataType: "json",
+         success: function (data) {
+            if (data.success) {
+               if (commentNum < data.comments.length) {
+                  let newComments = (data.comments.length-commentNum)
+                  let startIndex = commentNum
+                  if(notify){
+                     popup("There are " + newComments + " new comment(s)!");
+                     console.log("yay")
+                  }
+                  commentNum = data.comments.length
+                  // loop through the comments array
+                  for (let i = startIndex; i < data.comments.length; i++) {
+                     let comment = data.comments[i];
+                     let owner = my_username === comment.username
+                     createNewComment(comment.commentid, comment.comment, comment.created, comment.points, comment.username, '#comments', my_username, is_admin);
+                  }
+
+               }
+            } else {
+               console.error("Error: ");
+               console.log(data)
+            }
+         },
+         error: function (xhr, status, error) {
+            console.error(error);
+         }
+      });
    }
-   $admin = 0;
-   if (isset($_SESSION['isAdmin'])){
-      $admin = $_SESSION['isAdmin'];
-   }
-   $result = php_select("SELECT * FROM comment WHERE tid = " . $_GET['tid'] . "");
-   while ($row = mysqli_fetch_assoc($result)) {
-      $commentId = $row["commentid"];
-      $comment = $row["comment"];
-      $created = $row["created"];
-      $userId = $row["userid"];
-      $commentUsername = get_username_from_id($userId);
-      $points = get_comment_points($commentId);
-      $location = '#comments';
 
-      // if points is undefined, set to 0
-      if (!isset($points)) {
-         $points = 0;
-      }
-      
-
-   // createNewComment
-   echo "createNewComment(" . $commentId . ",\"" . $comment . "\",\"" . $created . "\",\"" . $points . "\",\"" . $commentUsername . "\",\"" . $location . "\",\"" . $curUsername . "\",\"" . $admin . "\");";
-   }
-
-   ?>
-
+   // call the getComments function every 5 seconds
+   getComments()
+   setInterval(function(){getComments(true)}, 5000);
 
 </script>
 

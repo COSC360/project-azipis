@@ -117,10 +117,7 @@ if (isset($_SESSION['username'])) {
 <script>
    let my_username = "<?php echo $curUser ?>";
    let is_admin = <?php echo $isAdmin ?>;
-   // define a variable to store the last received data
    let threadNum = 0;
-
-   // define a function to get threads with AJAX
    function getThreads(notify) {
       // make an AJAX call to get threads
       $.ajax({
@@ -128,7 +125,6 @@ if (isset($_SESSION['username'])) {
          dataType: "json",
          success: function (data) {
             if (data.success) {
-               // loop through the threads array
                if (threadNum < data.threads.length) {
                   let newThreads = (data.threads.length-threadNum)
                   let startIndex = threadNum
