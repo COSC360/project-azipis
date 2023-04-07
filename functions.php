@@ -191,7 +191,12 @@ function get_user_voted_tid($username){
     $result = php_select_prepared($query, 'i', $uid);
     // return all rows from result
     $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    return $row;
+    return json_encode($row);
+}
+
+if (isset($_POST['action']) && $_POST['action'] == "get_user_voted_tid") {
+    echo get_user_voted_tid($_POST['username']);
+    return;
 }
 
 // return cid that user has voted on
@@ -201,7 +206,8 @@ function get_user_voted_cid($username){
     $result = php_select_prepared($query, 'i', $uid);
     // return all rows from result
     $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    return $row;
+    echo json_encode($row);
+    return;
 }
 
 /*

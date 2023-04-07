@@ -2,6 +2,8 @@ function getUserThreads(username, owner, admin){
 
     console.log(username + " " + owner + " " + admin);
 
+    var curUser = owner;
+
     if (username === owner){
         owner = true;
     } else {
@@ -30,7 +32,7 @@ function getUserThreads(username, owner, admin){
                 points = 0;
             }
 
-            createNewThread(tid, title, created, community, points, user, threadtype, location, owner, admin);
+            createNewThread(tid, title, created, community, points, user, threadtype, location, owner, admin, curUser);
         }
 
     });
@@ -75,7 +77,7 @@ function getUserUpvoted(username, owner, admin){
 
     $.get('getUserVoted.php', {username: username, type: 'up'}, function(data) {
 
-        console.log(data);
+        //console.log(data);
         
         var threads = JSON.parse(data);
         for (var i = 0; i < threads.length; i++) {

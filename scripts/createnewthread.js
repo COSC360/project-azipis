@@ -1,4 +1,4 @@
-function createNewThread(tid, title, created, community, points, user, threadtype, location = "#threads", owner, admin) {
+function createNewThread(tid, title, created, community, points, user, threadtype, location = "#threads", owner, admin, curUser) {
     switch (parseInt(threadtype)) {
         case 1: threadtype = "images/coffeecup.png"; break;
         case 2: threadtype = "images/bean.png"; break;
@@ -51,6 +51,41 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
     let upvoteButton = newThread.querySelector(".points .upvote");
     let downvoteButton = newThread.querySelector(".points .downvote");
 
+    if (curUser != null) {
+        
+        get_voted_threads(curUser, function (votedThreads) {
+
+            if (votedThreads != null) {
+
+                votedThreads = JSON.parse(votedThreads);
+                console.log(votedThreads);
+                // for each thread in votedThreads, check if tid is in votedThreads
+
+                for (var i = 0; i < votedThreads.length; i++) {
+
+
+                    var returnedtid = votedThreads[i].tid;
+                    var vote = parseInt(votedThreads[i].vote);
+
+                    console.log("Returned id: " + returnedtid + " voted: " + vote);
+
+                    if (returnedtid == tid) {
+
+                        if (vote == 1) {
+                            upvoteButton.classList.add("highlightup");
+                        } else if (vote == -1) {
+                            downvoteButton.classList.add("highlightdown");
+                        }
+                    }
+
+
+                }
+            }
+        });
+
+    }
+
+
     upvoteButton.onclick = function () {
         $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
         if (!upvoteButton.classList.contains("highlightup")) {
@@ -58,7 +93,7 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
             downvoteButton.classList.remove("highlightdown");
         }
         //request to insert vote
-        vote(tid, 1, 'thread', function(){
+        vote(tid, 1, 'thread', function () {
             //get updated vote count
             get_votes(tid, "thread", function (points) {
                 newThread.querySelector(".pointnum").innerText = points
@@ -72,7 +107,7 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
             upvoteButton.classList.remove("highlightup");
         }
         //request to insert vote
-        vote(tid, -1, 'thread', function(){
+        vote(tid, -1, 'thread', function () {
             //get updated vote count
             get_votes(tid, "thread", function (points) {
                 newThread.querySelector(".pointnum").innerText = points
@@ -155,7 +190,7 @@ function createNewComment(cid, comment, created, points, username, location = "#
             downvoteButton.classList.add("highlightdown");
             upvoteButton.classList.remove("highlightup");
         }
-        vote(cid, -1, 'comment', function(){
+        vote(cid, -1, 'comment', function () {
             get_votes(cid, "comment", function (points) {
                 newComment.querySelector(".pointnum").innerText = points
             });
@@ -177,7 +212,7 @@ function get_votes(id, type, callback) {
                 var response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     console.log("points:", response.points);
-                    if(!response.points) response.points = 0;
+                    if (!response.points) response.points = 0;
                     callback(response.points);
                 } else {
                     console.log("fail");
@@ -193,50 +228,72 @@ function get_votes(id, type, callback) {
     xhr.send();
 }
 
-function vote(id,vote,type,callback) {
-    $.post("vote.php", { id: id,vote: vote, type: type }, function(response) {
+function vote(id, vote, type, callback) {
+    $.post("vote.php", { id: id, vote: vote, type: type }, function (response) {
         if (response.success) {
-            if(callback) callback()
+            if (callback) callback()
         } else {
             console.log("voting failed!", response)
-            if(callback) callback()
+            if (callback) callback()
         }
-    }, "json").fail(function(xhr, status, error) {
+    }, "json").fail(function (xhr, status, error) {
         console.log("error:", error)
-        if(callback) callback()
+        if (callback) callback()
     });
+}
+
+// function that calls the get_user_voted_tid function from function.php
+function get_voted_threads(username, callback) {
+
+    $.ajax({
+        url: 'functions.php',
+        data: {
+            'action': 'get_user_voted_tid',
+            'username': username
+        },
+        type: 'POST',
+        success: function (response) {
+
+            callback(response);
+
+        },
+        error: function (xhr, status, error) {
+            console.log("error:", error);
+        }
+    });
+
 }
 
 // function that highlights upvoted threads
 function highlight_voted_threads(tid, vote) {
 
-    console.log(document.querySelector('div[tid="'+tid+'"] .upvote'));
+    console.log(document.querySelector('div[tid="' + tid + '"] .upvote'));
 
 
-    if (vote == 1){
-        if (document.querySelector('div[tid="'+tid+'"] .upvote') != null) {
-            document.querySelector('div[tid="'+tid+'"] .upvote').classList.add('highlightup');
+    if (vote == 1) {
+        if (document.querySelector('div[tid="' + tid + '"] .upvote') != null) {
+            document.querySelector('div[tid="' + tid + '"] .upvote').classList.add('highlightup');
         }
     } else if (vote == -1) {
-        if (document.querySelector('div[tid="'+tid+'"] .downvote') != null) {
-            document.querySelector('div[tid="'+tid+'"] .downvote').classList.add('highlightdown');
+        if (document.querySelector('div[tid="' + tid + '"] .downvote') != null) {
+            document.querySelector('div[tid="' + tid + '"] .downvote').classList.add('highlightdown');
         }
     } else {
         return;
     }
-    
+
 }
 
 // function that highlights voted comments
 function highlight_voted_comments(cid, vote) {
 
-    if (vote == 1){
-        if (document.querySelector('div[cid="'+cid+'"] .upvote') != null) {
-            document.querySelector('div[cid="'+cid+'"] .upvote').classList.add('highlightup');
+    if (vote == 1) {
+        if (document.querySelector('div[cid="' + cid + '"] .upvote') != null) {
+            document.querySelector('div[cid="' + cid + '"] .upvote').classList.add('highlightup');
         }
     } else if (vote == -1) {
-        if (document.querySelector('div[cid="'+cid+'"] .downvote') != null) {
-            document.querySelector('div[cid="'+cid+'"] .downvote').classList.add('highlightdown');
+        if (document.querySelector('div[cid="' + cid + '"] .downvote') != null) {
+            document.querySelector('div[cid="' + cid + '"] .downvote').classList.add('highlightdown');
         }
     } else {
         return;

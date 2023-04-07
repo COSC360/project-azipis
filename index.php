@@ -120,7 +120,7 @@ if (isset($_SESSION['username'])) {
    let is_admin = <?php echo $isAdmin ?>;
    let threadNum = 0;
 
-   function getThreads(notify, callback) {
+   function getThreads(notify) {
       // make an AJAX call to get threads
       $.ajax({
          url: "get_threads.php?all=1",
@@ -139,10 +139,10 @@ if (isset($_SESSION['username'])) {
                   for (let i = startIndex; i < data.threads.length; i++) {
                      let thread = data.threads[i];
                      let owner = my_username === thread.username
-                     createNewThread(thread.tid, thread.title, thread.created, thread.cname, thread.points, thread.username, thread.threadtype, "#threads", owner, is_admin);
+                     createNewThread(thread.tid, thread.title, thread.created, thread.cname, thread.points, thread.username, thread.threadtype, "#threads", owner, is_admin, my_username);
                   }
 
-                  callback();
+
 
                }
             } else {
@@ -157,25 +157,12 @@ if (isset($_SESSION['username'])) {
    }
 
    // call the getThreads function every 5 seconds
-   getThreads(false, applyUserVotes)
+   getThreads(false)
    setInterval(function() {
       getThreads(true)
    }, 5000);
 
-   function applyUserVotes() {
-      <?php
-      if (isset($_SESSION['loggedin'])) {
-         $votedTids = get_user_voted_tid($curUser);
-         foreach ($votedTids as $votedTid) {
-            $tid = $votedTid['tid'];
-            $vote = $votedTid['vote'];
-            
-            echo 'highlight_voted_threads("' . $tid . '", ' . $vote . ');';
 
-         }
-      }
-      ?>
-   }
 </script>
 
 </html>
