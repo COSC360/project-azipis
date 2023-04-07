@@ -51,6 +51,7 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
     let upvoteButton = newThread.querySelector(".points .upvote");
     let downvoteButton = newThread.querySelector(".points .downvote");
 
+    // show how the user voted on threads
     if (curUser != null) {
         
         get_voted_threads(curUser, function (votedThreads) {
@@ -173,6 +174,42 @@ function createNewComment(cid, comment, created, points, username, location = "#
     let upvoteButton = newComment.querySelector(".points .upvote");
     let downvoteButton = newComment.querySelector(".points .downvote");
 
+    // show how the user voted on comments
+
+    if (owner != null) {
+        
+        get_voted_comments(owner, function (votedThreads) {
+
+            if (votedThreads != null) {
+
+                votedThreads = JSON.parse(votedThreads);
+                console.log(votedThreads);
+                // for each thread in votedThreads, check if tid is in votedThreads
+
+                for (var i = 0; i < votedThreads.length; i++) {
+
+
+                    var returnedcid = votedThreads[i].commentid;
+                    var vote = parseInt(votedThreads[i].vote);
+
+                    console.log("Returned id: " + returnedcid + " voted: " + vote);
+
+                    if (returnedcid == cid) {
+
+                        if (vote == 1) {
+                            upvoteButton.classList.add("highlightup");
+                        } else if (vote == -1) {
+                            downvoteButton.classList.add("highlightdown");
+                        }
+                    }
+
+
+                }
+            }
+        });
+
+    }
+
     upvoteButton.onclick = function () {
         $(upvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
         if (!upvoteButton.classList.contains("highlightup")) {
@@ -262,6 +299,27 @@ function get_voted_threads(username, callback) {
         }
     });
 
+}
+
+// function that calls the get_user_voted_cid function from function.php
+function get_voted_comments(username, callback) {
+    
+    $.ajax({
+        url: 'functions.php',
+        data: {
+            'action': 'get_user_voted_cid',
+            'username': username
+        },
+        type: 'POST',
+        success: function (response) {
+
+            callback(response);
+
+        },
+        error: function (xhr, status, error) {
+            console.log("error:", error);
+        }
+    });
 }
 
 // function that highlights upvoted threads
