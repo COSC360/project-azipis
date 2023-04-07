@@ -21,6 +21,7 @@ if (isset($_SESSION['username'])) {
    <link rel="stylesheet" href="css/login.css" />
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script type="text/javascript" src="scripts/popup.js"></script>
+   <script type="text/javascript" src="scripts/thread_sorting.js"></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
    <script type="text/javascript" src="scripts/createnewthread.js"></script>
@@ -40,9 +41,11 @@ if (isset($_SESSION['username'])) {
             <?php } else { ?>
             <button type="button" class="button centerme" onclick="openLogin()">Compose Thread</button>
             <?php } ?>
-            <button type="button" class="button centerme">Trending</button>
-            <button type="button" class="button centerme">New</button>
-            <button type="button" class="button centerme">Controversial</button>
+            <div id="sorting_container">
+               <button type="button" class="button">Trending</button>
+               <button type="button" class="button selected">New</button>
+               <button type="button" class="button">Controversial</button>
+            </div>
          </div>
          <h2>Related Topics</h2>
          <div class="collapsibles">
@@ -105,22 +108,25 @@ if (isset($_SESSION['username'])) {
    let my_username = "<?php echo $curUser ?>";
    let is_admin = <?php echo $isAdmin ?>;
    let threadNum = 0;
+   let sortby = 'new'
 
-   function getThreads(notify) {
+   function getThreads(notify,force=false) {
       // make an AJAX call to get threads
+      sortby = get_sorting()
       $.ajax({
-         url: "get_threads.php?cid=<?php echo $cid ?>",
+         url: "get_threads.php?cid=<?php echo $cid ?>&sort=" + sortby,
          dataType: "json",
          success: function (data) {
             if (data.success) {
-               if (threadNum < data.threads.length) {
+               if (threadNum < data.threads.length || force) {
                   let newThreads = (data.threads.length-threadNum)
-                  let startIndex = threadNum
-                  if(notify){
+                  let startIndex = 0
+                  if(notify && !force){
                      popup("There are " + newThreads + " new thread(s)!");
                      console.log("yay")
                   }
-                  threadNum = data.threads.length
+                  threadNum = data.threads.length;
+                  $("#threads .thread").parent().not("#thread_template").remove();
                   // loop through the threads array
                   for (let i = startIndex; i < data.threads.length; i++) {
                      let thread = data.threads[i];

@@ -198,7 +198,7 @@ function vote(id,vote,type,callback) {
         if (response.success) {
             if(callback) callback()
         } else {
-            console.log("voting failed!" + response)
+            console.log("voting failed!", response)
             if(callback) callback()
         }
     }, "json").fail(function(xhr, status, error) {
