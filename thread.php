@@ -92,7 +92,7 @@ if (isset($_SESSION['username'])) {
          <div id="threads">
             <h1 class="nomargin"><?php echo $threadname; ?></h1>
             By <h4 class="inline nomargin"><?php echo '<a href="user.php?username=' .$username. '">' . $username . '</a>' ; ?></h2>
-            at <h4 class="inline nomargin"><?php echo $creationtime; ?></h2>
+            at <h4 class="inline nomargin"><?php echo $formattedDate; ?></h2>
             <p><?php echo $threadbody; ?></p>
             <?php 
          if(isset($_SESSION['userid']) && ($_SESSION['isAdmin'] === 1 || $_SESSION['username' ] === $username)){

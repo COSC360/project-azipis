@@ -24,7 +24,13 @@
             $creationtime = $row["created"];
             $username = get_username_from_id($row["userid"]);
 
-            echo "<h2> Jobs > " . $row2["industry"] . " > <a href='community.php?cid=" . $row["communityid"] . "'>" . $row2["name"] . "</a></h2>";
+            // Parse the input date string
+            $dateObj = DateTime::createFromFormat('Y-m-d H:i:s', $creationtime);
+
+            // Format the date using format() with desired format string
+            $formattedDate = $dateObj->format('F j, Y \a\t g:ia');
+
+            echo "<h2> <a href='index.php'>Index</a> > " . $row2["industry"] . " > <a href='community.php?cid=" . $row["communityid"] . "'>" . $row2["name"] . "</a></h2>";
         }
     } else if ($cid != 0) {
         $result = php_select_prepared("SELECT * FROM community WHERE communityid = ?", "i", $cid);
@@ -34,7 +40,7 @@
             $industry = $row["industry"];
             $community = $row["name"];
 
-            echo "<h2> Jobs > " . $industry . " > <a href='community.php?cid=" . $cid . "'>" . $community . "</a></h2>";
+            echo "<h2> <a href='index.php'>Index</a> > " . $industry . " > <a href='community.php?cid=" . $cid . "'>" . $community . "</a></h2>";
         }
     }
     ?>
