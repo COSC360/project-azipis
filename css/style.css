@@ -408,3 +408,21 @@ figure{
 .highlightdown{
     background-color: #FF9C96;
 }
+
+.upvote{
+    background-image: url("../images/arrow-up-solid.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border-radius: 0.35em;
+    padding: 0.75em;
+}
+
+.downvote{
+    background-image: url("../images/arrow-down-solid.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    border-radius: 0.35em;
+    padding: 0.75em;
+}
