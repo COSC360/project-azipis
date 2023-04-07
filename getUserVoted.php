@@ -50,6 +50,8 @@ if ($type == 'up') {
 
     $combined_rows = array_merge($rows, $rows2);
     echo json_encode($combined_rows);
+
+    
     
 } else if ($type == 'down'){
 

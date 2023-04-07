@@ -35,8 +35,11 @@ if (isset($_SESSION['username'])) {
 
       <article id="left-sidebar">
          <div id="organizethreadbuttons">
-
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) { ?>
             <button type="button" class="button centerme" onclick="window.location.href='createthread.php?cid=<?php echo $cid; ?>'">Compose Thread</button>
+            <?php } else { ?>
+            <button type="button" class="button centerme" onclick="openLogin()">Compose Thread</button>
+            <?php } ?>
             <button type="button" class="button centerme">Trending</button>
             <button type="button" class="button centerme">New</button>
             <button type="button" class="button centerme">Controversial</button>
