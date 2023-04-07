@@ -67,6 +67,123 @@ function getUserComments(username, owner, admin){
 
 }
 
+function getUserUpvoted(username, owner, admin){
+    
+    
+    $("#threads").children().not("#thread_template").remove();
+    $("#comments").children().not("#comment_template").remove();
+
+    $.get('getUserVoted.php', {username: username, type: 'up'}, function(data) {
+
+        console.log(data);
+        
+        var threads = JSON.parse(data);
+        for (var i = 0; i < threads.length; i++) {
+            
+            if (threads[i].tid != undefined){
+
+                // get thread information and create new thread
+                var tid = threads[i].tid;
+                var title = threads[i].title;
+                var community = threads[i].communityid;
+                var created = threads[i].created;
+                var points = threads[i].points;
+                var threadtype = threads[i].threadtype;
+                var user = threads[i].username;
+
+                if (username === owner){
+                    owner = true;
+                } else {
+                    owner = false;
+                }
+
+                if (points == undefined){
+                    points = 0;
+                }
+
+                createNewThread(tid, title, created, community, points, user, threadtype, '#threads', owner, admin);
+
+            } else if (threads[i].commentid != undefined){
+
+                // get comment information and create new comment
+                var cid = threads[i].commentid;
+                var comment = threads[i].comment;
+                var created = threads[i].created;
+                var points = threads[i].points;
+                username = threads[i].username;
+
+                if (points == undefined){
+                    points = 0;
+                }
+
+                createNewComment(cid, comment, created, points, username, '#comments', owner, admin);
+                
+            
+            } else {
+                console.log("error");
+            }
+
+        }
+    })
+}
+
+function getUserDownvoted(username, owner, admin){
+    
+    $("#threads").children().not("#thread_template").remove();
+    $("#comments").children().not("#comment_template").remove();
+
+    $.get('getUserVoted.php', {username: username, type: 'down'}, function(data) {
+        
+        var threads = JSON.parse(data);
+        for (var i = 0; i < threads.length; i++) {
+            
+            if (threads[i].tid != undefined){
+
+                // get thread information and create new thread
+                var tid = threads[i].tid;
+                var title = threads[i].title;
+                var community = threads[i].communityid;
+                var created = threads[i].created;
+                var points = threads[i].points;
+                var threadtype = threads[i].threadtype;
+                var user = threads[i].username;
+
+                if (username === owner){
+                    owner = true;
+                } else {
+                    owner = false;
+                }
+
+                if (points == undefined){
+                    points = 0;
+                }
+
+                createNewThread(tid, title, created, community, points, user, threadtype, '#threads', owner, admin);
+
+            } else if (threads[i].commentid != undefined){
+
+                // get comment information and create new comment
+                var cid = threads[i].commentid;
+                var comment = threads[i].comment;
+                var created = threads[i].created;
+                var points = threads[i].points;
+                username = threads[i].username;
+
+                if (points == undefined){
+                    points = 0;
+                }
+
+                createNewComment(cid, comment, created, points, username, '#comments', owner, admin);
+                
+            
+            } else {
+                console.log("error");
+            }
+
+        }
+    })
+}
+
 function sendResetPassword(){
 
     $email = $("#email-input").val();
