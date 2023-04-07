@@ -144,10 +144,18 @@ if (isset($_SESSION['username'])){
 
     <footer>
 
-
-
     </footer>
 
 </body>
+
+<script>
+
+    // After the page is done loading call getUserThreads()
+    document.addEventListener("DOMContentLoaded", function() {
+    // Call getUserThreads() after the DOM is ready
+    getUserThreads('<?php echo $username ?>', '<?php echo $curUser ?>', <?php echo $isAdmin ?>);
+});
+
+</script>
 
 </html>
