@@ -50,12 +50,12 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
             downvoteButton.classList.remove("highlightdown");
         }
         //request to insert vote
-        vote(tid, 1, 'thread')
-
-        //get updated vote count
-        get_votes(tid, "thread", function (points) {
-            newThread.querySelector(".pointnum").innerText = points
-        });
+        vote(tid, 1, 'thread', function(){
+            //get updated vote count
+            get_votes(tid, "thread", function (points) {
+                newThread.querySelector(".pointnum").innerText = points
+            });
+        })
     }
     downvoteButton.onclick = function () {
         $(downvoteButton).animate({ fontSize: "1.2em" }, 100).animate({ fontSize: "1em" }, 100);
@@ -64,11 +64,12 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
             upvoteButton.classList.remove("highlightup");
         }
         //request to insert vote
-        vote(tid, -1, 'thread')
-        //get updated vote count
-        get_votes(tid, "thread", function (points) {
-            newThread.querySelector(".pointnum").innerText = points
-        });
+        vote(tid, -1, 'thread', function(){
+            //get updated vote count
+            get_votes(tid, "thread", function (points) {
+                newThread.querySelector(".pointnum").innerText = points
+            });
+        })
     }
     document.querySelector(location).appendChild(newThread);
 }
@@ -139,9 +140,10 @@ function createNewComment(cid, comment, created, points, username, location = "#
             downvoteButton.classList.add("highlightdown");
             upvoteButton.classList.remove("highlightup");
         }
-        vote(cid, -1, 'comment');
-        get_votes(cid, "comment", function (points) {
-            newComment.querySelector(".pointnum").innerText = points
+        vote(cid, -1, 'comment', function(){
+            get_votes(cid, "comment", function (points) {
+                newComment.querySelector(".pointnum").innerText = points
+            });
         });
     }
     newComment.querySelector(".date").innerText = created;
@@ -176,14 +178,16 @@ function get_votes(id, type, callback) {
     xhr.send();
 }
 
-function vote(id,vote,type) {
+function vote(id,vote,type,callback) {
     $.post("vote.php", { id: id,vote: vote, type: type }, function(response) {
         if (response.success) {
-            console.log("success")
+            if(callback) callback()
         } else {
-            console.log("fail")
+            console.log("voting failed!" + response)
+            if(callback) callback()
         }
     }, "json").fail(function(xhr, status, error) {
         console.log("error:", error)
+        if(callback) callback()
     });
 }
