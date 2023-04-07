@@ -255,6 +255,7 @@ function get_sanitized_string_param($method,$constant){
     $in = "";
     if(isset($method[$constant]) && !empty($method[$constant])){
         $in = $method[$constant];
+        $in = htmlspecialchars($in, ENT_QUOTES, 'UTF-8');
         if(gettype($in) != "string"){
            $in = "";
         }

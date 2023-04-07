@@ -13,7 +13,7 @@ if ($tid != 0){
 
     if ($result) {
         $returnjson['success'] = true;
-        $returnjson['threads'] = [];
+        $returnjson['comments'] = [];
         $i = 0;
         while ($row = mysqli_fetch_assoc($result)) {
             $returnjson['comments'][$i] = $row;
