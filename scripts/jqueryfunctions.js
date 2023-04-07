@@ -70,7 +70,8 @@ function getUserComments(username, owner, admin){
 }
 
 function getUserUpvoted(username, owner, admin){
-    
+
+    let curUser = owner;    
     
     $("#threads").children().not("#thread_template").remove();
     $("#comments").children().not("#comment_template").remove();
@@ -103,7 +104,7 @@ function getUserUpvoted(username, owner, admin){
                     points = 0;
                 }
 
-                createNewThread(tid, title, created, community, points, user, threadtype, '#threads', owner, admin);
+                createNewThread(tid, title, created, community, points, user, threadtype, '#threads', owner, admin, curUser);
 
             } else if (threads[i].commentid != undefined){
 
@@ -130,6 +131,8 @@ function getUserUpvoted(username, owner, admin){
 }
 
 function getUserDownvoted(username, owner, admin){
+
+    let curUser = owner;
     
     $("#threads").children().not("#thread_template").remove();
     $("#comments").children().not("#comment_template").remove();
@@ -160,7 +163,7 @@ function getUserDownvoted(username, owner, admin){
                     points = 0;
                 }
 
-                createNewThread(tid, title, created, community, points, user, threadtype, '#threads', owner, admin);
+                createNewThread(tid, title, created, community, points, user, threadtype, '#threads', owner, admin, curUser);
 
             } else if (threads[i].commentid != undefined){
 

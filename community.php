@@ -108,7 +108,7 @@ if (isset($_SESSION['username'])) {
    let my_username = "<?php echo $curUser ?>";
    let is_admin = <?php echo $isAdmin ?>;
    let threadNum = 0;
-   let sortby = 'new'
+   let sortby = 'new';
 
    function getThreads(notify,force=false) {
       // make an AJAX call to get threads
@@ -131,7 +131,7 @@ if (isset($_SESSION['username'])) {
                   for (let i = startIndex; i < data.threads.length; i++) {
                      let thread = data.threads[i];
                      let owner = my_username === thread.username
-                     createNewThread(thread.tid, thread.title, thread.created, thread.cname, thread.points, thread.username, thread.threadtype,"#threads",owner,is_admin);
+                     createNewThread(thread.tid, thread.title, thread.created, thread.cname, thread.points, thread.username, thread.threadtype,"#threads",owner,is_admin, my_username);
                   }
 
 
