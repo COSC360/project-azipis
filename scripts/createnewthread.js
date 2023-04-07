@@ -14,8 +14,10 @@ function createNewThread(tid, title, created, community, points, user, threadtyp
     newThread.querySelector(".community").innerText = community;
     newThread.querySelector(".overlayed").src = threadtype;
 
+    console.log("owner: " + owner + " admin: " + admin);
+
     // create delete thread button if owner or admin
-    if (owner || admin) {
+    if (owner == true || admin == 1) {
         var deleteThreadButton = document.createElement("button");
         deleteThreadButton.className = "button";
         deleteThreadButton.id = "delete_thread";
@@ -98,7 +100,7 @@ function createNewComment(cid, comment, created, points, username, location = "#
     authorElement.appendChild(authorLinkElement);
 
     // create delete comment button if owner or admin
-    if (owner === username || admin) {
+    if (owner === username || admin == 1) {
         var deleteCommentButton = document.createElement("button");
         deleteCommentButton.className = "button delete_comment";
         deleteCommentButton.innerText = "Delete Comment";
@@ -126,7 +128,7 @@ function createNewComment(cid, comment, created, points, username, location = "#
             upvoteButton.classList.add("highlight");
             downvoteButton.classList.remove("highlight");
         }
-        vote(cid, 1, 'comment')
+        vote(cid, 1, 'comment');
         get_votes(cid, "comment", function (points) {
             newComment.querySelector(".pointnum").innerText = points
         });
@@ -137,7 +139,7 @@ function createNewComment(cid, comment, created, points, username, location = "#
             downvoteButton.classList.add("highlight");
             upvoteButton.classList.remove("highlight");
         }
-        vote(cid, -1, 'comment')
+        vote(cid, -1, 'comment');
         get_votes(cid, "comment", function (points) {
             newComment.querySelector(".pointnum").innerText = points
         });
@@ -150,7 +152,7 @@ function createNewComment(cid, comment, created, points, username, location = "#
 
 function get_votes(id, type, callback) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "../get_votes.php?id=" + id + "&type=" + type, true);
+    xhr.open("GET", "get_votes.php?id=" + id + "&type=" + type, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
@@ -175,7 +177,7 @@ function get_votes(id, type, callback) {
 }
 
 function vote(id,vote,type) {
-    $.post("../vote.php", { id: id,vote: vote, type: type }, function(response) {
+    $.post("vote.php", { id: id,vote: vote, type: type }, function(response) {
         if (response.success) {
             console.log("success")
         } else {

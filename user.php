@@ -4,8 +4,8 @@ $username = get_sanitized_string_param($_GET, 'username');
 
 session_start();
 
-$isAdmin;
-$curUser;
+$isAdmin = 0;
+$curUser = '';
 
 if (isset($_SESSION['username'])){
     $curUser = get_sanitized_string_param($_SESSION, 'username');

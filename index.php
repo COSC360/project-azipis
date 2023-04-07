@@ -1,5 +1,14 @@
 <?php include 'functions.php';
 session_start();
+
+$isAdmin = 0;
+$curUser = '';
+
+if (isset($_SESSION['username'])){
+    $curUser = get_sanitized_string_param($_SESSION, 'username');
+    $isAdmin = get_sanitized_int_param($_SESSION, 'isAdmin');
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,11 +20,11 @@ session_start();
    <link rel="stylesheet" href="css/style.css" />
    <link rel="stylesheet" href="css/login.css" />
    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-   <script type="text/javascript" src="scripts/vote.js" defer></script>
+   <script type="text/javascript" src="scripts/vote.js" ></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
    <script type="text/javascript" src="scripts/login.js" defer></script>
-   <script type="text/javascript" src="scripts/createnewthread.js"></script>
-   <script type="text/javascript" src="scripts/jqueryfunctions.js"></script>
+   <script type="text/javascript" src="scripts/createnewthread.js" ></script>
+   <script type="text/javascript" src="scripts/jqueryfunctions.js" ></script>
 </head>
 
 <body>
@@ -117,7 +126,13 @@ session_start();
       $points = get_thread_points($tid);
       $user = get_username_from_id($row["userid"]);
       $type = $row["threadtype"];
-      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\");";
+      $location = '#threads';
+      $owner = false;
+      if ($user == $curUser) {
+         $owner = true;
+      }
+
+      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\",\"" . $location . "\",\"" . $owner . "\",\"" . $isAdmin . "\" ) ;";
    }
    ?>
 </script>

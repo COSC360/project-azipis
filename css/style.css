@@ -115,6 +115,12 @@ header{
     margin-right: 0.25em;
 }
 
+.delete_thread_div .button, .delete_comment_div .button{
+    margin-top: 1em;
+    padding: 0.3em;
+    margin-bottom: 1em;
+}
+
 .button:hover {
     background-color: #467EB3;
     color: white;
@@ -262,6 +268,7 @@ header{
 
 .content{
     margin: 0;
+    width: 90%;
 }
 
 .relative{
