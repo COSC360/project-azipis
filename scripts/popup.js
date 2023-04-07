@@ -1,5 +1,5 @@
 function popup(msg){
-    let popup = $("<div id=\"popup-notification\"><p>Here's your notification message!</p></div>")
+    let popup = $("<div id=\"popup-notification\"><p>" + msg + "</p></div>")
     $("body").append(popup);
 
     showPopup()

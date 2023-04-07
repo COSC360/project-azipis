@@ -128,6 +128,13 @@ function get_uid_from_username($username) {
     return $uid;
 }
 
+function get_community_name_from_cid($cid) {
+    $result = php_select_prepared("SELECT name FROM community WHERE communityid = ?", 'i', $cid);
+    $row = mysqli_fetch_assoc($result);
+    $name = $row["name"];
+    return $name;
+}
+
 function get_entry_exists($table,$colname,$val,$valtype){
     $result = php_select_prepared("SELECT * FROM " . $table . " WHERE " . $colname . "= ?", $valtype, $val);
     if(mysqli_num_rows($result) > 0){
