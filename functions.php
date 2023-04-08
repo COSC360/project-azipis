@@ -162,7 +162,7 @@ function get_comment_points($cid){
 
 // returns the points a user has from threads
 function get_user_thread_points($uid){
-    $query = 'SELECT SUM(vote) AS points from thread_votes WHERE userid = ?';
+    $query = 'SELECT SUM(vote) as points FROM thread_votes JOIN thread ON thread_votes.tid = thread.tid WHERE thread.userid = ?';
     $result = php_select_prepared($query, 'i', $uid);
     $row = mysqli_fetch_assoc($result);
     return $row["points"];
@@ -170,7 +170,7 @@ function get_user_thread_points($uid){
 
 // returns the points a user has from comments
 function get_user_comment_points($uid){
-    $query = 'SELECT SUM(vote) AS points from comment_votes WHERE userid = ?';
+    $query = 'SELECT SUM(vote) as points FROM comment_votes JOIN comment ON comment_votes.commentid = comment.commentid WHERE comment.userid = ?';
     $result = php_select_prepared($query, 'i', $uid);
     $row = mysqli_fetch_assoc($result);
     return $row["points"];
