@@ -95,7 +95,7 @@ if (isset($_SESSION['username'])) {
             at <h4 class="inline nomargin"><?php if(isset($formattedDate)) {echo $formattedDate; }?></h2>
             <p><?php if(isset($threadbody)) { echo $threadbody; } ?></p>
             <?php 
-         if(isset($_SESSION['userid']) && ($_SESSION['isAdmin'] === 1 || $_SESSION['username' ] === $username)){
+         if(isset($username) && isset($_SESSION['userid']) && ($_SESSION['isAdmin'] === 1 || $_SESSION['username' ] === $username)){
             echo '<button id="delete_thread" class="button" onclick=>Delete Thread</button>';
          }
          ?>   

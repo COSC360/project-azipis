@@ -13,8 +13,8 @@ if ($cid != 0){
     $query = "";
     switch ($sort) {
         case "new":
-            $query = "SELECT * FROM thread
-            JOIN (
+            $query = "SELECT thread.tid,title,communityid,created,threadtype,content,userid FROM thread
+            LEFT JOIN (
               SELECT SUM(vote) as points, tid FROM thread_votes 
               GROUP BY tid
             ) AS m 
@@ -23,8 +23,8 @@ if ($cid != 0){
             break;
         case "trending":
             $query = 
-            "SELECT * FROM thread 
-            JOIN (
+            "SELECT thread.tid,title,communityid,created,threadtype,content,userid FROM thread
+            LEFT JOIN (
               SELECT SUM(vote) as points, tid FROM thread_votes 
               GROUP BY tid
             ) AS m 
@@ -35,8 +35,8 @@ if ($cid != 0){
             break;
         case "controversial":
             $query = 
-            "SELECT * FROM thread 
-            JOIN (
+            "SELECT thread.tid,title,communityid,created,threadtype,content,userid FROM thread 
+            LEFT JOIN (
               SELECT SUM(vote) as points, tid FROM thread_votes 
               GROUP BY tid
             ) AS m 
@@ -57,6 +57,11 @@ if ($cid != 0){
         $i = 0;
         while ($row = mysqli_fetch_assoc($result)) {
             $returnjson['threads'][$i] = $row;
+            $pts = get_thread_points($row['tid']);
+            if($pts == null){
+                $pts = 0;
+            }
+            $returnjson['threads'][$i]['points'] = $pts;
             $returnjson['threads'][$i]['username'] = get_username_from_id($row['userid']);
             $returnjson['threads'][$i]['cname'] = get_community_name_from_cid($row['communityid']);
             $i = $i + 1;
@@ -73,8 +78,8 @@ if ($cid != 0){
 } else if($all == 1) {
     // select all threads
     $query = 
-            "SELECT * FROM thread 
-            JOIN (
+            "SELECT thread.tid,title,communityid,created,threadtype,content,userid FROM thread
+            LEFT JOIN (
               SELECT SUM(vote) as points, tid FROM thread_votes 
               GROUP BY tid
             ) AS m 
@@ -90,7 +95,11 @@ if ($cid != 0){
         while ($row = mysqli_fetch_assoc($result)) {
             $returnjson['threads'][$i] = $row;
             $returnjson['threads'][$i]['username'] = get_username_from_id($row['userid']);
-            $returnjson['threads'][$i]['points'] = get_thread_points($row['tid']);
+            $pts = get_thread_points($row['tid']);
+            if($pts == null){
+                $pts = 0;
+            }
+            $returnjson['threads'][$i]['points'] = $pts;
             $returnjson['threads'][$i]['cname'] = get_community_name_from_cid($row['communityid']);
             $i = $i + 1;
         }

@@ -134,6 +134,7 @@ if (isset($_SESSION['username'])) {
                      popup("There are " + newThreads + " new thread(s)!");
                      console.log("yay")
                   }
+                  console.log(data.threads[i])
                   threadNum = data.threads.length
                   // loop through the threads array
                   for (let i = startIndex; i < data.threads.length; i++) {
