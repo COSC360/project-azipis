@@ -71,7 +71,15 @@ if ($cid != 0){
 
 } else if($all == 1) {
     // select all threads
-    $query = "SELECT * FROM thread";
+    $query = 
+            "SELECT * FROM thread 
+            JOIN (
+              SELECT SUM(vote) as points, tid FROM thread_votes 
+              GROUP BY tid
+            ) AS m 
+            ON thread.tid = m.tid
+            ORDER BY points DESC
+            ";
     $result = php_select($query);
 
     if ($result) {
