@@ -22,7 +22,7 @@ function getUserThreads(username, owner, admin){
         for (var i = 0; i < threads.length; i++) {
             var tid = threads[i].tid;
             var title = threads[i].title;
-            var community = threads[i].communityid;
+            var community = threads[i].cname;
             var created = threads[i].created;
             var points = threads[i].points;
             var threadtype = threads[i].threadtype;

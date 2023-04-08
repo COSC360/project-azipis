@@ -20,6 +20,7 @@ while ($row = $result->fetch_assoc()) {
 
     $tid = $row['tid'];
     $points = get_thread_points($tid);
+    $row['cname'] = get_community_name_from_cid($row['communityid']);
 
     // set points to $points
     $row['points'] = $points;

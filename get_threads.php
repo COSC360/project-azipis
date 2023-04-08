@@ -58,6 +58,7 @@ if ($cid != 0){
         while ($row = mysqli_fetch_assoc($result)) {
             $returnjson['threads'][$i] = $row;
             $returnjson['threads'][$i]['username'] = get_username_from_id($row['userid']);
+            $returnjson['threads'][$i]['cname'] = get_community_name_from_cid($row['communityid']);
             $i = $i + 1;
         }
         die(json_encode($returnjson));
