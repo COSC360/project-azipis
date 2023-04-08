@@ -23,7 +23,7 @@ if (isset($_SESSION['username'])) {
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script type="text/javascript" src="scripts/popup.js"></script>
    <script type="text/javascript" src="scripts/script.js" defer></script>
-   <script type="text/javascript" src="scripts/login.js" defer></script>
+   <script type="text/javascript" src="scripts/login.js" ></script>
    <script type="text/javascript" src="scripts/createnewthread.js"></script>
    <script type="text/javascript" src="scripts/jqueryfunctions.js"></script>
 </head>
