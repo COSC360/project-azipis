@@ -3,13 +3,19 @@ let i;
 
 for (i = 0; i < coll.length; i++) {
   coll[i].nextElementSibling.style.display = "none";
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
 }
+
+$(document).ready(function() {
+  $('.collapsible').click(function() {
+      var content = $(this).next('.content');
+      if (content.hasClass('show')) {
+          content.removeClass('show').animate({ height: 0 }, 500, function(){
+            content.css("display", "none");
+          });
+      } else {
+        content.css("display", "inline-block");
+        content.css("height", "0px");
+        content.addClass('show').animate({ height: content.prop('scrollHeight') }, 500);
+      }
+  });
+});

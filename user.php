@@ -24,7 +24,6 @@ if (isset($_SESSION['username'])){
     <link rel="stylesheet" href="css/form.css" />
     <link rel="stylesheet" href="css/login.css" />
     <script type="text/javascript" src="scripts/form.js" defer></script>
-    <script type="text/javascript" src="scripts/script.js" defer></script>
     <script type="text/javascript" src="scripts/login.js" defer></script>
     <script type="text/javascript" src="scripts/createnewthread.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>

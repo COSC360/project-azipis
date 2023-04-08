@@ -23,7 +23,6 @@ if (isset($_GET['username']) && (!empty($_GET['username']))) {
             <link rel="stylesheet" href="css/login.css" />
             <link rel="stylesheet" href="css/updateform.css" />
             <script type="text/javascript" src="scripts/form.js" defer></script>
-            <script type="text/javascript" src="scripts/script.js" defer></script>
             <script type="text/javascript" src="scripts/login.js" defer></script>
             <script type="text/javascript" src="scripts/createnewthread.js" defer></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
