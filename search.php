@@ -146,7 +146,7 @@ if (isset($_SESSION['username'])) {
          $is_admin = $_SESSION['is_admin'];
       }
       $owner = $user === $my_username;
-      echo "createNewThread(" . $tid . ",\"" . $title . "\",\"" . $created . "\",\"" . $community . "\",\"" . $points . "\",\"" . $user . "\",\"" . $type . "\",\"" . '#threads' . "\",\"" . $owner . "\",\"" . $is_admin . "\",\"" . $my_username . "\");";
+      echo "createNewThread(" . $tid . ",`" . $title . "`,`" . $created . "`,`" . $community . "`,`" . $points . "`,`" . $user . "`,`" . $type . "`,`" . '#threads' . "`,`" . $owner . "`,`" . $is_admin . "`,`" . $my_username . "`);";
    }
 
    while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -155,7 +155,7 @@ if (isset($_SESSION['username'])) {
          $username = get_username_from_id($row2["userid"]);
          $imgpath = $row2["avatarimgpath"];
          $description = $row2["description"];
-         echo "createNewUserEntry(" . $userid . ",\"" . $username . "\",\"" . $imgpath . "\",\"" . $description . "\");";
+         echo "createNewUserEntry(" . $userid . ",`" . $username . "`,`" . $imgpath . "`,`" . $description . "`);";
       }
    }
    ?>
