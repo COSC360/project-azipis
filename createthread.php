@@ -92,7 +92,7 @@ session_start();
                      <!--<input type="number" class="textinput" id="threadtype" name="threadtype" placeholder="Type of Thread" required><br> -->
                   </div>
                   <textarea class="textinput" id="content" name="content" placeholder="Content of Thread" required></textarea><br>
-                  <input type="text" id="communityid" name="communityid" value="<?php echo $_GET['cid'] ?>" hidden>
+                  <input type="text" id="communityid" name="communityid" value="<?php echo get_sanitized_string_param($_GET,"cid") ?>" hidden>
                   <div class="clear"></div>
                   <input type="submit" class="button" value="Post" />
                </fieldset>
