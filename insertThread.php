@@ -10,9 +10,9 @@ if(!isset($_SESSION['userid'])){
 $query = "INSERT INTO thread (title, communityid, created, content, userid, threadtype) VALUES (?, ?, NOW(), ?, ?, ?)";
 $types = "sisii";
 
-$title = get_sanitized_string_param($_POST, 'title');
+$title = get_non_html_sanitized_string_param($_POST, 'title');
 $communityid = get_sanitized_int_param($_POST, 'communityid');
-$content = get_sanitized_string_param($_POST, 'content');
+$content = get_non_html_sanitized_string_param($_POST, 'content');
 $userid = $_SESSION['userid'];
 $threadtype = get_sanitized_int_param($_POST,'threadtype');
 if($threadtype < 1 || $threadtype > 3){

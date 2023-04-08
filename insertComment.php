@@ -5,7 +5,7 @@ session_start();
 $query = "INSERT INTO comment (comment, tid, created, userid) VALUES (?, ?, NOW(), ?)";
 $types = "sii";
 
-$comment = get_sanitized_string_param($_POST,'comment');
+$comment = get_non_html_sanitized_string_param($_POST,'comment');
 $threadid = get_sanitized_int_param($_POST,'tid');
 $result = false;
 

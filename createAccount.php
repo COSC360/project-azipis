@@ -86,10 +86,10 @@ session_start();
          <div id="threads">
             <form action="insertUser.php" method="post" enctype="multipart/form-data">
                <fieldset>
-                  <input type="text" class="textinput" id="fname" name="fname" placeholder="First Name" required>
-                  <input type="text" class="textinput" id="lname" name="lname" placeholder="Last Name" required>
-                  <input type="text" class="textinput" id="username" name="username" placeholder="User name" required>
-                  <input type="email" class="textinput" id="email" name="email" placeholder="Email" required> <br>
+                  <input type="text" class="textinput" minlength=3 maxlength=100 id="fname" name="fname" placeholder="First Name" required>
+                  <input type="text" class="textinput" minlength=3 maxlength=100 id="lname" name="lname" placeholder="Last Name" required>
+                  <input type="text" class="textinput" minlength=3 maxlength=20 pattern="[A-Za-z0-9]+" id="username" name="username" placeholder="User name" required>
+                  <input type="email" class="textinput" minlength=3 id="email" name="email" placeholder="Email" required> <br>
                   <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="pw" name="pw" placeholder="Password" required>
                   <input type="password" minlength=6 onChange="confirmPassword()" class="textinput" id="cpw" placeholder="Confirm Password" required>
                   <div class="clear"></div>
